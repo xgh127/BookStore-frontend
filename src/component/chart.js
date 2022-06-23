@@ -105,9 +105,27 @@ class Movie extends React.Component{
         })
     }
     removeItem(index){
-        this.setState({
-            books:this.state.books.filter((item,indey)=>index !=indey)
+        let newBooks =[...this.state.books];
+        axios.post(apiURL+"/removeCartItem",{
+            bookid:newBooks[index].bookid
         })
+            .then(response =>{
+                if(response != null) {
+
+
+                    newBooks = response;
+                    this.setState({
+                        //book: newBook
+                         books:this.state.books.filter((item,indey)=>index !=indey)
+                    })
+                    console.log("after delte"+this.state.books);
+                }
+                else
+                {
+                    console.log("get after delete failed");
+                }
+            })
+
     }
 
     getTotalprice(){
