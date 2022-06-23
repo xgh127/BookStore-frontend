@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bookstore_front.iml" filepath="$PROJECT_DIR$/bookstore_front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../summer/3004ssm乐儿乐社区生鲜团购系统/ssm40y34/spring.iml" filepath="$PROJECT_DIR$/../../summer/3004ssm乐儿乐社区生鲜团购系统/ssm40y34/spring.iml" />
+    </modules>
+  </component>
+</project>

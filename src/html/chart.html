@@ -1,0 +1,206 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>牙牙书城</title>
+    <link href="../css/chart.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        window.onload = function () {
+            let del=document.getElementsByClassName("delete");
+            for(let i=0; i<del.length; ++i) {
+                del[i].onclick = function () {
+                    alert("你确定要删除吗？");
+                    let div = this.parentNode.parentNode;
+                    div.parentNode.removeChild(div);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="box" style=" width:100%; height:100%;">
+
+    <div class="title-box">
+        <img src="../picture/logo.png">
+        <h1>我的购物车</h1>
+        <div></div>
+    </div>
+    <div class="min-box">
+        <div className="sideBar">
+            <a className="block-min-01" href="/src/html/all-books.html">
+                <div> 书库</div>
+            </a>
+            <a className="block-min-02" href="/src/html/chart.html">
+                <div>我的购物车</div>
+            </a>
+            <a className="block-min-03" href="/src/index/wsgh.html">
+                <div>我的命令</div>
+            </a>
+            <a className="block-min-04" href="/src/html/my_profile.html">
+                <div>我的简介</div>
+            </a>
+        </div>
+        </div>
+        <div class="books-box">
+            <main>
+                <div class="container">
+                    <table border="0" cellspacing = "0" id = "shopping_cart_info">
+                        <thead>
+                        <tr>
+                            <th width = "75px" height = "42px">
+                                <label for="checkall">
+                                    <input type="checkbox" name="checkall" id="checkall" class="checkall">
+                                    <span></span>全选
+                                </label>
+                            </th>
+                            <th width = "400px" height = "42px">商品</th>
+                            <th width = "135px" height = "42px">单价</th>
+                            <th width = "230px" height = "42px">购买数量</th>
+                            <th width = "150px" height = "42px">小计</th>
+                            <th width = "200px" height = "42px">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td width = "75px" height = "90px" colspan="2" align="left" valign = "top" class="pt20">
+                                <label for="checkall1">
+                                    <input type="checkbox" name="checkall" id="checkall1" class="checkall">
+                                    <span class = "checkallspan fl"></span>
+                                </label>
+                                <img src="../picture/深入理解计算机系统.jpg" alt="cosmetics" class ="shopping_item fl">
+                                <div class="shopping_blank fl">
+                                    深入理解计算机系统
+                                    <br><br>
+                                    <b>
+                                        作者:兰德尔·E·布莱恩特
+                                        分类:编程
+<!--                                        状态: 有货 库存1200件-->
+                                       </b>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </td>
+                            <td width = "135px" height = "90px" align="center" valign="top" class="price pt20">￥109.60</td>
+                            <td width = "230px" height = "90px" align="center" valign="top" class="purchasenum pt20">
+                                <i class="minus iconfont icon-subtract"></i>
+                                <input type="number" min="1" step="1" value="1">
+                                <i class="plus iconfont icon-jiahao"></i>
+                            </td>
+                            <td width = "150px" height = "90px" align="center" valign="top" class="pt20 sumup">￥318.00</td>
+                            <td width = "115px" height = "90px" align="left" valign="top" class="pt20 pl85 operation">
+                              <a href="javascript:;" class="delete"> <strong>删除</strong><br></a>
+                                <strong>移入收藏夹</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width = "75px" height = "90px" colspan="2" align="left" valign = "top" class="pt20">
+                                <label for="checkall2">
+                                    <input type="checkbox" name="checkall" id="checkall2" class="checkall">
+                                    <span class = "checkallspan fl"></span>
+                                </label>
+                                <img src="../picture/java编程思想.jpg" alt="laundry" class ="shopping_item fl">
+                                <div class="shopping_blank fl">
+                                    《java核心技术》
+                                    <br><br>
+                                    <b>.....</b>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </td>
+                            <td width = "135px" height = "90px" align="center" valign="top" class="price pt20">￥20.00</td>
+                            <td width = "230px" height = "90px" align="center" valign="top" class="purchasenum pt20">
+                                <i class="minus iconfont icon-subtract"></i>
+                                <input type="number" min="1" step="1" value="1">
+                                <i class="plus iconfont icon-jiahao"></i>
+                            </td>
+                            <td width = "150px" height = "90px" align="center" valign="top" class="pt20 sumup">￥80.00</td>
+                            <td width = "115px" height = "90px" align="left" valign="top" class="pt20 pl85 operation">
+                                <a href="javascript:;" class="delete"> <strong>删除</strong><br></a>
+                                <strong>移入收藏夹</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width = "75px" height = "90px" colspan="2" align="left" valign = "top" class="pt20">
+                                <label for="checkall3">
+                                    <input type="checkbox" name="checkall" id="checkall3" class="checkall">
+                                    <span class = "checkallspan fl"></span>
+                                </label>
+                                <img src="../picture/小王子.jpg" alt="kettle" class ="shopping_item fl">
+                                <div class="shopping_blank fl">
+                                    《小王子》
+                                    <br><br>
+                                    <b>......</b>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </td>
+                            <td width = "135px" height = "90px" align="center" valign="top" class="price pt20">￥99.00</td>
+                            <td width = "230px" height = "90px" align="center" valign="top" class="purchasenum pt20">
+                                <i class="minus iconfont icon-subtract"></i>
+                                <input type="number" min="1" step="1" value="1">
+                                <i class="plus iconfont icon-jiahao"></i>
+                            </td>
+                            <td width = "150px" height = "90px" align="center" valign="top" class="pt20 sumup">￥99.00</td>
+                            <td width = "115px" height = "90px" align="left" valign="top" class="pt20 pl85 operation">
+                                <a href="javascript:;" class="delete"> <strong>删除</strong><br></a>
+                                <strong>移入收藏夹</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width = "75px" height = "90px" colspan="2" align="left" valign = "top" class="pt20">
+                                <label for="checkall4">
+                                    <input type="checkbox" name="checkall" id="checkall4" class="checkall">
+                                    <span class = "checkallspan fl"></span>
+                                </label>
+                                <img src="../picture/java编程思想.jpg" alt="huaweiphone" class ="shopping_item fl">
+                                <div class="shopping_blank fl">
+                                    《java编程思想》
+                                    <br><br>
+                                    <b>.....</b>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </td>
+                            <td width = "135px" height = "90px" align="center" valign="top" class="price pt20">￥2599.00</td>
+                            <td width = "230px" height = "90px" align="center" valign="top" class="purchasenum pt20">
+                                <i class="minus iconfont icon-subtract"></i>
+                                <input type="number" min="1" step="1" value="1">
+                                <i class="plus iconfont icon-jiahao"></i>
+                            </td>
+                            <td width = "150px" height = "90px" align="center" valign="top" class="pt20 sumup">￥2599.00</td>
+                            <td width = "115px" height = "90px" align="left" valign="top" class="pt20 pl85 operation">
+                                <a href="javascript:;" class="delete"> <strong>删除</strong><br></a>
+                                <strong>移入收藏夹</strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="paddingpanel clearfix">
+                        <div class="conclude clearfix">
+                            <div class="concludeleft fl">
+                                <label for="checkall5">
+                                    <input type="checkbox" name="checkall" id="checkall5" class="checkall">
+                                    <span></span>全选
+                                </label>
+                                <a href="#">删除选中商品</a>
+                            </div>
+                            <div class="concluderight fr">
+                                <span class="fl">已选择<strong>1</strong>件商品</span>
+                                <dl class="fl">
+                                    <dt></dt>
+                                    <dd>总价：￥3096.00</dd>
+                                    <dd>优惠：￥200.00</dd>
+                                    <dd>合计：<strong>￥2886.00</strong></dd>
+                                </dl>
+                                <div style="clear:both"></div>
+                            </div>
+                        </div>
+                        <div class="continueorsubmit fr">
+                            <button type="button" class="continue">继续购物</button>
+                            <button type="submit" class="submit">提交订单</button>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

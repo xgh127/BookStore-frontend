@@ -1,0 +1,64 @@
+.NewSideBar {
+    width: 220px;
+    height: auto;
+    float: left;
+    position: relative;
+    top: 0px;
+    margin-top: 64px;
+
+}
+
+.NewSideBar a {
+    width: 220px;
+    height: 32px;
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s;
+    border-radius: 12px;
+    background-size: 20px auto;
+    background-position: 46px center;
+    background-repeat: no-repeat;
+    margin-bottom: 36px;
+}
+
+.NewSideBar a:hover {
+    position: relative;
+    cursor: pointer;
+    transform: translate(0,-3px);
+}
+/*.block1:focus,*/
+/*.block1 :focus {*/
+/*    outline: none !important;*/
+/*    !* outline: unset; *!*/
+/*}*/
+
+.NewSideBar a div {
+    font-size: 20px;
+    align-content: center;
+    color: #474747;
+    line-height: 40px;
+    padding-left: 80px;
+
+}
+/*:focus{*/
+/*    outline: none !important;*/
+/*}*/
+.block1 {
+    text-align: center;
+    background-color: #04c8d9;
+}
+
+.block2 {
+    text-align: center;
+    background-color: #ffa64b;
+}
+
+.block3 {
+    text-align: center;
+    background-color: #ffcd37;
+}
+
+.block4 {
+    text-align: center;
+    background-color: #fc805b;
+}

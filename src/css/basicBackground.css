@@ -1,0 +1,714 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+    font-family: "微软雅黑", Arial;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+}
+
+ul li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* 内容 */
+.box {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.title-box {
+    width: 1200px;
+    height: 156px;
+    margin: auto;
+    clear: both;
+    overflow: hidden;
+
+}
+
+.title-box img {
+    float: left;
+    margin-top: 88px;
+}
+
+.title-box div {
+    float: right;
+    margin-top: 115px;
+    width: 130px;
+    height: 1px;
+    background-color: #f04c44;
+}
+
+.title-box h1 {
+    float: right;
+    font-size: 40px;
+    color: #f04c44;
+    margin: 0;
+    margin-top: 88px;
+    margin-left: 20px;
+    margin-right: 70px;
+    padding: 0;
+}
+
+/* 就医流程等 */
+.jylc-box {
+    width: 1200px;
+    height: 166px;
+    margin: auto;
+    position: relative;
+    top: 0px;
+    margin-top: 120px;
+}
+
+.jylc-box a {
+    width: 136px;
+    height: auto;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: block;
+    float: left;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.jylc-box a:hover {
+    position: relative;
+    cursor: pointer;
+    transform: translate(0,-6px);
+}
+
+.jylc-box a div {
+    width: 136px;
+    height: 136px;
+    border-radius: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.jylc-box a p {
+    font-size: 24px;
+    color: #474747;
+    text-align: center;
+    padding-top: 36px;
+}
+
+.jylc-min-01 {
+
+    background-color: #04c8d9;
+}
+
+.jylc-min-02 {
+
+    background-color: #ffa64b;
+}
+
+.jylc-min-03 {
+
+    background-color: #ffcd37;
+}
+
+.jylc-min-04 {
+
+    background-color: #fc805b;
+}
+
+.jylc-min-05 {
+
+    background-color: #71ad14;
+}
+
+/* 就医流程等 */
+.min-box {
+    width: 1200px;
+    height: auto;
+    margin: auto;
+    clear: both;
+    overflow: hidden;
+}
+
+/* 左侧列表 */
+.SideBar {
+    width: 220px;
+    height: auto;
+    float: left;
+    position: relative;
+    top: 0px;
+    margin-top: 64px;
+}
+
+.SideBar a {
+    width: 220px;
+    height: 66px;
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s;
+    border-radius: 12px;
+    background-size: 20px auto;
+    background-position: 46px center;
+    background-repeat: no-repeat;
+    margin-bottom: 36px;
+}
+
+.SideBar a:hover {
+    position: relative;
+    cursor: pointer;
+    transform: translate(0,-3px);
+}
+
+.SideBar a div {
+    font-size: 20px;
+    align-content: center;
+    color: #474747;
+    line-height: 40px;
+    padding-left: 80px;
+}
+
+.block-min-01 {
+    /*background-image: url(../images/jylc-img-01.png);*/
+    background-color: #04c8d9;
+}
+
+.block-min-02 {
+    /* background-image: url(../images/jylc-img-02.png);*/
+    background-color: #ffa64b;
+}
+
+.block-min-03 {
+    /*background-image: url(../images/jylc-img-03.png);*/
+    background-color: #ffcd37;
+}
+
+.block-min-04 {
+    /*background-image: url(../images/jylc-img-04.png);*/
+    background-color: #fc805b;
+}
+
+
+/* 右侧列表 */
+.books-box {
+    float: right;
+    width: 940px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 52px;
+}
+
+.books_query-01 {
+    width: 100%;
+    height: 86px;
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+}
+
+.books_query-01 div {
+    margin-left: 48px;
+    float: left;
+    width: 8px;
+    height: 24px;
+    background-color: #474747;
+    margin-top: 31px;
+}
+
+.books_query-01 h1 {
+    display: block;
+    float: left;
+    padding-left: 14px;
+    font-size: 24px;
+    color: #474747;
+    line-height: 86px;
+    margin: 0;
+}
+
+.ghxz-02 {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    margin-top: 18px;
+}
+
+.ghxz-02 h1 {
+    text-align: center;
+    color: #4d8ef0;
+    font-size: 24px;
+    margin-bottom: 28px;
+}
+
+.ghxz-02 h4 {
+    padding-left: 48px;
+}
+
+.ghxz-02 p {
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-bottom: 20px;
+    font-size: 15px;
+    line-height: 30px;
+    color: #666;
+    margin: 0;
+}
+
+.ghxz-02 img {
+    display: block;
+    margin: auto;
+    padding-bottom: 60px;
+}
+
+.ghxz-02-btn {
+    width: 260px;
+    height: 38px;
+    margin: auto;
+    padding-bottom: 60px;
+    padding-top: 40px;
+}
+
+.ghxz-02-btn input {
+    width: 120px;
+    height: 38px;
+    background-color: #ccc;
+    text-align: center;
+    line-height: 38px;
+    display: block;
+    text-decoration: none;
+    color: #666;
+    font-size: 15px;
+    border-radius: 8px;
+    border: none;
+}
+
+.ghxz-02-btn input:hover {
+    background-color: #2865be;
+    color: #fff;
+}
+
+.ghxz-02-btn a {
+    width: 120px;
+    height: 38px;
+    background-color: #ccc;
+    text-align: center;
+    line-height: 38px;
+    display: block;
+    text-decoration: none;
+    color: #666;
+    font-size: 15px;
+    border-radius: 8px;
+}
+
+.ghxz-02-btn a:hover {
+    background-color: #2865be;
+    color: #fff;
+}
+
+.ghxz-03 {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    margin-top: 18px;
+}
+
+.ghxz-03 p {
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-bottom: 20px;
+    font-size: 15px;
+    line-height: 30px;
+    color: rgb(235, 11, 11);
+    margin: 0;
+}
+
+.ghzc-01 {
+    width: 844px;
+    margin-left: 48px;
+    margin-right: 48px;
+    height: 34px;
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.ghzc-01-01 {
+    float: left;
+    width: 100px;
+    text-align: right;
+    font-size: 15px;
+    color: #666;
+    line-height: 28px;
+}
+
+.ghzc-01-02 {
+    float: left;
+    width: 300px;
+    height: 28px;
+    font-size: 14px;
+    color: #666;
+    line-height: 28px;
+    padding-left: 10px;
+    border: solid 1px #dbdbdb;
+}
+
+.ghzc-01-03 {
+    float: left;
+    margin-left: 12px;
+    text-align: right;
+    font-size: 12px;
+    color: #666;
+    line-height: 28px;
+}
+
+
+.ghcx-01 {
+    width: 844px;
+    margin-left: 48px;
+    margin-right: 48px;
+    height: 34px;
+    clear: both;
+    overflow: hidden;
+    margin-top: 18px;
+    margin-bottom: 20px;
+}
+
+.ghcx-01-01 {
+    float: left;
+    text-align: right;
+    font-size: 15px;
+    color: #666;
+    line-height: 28px;
+}
+
+.ghcx-01-02 {
+    float: left;
+    width: 300px;
+    height: 28px;
+    font-size: 14px;
+    color: #666;
+    line-height: 28px;
+    padding-left: 10px;
+    border: solid 1px #dbdbdb;
+}
+
+.ghcx-01-btn {
+    float: left;
+    width: 120px;
+    height: 32px;
+    background-color: #ebebeb;
+    text-align: center;
+    line-height: 32px;
+    display: block;
+    text-decoration: none;
+    color: #666;
+    font-size: 15px;
+    border: none;
+}
+
+.ghcx-01-btn:hover {
+    background-color: #fc805b;
+    color: #fff;
+}
+
+.ghzc-01 ul {
+    margin: 0;
+    padding: 0;
+    height: 28px;
+    float: left;
+}
+
+.ghzc-01 ul li {
+    float: left;
+    margin-left: 30px;
+    font-size: 15px;
+    color: #666;
+    line-height: 28px;
+}
+
+.input_radio {
+    vertical-align: middle;
+    margin: 0 4px 0 0;
+}
+
+.ghzc-02 {
+    width: 844px;
+    margin-left: 48px;
+    margin-right: 48px;
+    height: 34px;
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.ghzc-02-01 {
+    float: left;
+    width: 100px;
+    text-align: right;
+    font-size: 15px;
+    color: #666;
+    line-height: 28px;
+}
+
+.ghzc-02-02 {
+    float: left;
+    width: 600px;
+    height: 28px;
+    font-size: 14px;
+    color: #666;
+    line-height: 28px;
+    padding-left: 10px;
+    border: solid 1px #dbdbdb;
+}
+
+.ghzc-03 {
+    width: 844px;
+    margin-left: 48px;
+    margin-right: 48px;
+    height: 280px;
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+.ghzc-03-01 {
+    float: left;
+    width: 100px;
+    text-align: right;
+    font-size: 15px;
+    color: #666;
+    line-height: 280px;
+}
+
+.ghzc-03-02 {
+    float: left;
+    width: 600px;
+    height: 252px;
+    overflow: auto;
+    line-height: 24px;
+    font-family: "微软雅黑", Arial;
+    font-size: 14px;
+    vertical-align: middle;
+    color: #666;
+    padding: 10px;
+    border: solid 1px #dbdbdb;
+}
+
+.ksdh-right-min-03 {
+    width: 790px;
+    height: auto;
+    margin: auto;
+    clear: both;
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+
+.ksdh-right-min-03 a {
+    width: 148px;
+    height: 40px;
+    float: left;
+    margin-left: 4px;
+    margin-right: 4px;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 40px;
+    color: #333;
+    margin-bottom: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.ksdh-right-min-03 a:hover {
+    border: solid 1px #39b6bf;
+    background-color: #39b6bf;
+    color: #fff;
+}
+
+/*专家列表*/
+table {
+    border-collapse: collapse;
+}
+
+.mail-box {
+    width: 844px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.mail-title th {
+    width: 90px;
+    background-color: #6db2ef;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.mail-title td {
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #aaa;
+    color: #fff;
+    line-height: 42px;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: center;
+}
+
+.mail-min th {
+    background-color: #f0f5f8;
+    font-size: 14px;
+    font-weight: normal;
+    color: #666;
+}
+
+.mail-min td {
+    font-size: 14px;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: center;
+    color: #666;
+    padding: 20px;
+}
+
+.mail-min td a {
+    text-decoration: none;
+    color: #2865be;
+}
+
+.mail-min td a:hover {
+    color: #d33939;
+}
+
+.xxtx-box {
+    width: 414px;
+    margin-left: 190px;
+    margin-bottom: 30px;
+}
+
+/* 底部 */
+.bot {
+    width: 100%;
+    height: 114px;
+    position: absolute;
+    bottom: 0;
+    background-color: #214780;
+    text-align: center;
+}
+
+.bot-01 {
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.4;
+    padding-top: 32px;
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.bot-01 a {
+    color: #fff;
+    margin-left: 10px;
+}
+
+.bot-02 {
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.4;
+}
+
+/* 底部 */
+.bot-box {
+    width: 100%;
+    height: 114px;
+    background-color: #214780;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.bot-box-01 {
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.4;
+    padding-top: 32px;
+    padding-bottom: 8px;
+}
+
+.bot-box-02 {
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.4;
+}
+
+.tpfy {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+    overflow: hidden;
+    line-height: 108px;
+    margin-bottom: 30px;
+}
+
+/* bootstrap  分页样式 */
+.page {
+    display: inline-block;
+    padding-left: 0;
+    border-radius: 0
+}
+
+.page a {
+    float: left;
+    margin-right: 10px;
+    color: #666;
+}
+
+.page a:hover {
+    color: #f04c44;
+}
+.books{
+    display: block;
+    width: auto;
+    height: auto;
+    float :left;
+}
+.book_text{
+    width: auto;
+    height: auto;
+    float: top;
+
+}
+.books-box{
+    width: 50px;
+    vertical-align: central;
+
+    text-align: -moz-center;
+}
+/* 左侧列表 */
+.Home{
+    width: 220px;
+  position: center;
+    float: top;
+}
+.Home a{
+    position: center;
+}
+
+

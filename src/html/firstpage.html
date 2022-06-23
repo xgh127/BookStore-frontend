@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>牙牙书城</title>
+    <link href="../css/basicBackground.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="box" style=" width:100%; height:100%;">
+    <!-- title -->
+    <div class="title-box">
+        <img src="../picture/logo.png">
+        <h1>首页</h1>
+        <div></div>
+    </div>
+    <div class="min-box">
+        <div class="sideBar">
+            <div className="sideBar">
+                <a className="block-min-01" href="/src/html/all-books.html">
+                    <div> 书库</div>
+                </a>
+                <a className="block-min-02" href="/src/html/chart.html">
+                    <div>我的购物车</div>
+                </a>
+                <a className="block-min-03" href="/src/index/wsgh.html">
+                    <div>我的命令</div>
+                </a>
+                <a className="block-min-04" href="/src/html/my_profile.html">
+                    <div>我的简介</div>
+                </a>
+            </div>
+        </div>
+        <div class="books-box">
+            <div class="books_query-01">
+                <div></div>
+                <h1>书籍查询</h1>
+            </div>
+            <form name="form1" method="post" action="/index.php/index/ghcx.html">
+                <div class="ghcx-01">
+                    <div class="ghcx-01-01">请输入书籍名称：</div>
+                    <input class="ghcx-01-02" name="txtCard" type="text" id="txtCard" value="">
+                    <input class="ghcx-01-btn" type="submit" name="Submit" value="查询">
+                </div>
+                <div class="ghxz-02">
+                    <table class="mail-box" border="1" cellspacing="0" bordercolor="#ebebeb">
+                        <tbody>
+                        <tr class="mail-title" style=" height:42px;">
+                            <th>书籍编号</th>
+                            <td>作者</td>
+                            <td>书名</td>
+                            <td>剩余数量</td>
+                            <td>价格</td>
+                        </tr>
+                        <tr class="mail-min" style=" height:35px;">
+                            <th>112</th>
+                            <td>莫言</td>
+                            <td>丰乳肥臀</td>
+                            <td>100</td>
+                            <td>20.0</td>
+                        </tr>
+                        <tr class="mail-min" style=" height:35px;">
+                            <th></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="mail-min" style=" height:35px;">
+                            <th></th>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table >
+                        <th>
+                            <div class="book_text">
+                                <a href="book-detail.html"  target="_blank "><img src="../picture/深入理解计算机系统.jpg"></a>
+                                <p>《深入理解计算机系统》</br>￥136.9</p>
+                            </div></th>
+                        <th>
+                            <div class="book_text">
+                                <img src="../picture/java核心技术.jpg">
+                                <p>《java核心技术》</br>￥80</p>
+                            </div>
+                        </th>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
