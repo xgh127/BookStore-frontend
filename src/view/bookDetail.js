@@ -3,28 +3,9 @@ import '../css/basicBackground.css'
 import SideBar from "../component/sideBar";
 import Book_detail from "../component/book_detail";
 import SubContainer from "../component/subContainer";
-import title from "../picture/logo.png";
 import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
-function Head_img(){
-    return(
-        <img className="title"
-             src={title}
-             alt="title"/>
-    ) ;
-}
-function HeadBar(props){
-    return(
-        <div className="title-box">
-            <Head_img/>
-            <h1>{props.Head}</h1>
-        </div>
-    );
-}
-const pageHead={
-    Head:'首页'
-}
-const header=()=> <HeadBar Head={pageHead.Head}/>//页面头
+import HeaderBar from "../component/HeaderBar";
 class BookDetail extends React.Component{
 
     constructor(props) {
@@ -81,7 +62,7 @@ class BookDetail extends React.Component{
         return (
 
             <div className="min-box">
-                {header()}
+                <HeaderBar Head={"书籍详情"}/>
                 <SideBar/>
                 <SubContainer elem = {this.bookDetail()}/>
             </div>
@@ -96,4 +77,4 @@ let theBookDetail = () =>
         <BookDetail/>
     )
 }
-export { theBookDetail};
+export {theBookDetail};
