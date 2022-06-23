@@ -3,7 +3,7 @@ import '../css/logincss.css'
 import logHead from "../picture/login_head.jpeg"
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
 import axios from "axios"
-import {apiURL} from "../config/BaseConfig";
+import {apiURL, frontURL} from "../config/BaseConfig";
 
 function Head_img(){//
     return(
@@ -48,7 +48,7 @@ class Login extends React.Component{
                 .then(response => {
                 if (response.data.username != null) {
                     alert("验证成功");
-                    window.location.href="http://localhost:3000/first";//跳转到主页
+                    window.location.href=frontURL+"/first";//跳转到主页
                 } else {
                     console.log("failed");
                     alert("对不起，验证失败，您尚未注册");
