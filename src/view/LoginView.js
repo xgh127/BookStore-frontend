@@ -12,7 +12,7 @@ function Head_img(){//
         </div>
     ) ;
 }
-class Login extends React.Component{
+class LoginView extends React.Component{
     constructor(props) {
         super(props);
         /*申请两个state*/
@@ -95,8 +95,8 @@ class Login extends React.Component{
 /*直接在这儿输出登陆页面*/
 const loginPage=()=>{
     return(
-        <Login/>
+        <LoginView/>
     )
 
 }
-export {Login,loginPage};
+export {LoginView,loginPage};

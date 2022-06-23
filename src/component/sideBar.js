@@ -17,10 +17,10 @@ class SideBar extends React.Component{
                     <div><Link to="/chart">我的购物车</Link></div>
                 </a>
                 <a className="block-min-03" href="/src/index/wsgh.html">
-                    <div>我的订单</div>
+                    <div><Link to="/order">我的订单</Link></div>
                 </a>
                 <a className="block-min-04" href="/src/html/my_profile.html">
-                    <div>我的简介</div>
+                    <div><Link to ="/personCenter">个人中心</Link></div>
                 </a>
             </div>
         )

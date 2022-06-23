@@ -29,10 +29,19 @@ class OrderView extends React.Component{
     render() {
         return(
             <div className="min-box">
-                <HeaderBar Head={"书籍详情"}/>
+                <HeaderBar Head={"我的订单"}/>
                 <SideBar/>
-                <SubContainer elem = {this.bookDetail()}/>
+                <SubContainer elem = {"目前也是啥也没有"}/>
             </div>
         )
     }
 }
+let theOrder = () =>
+{
+    return(
+        <div>
+            <OrderView/>
+        </div>
+    )
+}
+export {theOrder};

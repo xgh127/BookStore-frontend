@@ -3,33 +3,12 @@ import '../css/basicBackground.css'
 import { FilterableProductTable2} from "../component/table";
 import SubContainer from "../component/subContainer";
 import Container from "../component/Container";
-import title from "../picture/logo.png";
 import SideBar from "../component/sideBar";
 import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
+import HeaderBar from "../component/HeaderBar";
 
-function Head_img(){
-    return(
-        <img className="title"
-             src={title}
-             alt="title"/>
-    ) ;
-}
-function HeadBar(props){
-    return(
-        <div className="title-box">
-            <Head_img/>
-            <h1>{props.Head}</h1>
-        </div>
-    );
-}
-const pageHead={
-    Head:'首页'
-}
-const sideBar=<SideBar/>
-const header=()=> <HeadBar Head={pageHead.Head}/>//页面头
-
-class Home extends React.Component{
+class HomeView extends React.Component{
 
     constructor(props) {
         super(props);
@@ -78,27 +57,13 @@ class Home extends React.Component{
         )
     }
 }
-let table_page=() =>{
-    return(
-        <div>
-            <Home/>
-        </div>
-    )
-}
-const Pagefirst=()=>
-{
-    return(
-        <div>
-            {header()}
-            <Container SideBar={sideBar} Sub={table_page()}/>
-        </div>
-    )
-}
+
 const TheFirst=()=>
 {
     return(
         <div>
-            <Pagefirst/>
+            <HeaderBar Head={"首页"}/>
+            <Container SideBar={<SideBar/>} Sub={<HomeView/>}/>
         </div>
     )
 }
