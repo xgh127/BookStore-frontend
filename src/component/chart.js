@@ -67,7 +67,7 @@ class Movie extends React.Component{
                                     <td>￥{item.bookPrice}</td>
                                     <td>
                                         <button onClick={()=>this.changeBookCount(index,-1)}
-                                                disabled={item.buyNum ==1}>-</button>
+                                                disabled={item.buyNum ===1}>-</button>
                                         <span>{item.buyNum}</span>
                                         <button onClick={()=>this.changeBookCount(index,1)}>+</button>
                                     </td>
@@ -79,7 +79,7 @@ class Movie extends React.Component{
                 </table>
                 <div className="continueorsubmit fr">
                     <button type="button" className="continue" onClick={ this.Continue}>继续购物</button>
-                    <button type="submit" className="submit" onClick={this.addOrder}>提交订单</button>
+                    <button type="submit" className="submit">提交订单</button>
                 </div>
                 <p>总价格:{this.getTotalprice()}</p>
             </div>)
@@ -90,7 +90,7 @@ class Movie extends React.Component{
     }
     render() {
         const {books} = this.state
-        return books.length ==0?this.renderNone():this.renderBooks()
+        return books.length ===0?this.renderNone():this.renderBooks()
     }
     changeBookCount(index,count){
         const newBooks =[...this.state.books]
@@ -116,7 +116,7 @@ class Movie extends React.Component{
                     newBooks = response;
                     this.setState({
                         //book: newBook
-                         books:this.state.books.filter((item,indey)=>index !=indey)
+                         books:this.state.books.filter((item,indey)=>index !== indey)
                     })
                     console.log("after delte"+this.state.books);
                 }

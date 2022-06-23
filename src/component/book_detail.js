@@ -12,9 +12,10 @@ class Book_detail extends React.Component{
      addToCart=()=>
     {
 
-        alert("确定加入购物车？");
+        alert("确定加入购物车？如果购物车已经存在该书籍，您的购买数量将会+1，您可以自行前往购物车查看并修改您需要的购买数量并进行修改！");
         //发送数据到后端
        let book = this.props.product;
+       console.log("username"+localStorage.getItem("username"))
        let bookInfo ={
            id:book.id,
            title:book.title,
@@ -22,20 +23,21 @@ class Book_detail extends React.Component{
            price:book.price,
            type:book.type,
            description:book.description,
-           image:book.image
+           image:book.image,
+           username:localStorage.getItem("username")
        }
-        if(bookInfo == null)
-        {
-            alert("error");
-        }
-        else {
-            console.log("bookid = "+bookInfo.id);
-            axios.post(apiURL + "/addCart", bookInfo)
-                .then(response=>
-                {
-                console.log(response);
-        })
-        }
+       if(bookInfo != null) {
+           console.log("bookid = " + bookInfo.id);
+           axios.post(apiURL + "/addCart", bookInfo)
+               .then(response => {
+                   console.log(response);
+               })
+       }
+       else
+       {
+           alert("add falied")
+       }
+
     }
 
 

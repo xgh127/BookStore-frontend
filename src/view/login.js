@@ -38,6 +38,8 @@ class Login extends React.Component{
         }
         else {
 
+            localStorage.setItem("username",user);
+            localStorage.setItem("password",pwd);
             /*向后端的这个controller发送请求，获取后端的return*/
             axios.post(apiURL+"/loginCheck", {
                 user_id :- 1,
