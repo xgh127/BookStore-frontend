@@ -112,7 +112,7 @@ class Movie extends React.Component{
             .then(response =>{
                 if(response != null) {
 
-/*我啥也没写就是玩儿*/
+/*我啥也没写就是玩儿aa*/
                     newBooks = response;
                     this.setState({
                         //book: newBook
