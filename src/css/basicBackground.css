@@ -140,6 +140,12 @@ p {
     clear: both;
     overflow: hidden;
 }
+.register-box{
+    margin-top: 56px;
+    position: center;
+    left: 50px;
+    height: auto;
+}
 
 /* 左侧列表 */
 .SideBar {
@@ -208,6 +214,7 @@ p {
     border-radius: 10px;
     margin-top: 52px;
 }
+
 
 .books_query-01 {
     width: 100%;

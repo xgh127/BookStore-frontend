@@ -13,6 +13,7 @@ import {theBookDetail} from"./view/bookDetail"
 import {theChartPage} from "./view/ChartView";
 import {thePersonCenter} from "./view/PersonCeter";
 import {theOrder} from "./view/OrderView";
+import {theRegisterPage} from "./view/RegisterView";
 
 /*直接import的登录页面*/
 function AllOfPage(){
@@ -20,6 +21,7 @@ function AllOfPage(){
         <Router>
         <div>
                 <Route exact path="/" component={loginPage}/>
+                <Route exact path="/register" component={theRegisterPage}/>
                 <Route exact path="/first" component={TheFirst}/>
                 <Route exact path='/detail' component={theBookDetail}/>
                 <Route exact path="/chart" component={theChartPage}/>

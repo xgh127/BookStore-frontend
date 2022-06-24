@@ -1,14 +1,15 @@
 import React from "react";
 import '../css/logincss.css'
 import logHead from "../picture/login_head.jpeg"
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
 import axios from "axios"
 import {apiURL, frontURL} from "../config/BaseConfig";
+import HeaderBar from "../component/HeaderBar";
+import {Link} from "react-router-dom";
 
 function Head_img(){//
     return(
         <div className="min-box">
-            <img width="300px" src={logHead} alt="头像"/>
+            <img width="200px" src={logHead} alt="头像"/>
         </div>
     ) ;
 }
@@ -26,6 +27,10 @@ class LoginView extends React.Component{
         let userInfo = {};
         userInfo[key] = e.target.value;
         this.setState(userInfo);
+    }
+    doRegister = e =>
+    {
+
     }
     doLogin = e =>
     {
@@ -61,8 +66,11 @@ class LoginView extends React.Component{
     render()
     {
         return (
+<div className="min-box">
+    <HeaderBar Head={"登陆"}/>
             <div className="login-Box">
-                    <Head_img/>
+               <Head_img/>
+
                     <h3>登录</h3>
                     <form onSubmit={this.doLogin}>
 
@@ -83,11 +91,12 @@ class LoginView extends React.Component{
                             this.InfoSet(event,'password')
                         }}
                         />
-                        {/*/!*处理登录*!/<Link to = "/home">登录</Link>，注意，button设置成submit才能提交*/}
-                        <button type="submit">登录</button>
-                            {/*<a href="#">忘记密码</a>*/}
+                        <button type="submit"> 登录 </button><br/>
+                        <span>没有账号？</span><br/>
+                        <button><Link to ="/register">前往注册</Link></button>
                     </form>
             </div>
+</div>
         )
     }
 }
