@@ -9,7 +9,7 @@
     height: 420px;
     padding: 80px 40px;
     box-sizing: border-box;
-    background: rgb(236, 186, 186,0);
+    background: none;
 }
 
 #user-icon {
@@ -28,6 +28,9 @@ h3 {
     color: #e7e70e;
     text-align: center;
 }
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
 
 .login-Box p {
     margin: 0;
@@ -38,7 +41,7 @@ h3 {
 
 .login-Box input {
     width: 100%;
-    margin-bottom: 20px;
+
 }
 
     .login-Box input[type="text"],
@@ -48,7 +51,7 @@ h3 {
        background: transparent;
         outline: #251e1e;
         height: 40px;
-        color: #2d1f1f;
+        /*color: #2d1f1f;*/
         font-size: 16px;
     }
 
@@ -68,7 +71,7 @@ h3 {
 }
 
     .login-Box input[type="submit"]:hover {
-        background: #efed40;
+      /*// background: #efed40;*/
         color: #262626;
     }
 

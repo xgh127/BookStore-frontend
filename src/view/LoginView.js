@@ -5,6 +5,8 @@ import axios from "axios"
 import {apiURL, frontURL} from "../config/BaseConfig";
 import HeaderBar from "../component/HeaderBar";
 import {Link} from "react-router-dom";
+import {Button, Form, Input} from "antd";
+import {LockOutlined, UserOutlined} from "@ant-design/icons";
 
 function Head_img(){//
     return(
@@ -22,6 +24,7 @@ class LoginView extends React.Component{
             password:""
         }
     }
+
     InfoSet = (e,key) =>
     {
         let userInfo = {};
@@ -58,7 +61,7 @@ class LoginView extends React.Component{
                     window.location.href=frontURL+"/first";//跳转到主页
                 } else {
                     console.log("failed");
-                    alert("对不起，验证失败，您尚未注册");
+                    alert("对不起，验证失败，您可能尚未注册或者用户名或密码错误");
                 }
             })
         }
@@ -69,34 +72,56 @@ class LoginView extends React.Component{
 <div className="min-box">
     <HeaderBar Head={"登陆"}/>
             <div className="login-Box">
-               <Head_img/>
 
-                    <h3>登录</h3>
-                    <form onSubmit={this.doLogin}>
+            <Head_img/>
+                    <Form>
 
-                        {/*输入用户名部分*/}
-                        <p>用户名</p>
-                        <input type="text" id="username" placeholder="请输入用户名"
-                             /*换个行以示尊敬*/
-                        value = {this.state.username}
-                        onInput={(event) =>{
-                                this.InfoSet(event,'username')
-                        }} //如果输入的username改变了应该咋办
-                        />
-                        {/*密码部分*/}
-                        <p>密码</p>
-                        <input type="password" id="password" placeholder="请输入密码"
-                            /*继续尊敬*/
-                        onInput={(event) =>{
-                            this.InfoSet(event,'password')
-                        }}
-                        />
-                        <button type="submit"> 登录 </button><br/>
+                        <Form.Item
+                                        name="username"
+                                        rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your username!',
+                                    },
+                                        ]}
+                                        >
+                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username"
+                                         type="text" id="username" placeholder="请输入用户名"
+
+                                   value = {this.state.username}
+                                   onInput={(event) =>{
+                                       this.InfoSet(event,'username')
+                                   }} //如果输入的username改变了应该咋办
+                            />
+
+                                        </Form.Item>
+                        <Form.Item
+                                        name="password"
+                                        rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your password!',
+                                    },
+                                        ]}
+                                        >
+                                        <Input
+                                        prefix={<LockOutlined className="site-form-item-icon" />}
+                                        type="password"
+                                        placeholder="请输入密码"
+                                        onInput={(event) =>{
+                                            this.InfoSet(event,'password')
+                                        }}
+                                        />
+                                        </Form.Item>
+                        <Button  type="primary"
+                                 htmlType="submit"
+                                 onClick={this.doLogin}> 登录 </Button><br/>
                         <span>没有账号？</span><br/>
-                        <button><Link to ="/register">前往注册</Link></button>
-                    </form>
+                        <Button ><Link to ="/register">前往注册</Link></Button>
+                    </Form>
             </div>
-</div>
+    </div>
+
         )
     }
 }
