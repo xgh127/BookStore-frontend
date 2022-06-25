@@ -5,7 +5,6 @@ class BookRow extends React.Component{
         const book=this.props.book;
         return(
             <tr>
-              {/*<div className="book_text">*/}
                 <box className="books-box">
                 <img src={book.url} alt={book.name} />
                 <p>{book.name}{' '}{book.price}元</p>

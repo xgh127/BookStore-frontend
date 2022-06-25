@@ -1,11 +1,15 @@
 import React from "react";
 import '../css/basicBackground.css'
+import {Button, List, Pagination} from "antd";
+import {apiURL} from "../config/BaseConfig";
+
+
 class ProductRow extends React.Component {
 
     jumpToDetail = () =>
     {
         let id = this.props.product.id.toString();
-        window.location.href = "http://localhost:3000/detail?id=" + id +"";
+        window.location.href = apiURL+"/detail?id=" + id +"";
     }
     render() {
         const product = this.props.product;
@@ -16,8 +20,9 @@ class ProductRow extends React.Component {
       </span>;
 
         return (
+
             <tr className="mail-min" >
-                <td><button onClick={this.jumpToDetail}>{title}</button></td>
+                <td><Button block type ="Link" onClick={this.jumpToDetail}>{title}</Button></td>
                 <td><img width={180} alt={product.image} src={product.image}  /></td>
                 <td>{product.author}</td>
                 <td>{product.price}</td>
@@ -49,7 +54,14 @@ class ProductTable extends React.Component {
         });
 
         return (
-            <table className="mail-box">
+            <List className="mail-box" dataSource={rows}  pagination={{
+                onChange: page => {
+                    console.log(page);
+                },
+                pageSize: 16,
+            }}
+
+            >
                 <thead>
                 <tr className="main-title">
                     <th>书名</th>
@@ -59,8 +71,10 @@ class ProductTable extends React.Component {
                     <th>分类</th>
                 </tr>
                 </thead>
-                <tbody>{rows}</tbody>
-            </table>
+                <tbody >
+                {rows}
+                </tbody>
+            </List>
         );
     }
 }

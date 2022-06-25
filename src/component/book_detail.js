@@ -2,6 +2,8 @@ import React from "react";
 import '../css/book_detail.css'
 import axios from "axios";
 import {apiURL} from "../config/BaseConfig";
+import {Button} from "antd";
+import {UserOutlined} from "@ant-design/icons";
 
 class Book_detail extends React.Component{
 
@@ -55,8 +57,8 @@ class Book_detail extends React.Component{
                             <li>简介：{product.description}</li>
                         </ul>
                     </article>
-                    <button onClick={this.addToCart}>加入购物车</button>
-                    <button id="btn" >购买</button>
+                    <Button   onClick={this.addToCart}>加入购物车</Button>
+                    <Button id="btn" >购买</Button>
                 </div>
             </div>
         )

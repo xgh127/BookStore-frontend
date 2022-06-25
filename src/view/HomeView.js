@@ -35,7 +35,7 @@ class HomeView extends React.Component{
     }
 //返回书籍搜索表
     table1 =()=>{
-       console.log("the book is "+this.state.books);
+       console.log("HomeViewData "+this.state.books);
         if(this.state.books == null)
         {
             console.log("empty")

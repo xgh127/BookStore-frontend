@@ -4,6 +4,8 @@ import SideBar from "../component/sideBar";
 import SubContainer from "../component/subContainer";
 import HeaderBar from "../component/HeaderBar";
 import {frontURL} from "../config/BaseConfig";
+import {Button} from "antd";
+import { PoweroffOutlined} from '@ant-design/icons';
 
 class PersonCeterView extends React.Component{
 doLogOut=()=>
@@ -16,7 +18,7 @@ doLogOut=()=>
             <div className="min-box">
                 <HeaderBar Head={"个人中心"}/>
                 <SideBar/>
-                <SubContainer elem = {  <button onClick={this.doLogOut}>退出登陆</button>}/>
+                <SubContainer elem = {  <Button icon={<PoweroffOutlined />} danger onClick={this.doLogOut}>退出登陆</Button>}/>
 
             </div>
         )

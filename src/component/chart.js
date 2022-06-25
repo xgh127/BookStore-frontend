@@ -1,9 +1,10 @@
 import React from "react";
 import '../css/book_detail.css'
 import '../css/chart.css'
-import {postRequest} from "../utils/ajax";
+import {getRequest, postRequest, postRequest_v2} from "../utils/ajax";
 import {apiURL,frontURL} from "../config/BaseConfig";
 import axios from "axios";
+import {Button} from "antd";
 
 function formatPrice(price){
     if(typeof price !=="number"){
@@ -35,13 +36,15 @@ class Movie extends React.Component{
             }
         }
         let url = apiURL+'/getOrders';
-        postRequest(url,callback);//发送请求
+        getRequest(url, {
+            username:localStorage.getItem("username")
+        },callback
+        );//发送请求
     }
     Continue =()=>//点击继续购物的时候跳转到主页面
     {
         window.location.href=frontURL+"/first";
     }
-
 
     renderBooks(){
         return(
@@ -66,20 +69,20 @@ class Movie extends React.Component{
                                     <td>{item.bookName}</td>
                                     <td>￥{item.bookPrice}</td>
                                     <td>
-                                        <button onClick={()=>this.changeBookCount(index,-1)}
-                                                disabled={item.buyNum ===1}>-</button>
+                                        <Button shape="circle" onClick={()=>this.changeBookCount(index,-1)}
+                                                disabled={item.buyNum ===1}>-</Button>
                                         <span>{item.buyNum}</span>
-                                        <button onClick={()=>this.changeBookCount(index,1)}>+</button>
+                                        <Button shape="circle"  onClick={()=>this.changeBookCount(index,1)}>+</Button>
                                     </td>
-                                    <td><button onClick={()=>this.removeItem(index)}>移除</button></td>
+                                    <td><Button danger onClick={()=>this.removeItem(index)}>移除</Button></td>
                                 </tr>)
                         })
                     }
                     </tbody>
                 </table>
                 <div className="continueorsubmit fr">
-                    <button type="button" className="continue" onClick={ this.Continue}>继续购物</button>
-                    <button type="submit" className="submit">提交订单</button>
+                    <Button type="button"   className="continue" onClick={ this.Continue}>继续购物</Button>
+                    <Button type="submit"  className="submit">提交订单</Button>
                 </div>
                 <p>总价格:{this.getTotalprice()}</p>
             </div>)
@@ -90,7 +93,7 @@ class Movie extends React.Component{
     }
     render() {
         const {books} = this.state
-        return books.length ===0?this.renderNone():this.renderBooks()
+        return books.length ===0 ? this.renderNone():this.renderBooks()
     }
     changeBookCount(index,count){
         const newBooks =[...this.state.books]
@@ -98,7 +101,8 @@ class Movie extends React.Component{
         console.log("get "+newBooks[index].bookid+" "+newBooks[index].buyNum)
         axios.post(apiURL+"/changeBuyNum",{
             bookid:newBooks[index].bookid,
-            buyNum:newBooks[index].buyNum
+            buyNum:newBooks[index].buyNum,
+            username:localStorage.getItem("username")
         })
         this.setState({
             books:newBooks
@@ -107,7 +111,8 @@ class Movie extends React.Component{
     removeItem(index){
         let newBooks =[...this.state.books];
         axios.post(apiURL+"/removeCartItem",{
-            bookid:newBooks[index].bookid
+            bookid:newBooks[index].bookid,
+            username:localStorage.getItem("username")
         })
             .then(response =>{
                 if(response != null) {
