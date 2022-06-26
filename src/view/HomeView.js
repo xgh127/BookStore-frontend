@@ -28,14 +28,20 @@ class HomeView extends React.Component{
             }
             else
             {
+                /*数据库中保存的书籍的价格是ing类型的，95.2保存为9520，这里需要重新解析一下！！！！*/
+                for(let i = 0; i < data.length; ++i)
+                {
+                    let actualPrice = parseInt(data[i].price)/100;
+                    data[i].price = actualPrice;
+                }
                 this.setState({books:data});
+                console.log("HomeViewData "+this.state.books);
             }
         }
         postRequest(apiURL+'/getBooks',callback);
     }
 //返回书籍搜索表
     table1 =()=>{
-       console.log("HomeViewData "+this.state.books);
         if(this.state.books == null)
         {
             console.log("empty")

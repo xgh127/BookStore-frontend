@@ -1,7 +1,7 @@
 import React from "react";
 import '../css/basicBackground.css'
 import {Button, List, Pagination} from "antd";
-import {apiURL} from "../config/BaseConfig";
+import {apiURL, frontURL} from "../config/BaseConfig";
 
 
 class ProductRow extends React.Component {
@@ -9,20 +9,20 @@ class ProductRow extends React.Component {
     jumpToDetail = () =>
     {
         let id = this.props.product.id.toString();
-        window.location.href = apiURL+"/detail?id=" + id +"";
+        window.location.href = frontURL+"/detail?id=" + id +"";
     }
     render() {
         const product = this.props.product;
-        const title = product.stocked ?
-            product.title :
+        const name = product.stocked ?
+            product.name :
             <span style={{color: 'red'}}>
-        {product.title}
+        {product.name}
       </span>;
 
         return (
 
             <tr className="mail-min" >
-                <td><Button block type ="Link" onClick={this.jumpToDetail}>{title}</Button></td>
+                <td><Button block type ="Link" onClick={this.jumpToDetail}>{name}</Button></td>
                 <td><img width={180} alt={product.image} src={product.image}  /></td>
                 <td>{product.author}</td>
                 <td>{product.price}</td>
@@ -39,7 +39,7 @@ class ProductTable extends React.Component {
         const inStockOnly = this.props.inStockOnly;
         const rows = [];
         this.props.products.forEach((product) => {
-            if (product.title.indexOf(filterText) === -1) {
+            if (product.name.indexOf(filterText) === -1) {
                 return;
             }
             if (inStockOnly && !product.stocked) {
@@ -48,20 +48,13 @@ class ProductTable extends React.Component {
             rows.push(
                 <ProductRow
                     product={product}
-                    key={product.title}
+                    key={product.name}
                 />
             );
         });
 
         return (
-            <List className="mail-box" dataSource={rows}  pagination={{
-                onChange: page => {
-                    console.log(page);
-                },
-                pageSize: 16,
-            }}
-
-            >
+            <table className="mail-box">
                 <thead>
                 <tr className="main-title">
                     <th>书名</th>
@@ -74,7 +67,7 @@ class ProductTable extends React.Component {
                 <tbody >
                 {rows}
                 </tbody>
-            </List>
+            </table>
         );
     }
 }

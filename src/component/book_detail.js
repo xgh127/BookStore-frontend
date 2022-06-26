@@ -3,7 +3,6 @@ import '../css/book_detail.css'
 import axios from "axios";
 import {apiURL} from "../config/BaseConfig";
 import {Button} from "antd";
-import {UserOutlined} from "@ant-design/icons";
 
 class Book_detail extends React.Component{
 
@@ -20,7 +19,7 @@ class Book_detail extends React.Component{
        console.log("username"+localStorage.getItem("username"))
        let bookInfo ={
            id:book.id,
-           title:book.title,
+           title:book.name,
            author:book.author,
            price:book.price,
            type:book.type,
@@ -50,7 +49,7 @@ class Book_detail extends React.Component{
                         <img src={product.image}
                              alt={product.name}/>
                         <ul>
-                            <li>书名：{product.title}</li>
+                            <li>书名：{product.name}</li>
                             <li>分类：{product.type}</li>
                             <li>作者：{product.author}</li>
                             <li>定价：{product.price}</li>

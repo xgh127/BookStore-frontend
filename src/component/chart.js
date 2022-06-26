@@ -67,7 +67,7 @@ class Movie extends React.Component{
                                 <tr>
                                     <td>{item.idCartOrder}</td>
                                     <td>{item.bookName}</td>
-                                    <td>￥{item.bookPrice}</td>
+                                    <td>￥{item.price}</td>
                                     <td>
                                         <Button shape="circle" onClick={()=>this.changeBookCount(index,-1)}
                                                 disabled={item.buyNum ===1}>-</Button>
@@ -135,7 +135,7 @@ class Movie extends React.Component{
 
     getTotalprice(){
         let totalPrice = this.state.books.reduce((pre,item)=>{
-            return pre+item.bookPrice * item.buyNum
+            return pre+item.price * item.buyNum
         },0)
         return formatPrice(totalPrice)
     }

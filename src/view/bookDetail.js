@@ -32,10 +32,13 @@ class BookDetail extends React.Component{
             }
             else
             {
+                /*这里也需要对价格进行处理*/
+                let actualPrice = parseInt(bookData.price)/100;
+                bookData.price = actualPrice;
+
                 this.setState({
                     bookData: bookData
                 })
-
             }
         }
         bookId = bookId.split("").reverse().join("");
@@ -43,7 +46,6 @@ class BookDetail extends React.Component{
         let url = apiURL+"/findOne?id=" + bookId.toString()+"";
         postRequest(url,callback);
     }
-
     bookDetail =() =>
     {
         if(this.state.bookData == null)
@@ -51,7 +53,7 @@ class BookDetail extends React.Component{
             console.log("nothing you've get");
         }
         else {
-            console.log("book information is"+this.state.bookData);
+            console.log("book information is"+this.state.bookData.name);
             return (
 
                 <Book_detail product={this.state.bookData}/>
