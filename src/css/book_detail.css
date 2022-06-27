@@ -1,6 +1,32 @@
 @charset "utf-8";
 /* CSS Document */
 
+.BookDetailImg{
+    display: inline-block;
+    width: 30%;
+    height: auto;
+    float: left;
+    margin-left:auto;
+
+}
+.BookDescription{
+    display: inline-block;
+    float: right;
+    margin-left:50px;
+    width: 70%;
+    height: auto;
+    padding: 10px 20px;
+
+}
+.BookDetailTop{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+
+}
 body {
     font-family: "微软雅黑", Arial;
     padding: 0;
@@ -78,6 +104,7 @@ p {
     display: block;
     float: left;
     text-decoration: none;
+
     text-align: center;
     transition: transform 0.3s;
 }

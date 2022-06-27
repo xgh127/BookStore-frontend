@@ -7,6 +7,7 @@ import SideBar from "../component/sideBar";
 import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
 import HeaderBar from "../component/HeaderBar";
+import {PriceTrim} from "../Service/bookService";
 
 class HomeView extends React.Component{
 
@@ -29,11 +30,7 @@ class HomeView extends React.Component{
             else
             {
                 /*数据库中保存的书籍的价格是ing类型的，95.2保存为9520，这里需要重新解析一下！！！！*/
-                for(let i = 0; i < data.length; ++i)
-                {
-                    let actualPrice = parseInt(data[i].price)/100;
-                    data[i].price = actualPrice;
-                }
+                data = PriceTrim(data);
                 this.setState({books:data});
                 console.log("HomeViewData "+this.state.books);
             }
@@ -68,7 +65,7 @@ const TheFirst=()=>
 {
     return(
         <div>
-            <HeaderBar Head={"首页"}/>
+            <HeaderBar Head={"欢迎你,"+localStorage.getItem("username")}/>
             <Container SideBar={<SideBar/>} Sub={<HomeView/>}/>
         </div>
     )

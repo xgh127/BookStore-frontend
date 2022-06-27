@@ -7,39 +7,11 @@ import {
     Input,
     Select,
 } from 'antd';
+import {formItemLayout,tailFormItemLayout} from "../assert/Format"
 import { useState } from 'react';
 import {frontURL} from "../config/BaseConfig";
 const { Option } = Select;
-const formItemLayout = {
-    labelCol: {
-        xs: {
-            span: 4,
-        },
-        sm: {
-            span: 0,
-        },
-    },
-    wrapperCol: {
-        xs: {
-            span: 24,
-        },
-        sm: {
-            span: 16,
-        },
-    },
-};
-const tailFormItemLayout = {
-    wrapperCol: {
-        xs: {
-            span: 24,
-            offset: 0,
-        },
-        sm: {
-            span: 16,
-            offset: 8,
-        },
-    },
-};
+
 
 const RegisterForm = () => {
     const [form] = Form.useForm();

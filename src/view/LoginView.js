@@ -7,6 +7,7 @@ import HeaderBar from "../component/HeaderBar";
 import {Link} from "react-router-dom";
 import {Button, Form, Input} from "antd";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
+import {formItemLayout, tailFormItemLayout} from "../assert/Format";
 
 function Head_img(){//
     return(
@@ -70,11 +71,11 @@ class LoginView extends React.Component{
     {
         return (
 <div className="min-box">
-    <HeaderBar Head={"登陆"}/>
+    <HeaderBar Head={"欢迎来到牙牙书城，请先登录吧！"}/>
             <div className="login-Box">
 
             <Head_img/>
-                    <Form>
+                    <Form  {...formItemLayout}>
 
                         <Form.Item
                                         name="username"
@@ -112,12 +113,14 @@ class LoginView extends React.Component{
                                             this.InfoSet(event,'password')
                                         }}
                                         />
-                                        </Form.Item>
+                        </Form.Item>
+                        <Form {...tailFormItemLayout}>
                         <Button  type="primary"
                                  htmlType="submit"
                                  onClick={this.doLogin}> 登录 </Button><br/>
                         <span>没有账号？</span><br/>
                         <Button ><Link to ="/register">前往注册</Link></Button>
+                        </Form>
                     </Form>
             </div>
     </div>

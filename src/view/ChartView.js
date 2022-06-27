@@ -13,7 +13,7 @@ class ChartView extends React.Component {
     render() {
     return(
         <div>
-            <HeaderBar Head={"购物车"}/>
+            <HeaderBar Head={"我的购物车"}/>
                 <Container
                 SideBar={<SideBar/>}
                 Sub={pageChart}/>

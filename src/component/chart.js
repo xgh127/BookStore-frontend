@@ -4,7 +4,8 @@ import '../css/chart.css'
 import {getRequest, postRequest, postRequest_v2} from "../utils/ajax";
 import {apiURL,frontURL} from "../config/BaseConfig";
 import axios from "axios";
-import {Button} from "antd";
+import {Button, InputNumber} from "antd";
+import {PriceTrim} from "../Service/bookService";
 
 function formatPrice(price){
     if(typeof price !=="number"){
@@ -31,6 +32,7 @@ class Movie extends React.Component{
             }
             else
             {
+                data = PriceTrim(data);
                 this.setState({books:data});
                 console.log("Render cart by getting data from cartorder DB successfully")
             }
@@ -71,7 +73,7 @@ class Movie extends React.Component{
                                     <td>
                                         <Button shape="circle" onClick={()=>this.changeBookCount(index,-1)}
                                                 disabled={item.buyNum ===1}>-</Button>
-                                        <span>{item.buyNum}</span>
+                                        <span >x{item.buyNum}</span>
                                         <Button shape="circle"  onClick={()=>this.changeBookCount(index,1)}>+</Button>
                                     </td>
                                     <td><Button danger onClick={()=>this.removeItem(index)}>移除</Button></td>
@@ -100,9 +102,8 @@ class Movie extends React.Component{
         newBooks[index].buyNum +=count;
         console.log("get "+newBooks[index].bookid+" "+newBooks[index].buyNum)
         axios.post(apiURL+"/changeBuyNum",{
-            bookid:newBooks[index].bookid,
+            cartOrderID:newBooks[index].idCartOrder,
             buyNum:newBooks[index].buyNum,
-            username:localStorage.getItem("username")
         })
         this.setState({
             books:newBooks
@@ -110,9 +111,11 @@ class Movie extends React.Component{
     }
     removeItem(index){
         let newBooks =[...this.state.books];
+        console.log("delete "+newBooks[index].idCartOrder+" "+newBooks[index].bookid+newBooks[index].bookName);
+        //console.log("before delte"+JSON.stringify(newBooks[0]));
         axios.post(apiURL+"/removeCartItem",{
-            bookid:newBooks[index].bookid,
-            username:localStorage.getItem("username")
+            cartOrderID:newBooks[index].idCartOrder,
+
         })
             .then(response =>{
                 if(response != null) {

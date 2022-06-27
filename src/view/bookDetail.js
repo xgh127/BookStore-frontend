@@ -6,6 +6,7 @@ import SubContainer from "../component/subContainer";
 import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
 import HeaderBar from "../component/HeaderBar";
+
 class BookDetail extends React.Component{
 
     constructor(props) {
@@ -34,8 +35,7 @@ class BookDetail extends React.Component{
             {
                 /*这里也需要对价格进行处理*/
                 let actualPrice = parseInt(bookData.price)/100;
-                bookData.price = actualPrice;
-
+                bookData.price = actualPrice.toFixed(2);
                 this.setState({
                     bookData: bookData
                 })
