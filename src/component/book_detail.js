@@ -25,7 +25,7 @@ class Book_detail extends React.Component{
 
         this.state =
         {
-            buyNum:0,
+            buyNum:1,
             allPrice:0,
             bookPrice:0,
         }
@@ -57,7 +57,8 @@ class Book_detail extends React.Component{
        }
        else
        {
-           alert("add falied")
+
+           alert("add failed")
        }
 
     }

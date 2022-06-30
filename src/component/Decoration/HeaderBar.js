@@ -1,6 +1,6 @@
 import React from "react";
-import '../css/basicBackground.css'
-import title from "../picture/logo.png";
+import '../../css/basicBackground.css'
+import title from "../../picture/logo.png";
 
 class HeaderBar extends React.Component{
     constructor(props) {

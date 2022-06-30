@@ -1,5 +1,5 @@
 import React from "react";
-import '../css/basicBackground.css'
+import '../../css/basicBackground.css'
 import {Affix, Button} from "antd";
 
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom'

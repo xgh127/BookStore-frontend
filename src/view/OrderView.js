@@ -1,12 +1,12 @@
 import React from "react";
 import '../css/basicBackground.css'
-import SideBar from "../component/sideBar";
+import SideBar from "../component/Decoration/sideBar";
 import Book_detail from "../component/book_detail";
-import SubContainer from "../component/subContainer";
+import SubContainer from "../component/Container/subContainer";
 import title from "../picture/logo.png";
 import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
-import HeaderBar from "../component/HeaderBar";
+import HeaderBar from "../component/Decoration/HeaderBar";
 function Head_img(){
     return(
         <img className="title"

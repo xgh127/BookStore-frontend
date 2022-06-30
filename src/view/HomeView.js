@@ -1,13 +1,14 @@
 import React from "react";
 import '../css/basicBackground.css'
 import { FilterableProductTable2} from "../component/table";
-import SubContainer from "../component/subContainer";
-import Container from "../component/Container";
-import SideBar from "../component/sideBar";
+import SubContainer from "../component/Container/subContainer";
+import Container from "../component/Container/Container";
+import SideBar from "../component/Decoration/sideBar";
 import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
-import HeaderBar from "../component/HeaderBar";
+import HeaderBar from "../component/Decoration/HeaderBar";
 import {PriceTrim} from "../Service/bookService";
+import {withRouter} from "react-router-dom";
 
 class HomeView extends React.Component{
 
@@ -55,19 +56,19 @@ class HomeView extends React.Component{
     {
         return (
                 <div>
-                    <SubContainer elem={this.table1()}/>
+                    <HeaderBar Head={"欢迎你,"+localStorage.getItem("username")}/>
+                    <Container SideBar={<SideBar/>} Sub={  <SubContainer elem={this.table1()}/>}/>
+
                 </div>
         )
     }
 }
 
-const TheFirst=()=>
+export const TheFirst=()=>
 {
     return(
         <div>
-            <HeaderBar Head={"欢迎你,"+localStorage.getItem("username")}/>
-            <Container SideBar={<SideBar/>} Sub={<HomeView/>}/>
+          <HomeView/>
         </div>
     )
 }
-export  {TheFirst};

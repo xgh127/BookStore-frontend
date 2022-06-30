@@ -3,11 +3,12 @@ import '../css/logincss.css'
 import logHead from "../picture/login_head.jpeg"
 import axios from "axios"
 import {apiURL, frontURL} from "../config/BaseConfig";
-import HeaderBar from "../component/HeaderBar";
+import HeaderBar from "../component/Decoration/HeaderBar";
 import {Link} from "react-router-dom";
 import {Button, Form, Input} from "antd";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 import {formItemLayout, tailFormItemLayout} from "../assert/Format";
+import {userLogin} from "../Service/UserService";
 
 function Head_img(){//
     return(
@@ -46,24 +47,11 @@ class LoginView extends React.Component{
             alert("Mistake!")
         }
         else {
-
-            localStorage.setItem("username",user);
-            localStorage.setItem("password",pwd);
-            /*向后端的这个controller发送请求，获取后端的return*/
-            axios.post(apiURL+"/loginCheck", {
-                user_id :- 1,
-                username:user,
-                password:pwd,
-                user_type:-1
-            })
-                .then(response => {
-                if (response.data.username != null) {
-                    alert("验证成功");
-                    window.location.href=frontURL+"/first";//跳转到主页
-                } else {
-                    console.log("failed");
-                    alert("对不起，验证失败，您可能尚未注册或者用户名或密码错误");
-                }
+            userLogin({
+                     user_id :- 1,
+                    username:user,
+                    password:pwd,
+                    user_type:-1
             })
         }
     }
@@ -77,15 +65,11 @@ class LoginView extends React.Component{
             <Head_img/>
                     <Form  {...formItemLayout}>
 
-                        <Form.Item
-                                        name="username"
-                                        rules={[
+                        <Form.Item name="username" rules={[
                                     {
                                         required: true,
                                         message: 'Please input your username!',
-                                    },
-                                        ]}
-                                        >
+                                    },]}>
                             <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username"
                                          type="text" id="username" placeholder="请输入用户名"
 
@@ -96,14 +80,11 @@ class LoginView extends React.Component{
                             />
 
                                         </Form.Item>
-                        <Form.Item
-                                        name="password"
-                                        rules={[
+                        <Form.Item name="password" rules={[
                                     {
                                         required: true,
                                         message: 'Please input your password!',
-                                    },
-                                        ]}
+                                    },]}
                                         >
                                         <Input
                                         prefix={<LockOutlined className="site-form-item-icon" />}

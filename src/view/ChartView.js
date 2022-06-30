@@ -1,10 +1,10 @@
 import React from "react";
 import '../css/basicBackground.css'
-import SideBar from "../component/sideBar";
-import SubContainer from "../component/subContainer";
-import HeaderBar from "../component/HeaderBar";
-import Container from "../component/Container";
-import Movie from "../component/chart";
+import SideBar from "../component/Decoration/sideBar";
+import SubContainer from "../component/Container/subContainer";
+import HeaderBar from "../component/Decoration/HeaderBar";
+import Container from "../component/Container/Container";
+import Movie from "../component/Chart/chart";
 
 let chart=<Movie/> ;                           //购物车
 let pageChart =  <SubContainer elem={chart}/>;

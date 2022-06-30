@@ -1,11 +1,11 @@
 import React from "react";
-import '../css/book_detail.css'
-import '../css/chart.css'
-import {getRequest, postRequest, postRequest_v2} from "../utils/ajax";
-import {apiURL,frontURL} from "../config/BaseConfig";
+import '../../css/book_detail.css'
+import '../../css/chart.css'
+import {getRequest, postRequest, postRequest_v2} from "../../utils/ajax";
+import {apiURL,frontURL} from "../../config/BaseConfig";
 import axios from "axios";
 import {Button, InputNumber} from "antd";
-import {PriceTrim} from "../Service/bookService";
+import {PriceTrim} from "../../Service/bookService";
 
 function formatPrice(price){
     if(typeof price !=="number"){

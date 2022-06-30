@@ -1,8 +1,8 @@
 import React from "react";
 import RegisterForm from "../component/RegisterForm";
-import HeaderBar from "../component/HeaderBar";
-import Container from "../component/Container";
-import SubContainer from "../component/subContainer";
+import HeaderBar from "../component/Decoration/HeaderBar";
+import Container from "../component/Container/Container";
+import SubContainer from "../component/Container/subContainer";
 
 
 class RegisterView extends React.Component{

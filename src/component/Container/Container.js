@@ -1,5 +1,5 @@
 import React from "react";
-import '../css/basicBackground.css'
+import '../../css/basicBackground.css'
 
 function SubContainer(props) {
     return null;
