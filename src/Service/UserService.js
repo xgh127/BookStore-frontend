@@ -14,9 +14,8 @@ const userLogin = (loginInfo)=>
 
                 LoginSuccessFully();//输出正确信息
                 localStorage.setItem(UserConst.USERNAME, response.username);
-                window.location.href=frontURL+"/first";
-           // history.push("/first");
-
+                 history.push("/first");
+                 history.go();
             } else {
                 LoginFailed();
             }

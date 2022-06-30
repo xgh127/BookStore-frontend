@@ -4,8 +4,10 @@ import '../../css/chart.css'
 import {getRequest, postRequest, postRequest_v2} from "../../utils/ajax";
 import {apiURL,frontURL} from "../../config/BaseConfig";
 import axios from "axios";
-import {Button, InputNumber} from "antd";
+import {Button, InputNumber, Popconfirm} from "antd";
 import {PriceTrim} from "../../Service/bookService";
+import {message} from "antd";
+import {history} from "../../utils/history";
 
 function formatPrice(price){
     if(typeof price !=="number"){
@@ -45,10 +47,12 @@ class Movie extends React.Component{
     }
     Continue =()=>//点击继续购物的时候跳转到主页面
     {
-        window.location.href=frontURL+"/first";
-    }
+        history.push("/first");
+        history.go(0);
+    };
 
     renderBooks(){
+
         return(
             <div>
                 <table id= "shopping_cart_info">
@@ -76,7 +80,21 @@ class Movie extends React.Component{
                                         <span >x{item.buyNum}</span>
                                         <Button shape="circle"  onClick={()=>this.changeBookCount(index,1)}>+</Button>
                                     </td>
-                                    <td><Button danger onClick={()=>this.removeItem(index)}>移除</Button></td>
+                                    <td>
+                                        <Popconfirm
+                                            title="Are you sure to delete this task?"
+                                          onConfirm={() =>
+                                          {
+                                              this.removeItem(index);
+                                              message.success("删除成功")
+                                          }}
+                                            okText="Yes"
+                                            cancelText="No"
+                                        >
+                                            <Button danger>移除</Button>
+                                        </Popconfirm>
+
+                                </td>
                                 </tr>)
                         })
                     }

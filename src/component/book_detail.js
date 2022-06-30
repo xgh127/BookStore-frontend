@@ -1,22 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import '../css/book_detail.css'
 import axios from "axios";
 import {apiURL, frontURL} from "../config/BaseConfig";
 import {
-    BackTop,
     Button,
     Card,
     Col,
     Descriptions,
-    Form,
     Image,
-    InputNumber,
+    InputNumber, Modal, notification,
     PageHeader,
-    Row,
-    TabPaneProps,
-    Tabs
+    Row
 } from "antd";
-import Cell from "antd/es/descriptions/Cell";
+import {history} from "../utils/history";
+const openNotification = (placement) => {
+    notification.info({
+        message: "添加成功",
+        description:
+            '您已成功添加该商品到购物车，点击侧边>我的购物车<可以查看',
+        placement,
+    });
+};
 class Book_detail extends React.Component{
 
     constructor(props) {
@@ -30,11 +34,27 @@ class Book_detail extends React.Component{
             bookPrice:0,
         }
     }
-    addToCart=()=>
+    /*消息确认框*/
+    showAddConfirm = ()=>
     {
-
-        alert("确定加入购物车？如果购物车已经存在该书籍，您的购买数量将会+1，您可以自行前往购物车查看并修改您需要的购买数量并进行修改！");
-        //发送数据到后端
+        Modal.confirm(
+            {
+                title: '您确定要把《'+this.props.product.name+'》加入购物车吗? ',
+                content: '如果您购物车中已经有该商品，我们将会将您此次的购买数量加到购物车中的购买数量！',
+                cancelText: '取消',
+                okText: '确定',
+                okType: 'primary',
+                onOk: () => {
+                    this.addToCart()//确认按钮的回调方法，确认后可执行加入购物车
+                },
+                onCancel() {
+                    console.log('Cancel');
+                },
+            }
+        )
+    }
+    addToCart=()=>
+    {//发送数据到后端
        let book = this.props.product;
        console.log("username"+localStorage.getItem("username"))
        let bookInfo ={
@@ -48,24 +68,18 @@ class Book_detail extends React.Component{
            image:book.image,
            username:localStorage.getItem("username")
        }
-       if(bookInfo != null) {
            console.log("bookid = " + bookInfo.id);
            axios.post(apiURL + "/addCart", bookInfo)
                .then(response => {
-                   console.log(response);
+                   openNotification('top');//弹出消息提示框，参数是提示出现的位置
                })
        }
-       else
-       {
 
-           alert("add failed")
-       }
-
-    }
     backToHome=()=>
     {
-        window.location.href=frontURL+"/first";
+        history.go(-1);
     }
+    /*修改购买数量*/
     buyNumChange(e){
         this.setState({bookPrice:this.props.product.price});
 
@@ -73,8 +87,8 @@ class Book_detail extends React.Component{
             this.setState({buyNum: e, allPrice:this.state.bookPrice  * e})
         }
         console.log("After change "+this.state.allPrice+ " "+this.state.buyNum);
-
     }
+
     render(){
         const product = this.props.product;
         return(
@@ -112,9 +126,9 @@ class Book_detail extends React.Component{
                             <Col span={8}><p>总价：{this.state.allPrice.toFixed(2)}元</p></Col>
 
                         <Col span={3}>
-                    <Button onClick={this.addToCart}>加入购物车</Button>
-                            <Button id="btn"  >购买</Button></Col>
+                    <Button onClick={ this.showAddConfirm}>加入购物车</Button>
 
+                            <Button id="btn"  >购买</Button></Col>
                         </Row>
 
                     </Card>

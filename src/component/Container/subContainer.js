@@ -1,4 +1,5 @@
 import React from "react";
+import {Affix} from "antd";
 
 class SubContainer extends  React.Component{
     constructor(props) {
@@ -7,9 +8,11 @@ class SubContainer extends  React.Component{
     render()
     {
         return (
+
             <div className="books-box">
                 {this.props.elem}
             </div>
+
         )
     }
 }

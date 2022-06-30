@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import '../css/basicBackground.css'
-import {Button, List, Pagination} from "antd";
+import {Affix, Button, Card, List, Pagination, Table} from "antd";
 import {apiURL, frontURL} from "../config/BaseConfig";
 
 
@@ -22,7 +22,7 @@ class ProductRow extends React.Component {
         return (
 
             <tr className="mail-min" >
-                <td><Button block type ="Link" onClick={this.jumpToDetail}>{name}</Button></td>
+                <td><Button block type ="Link" onClick={this.jumpToDetail}>{product.name}</Button></td>
                 <td><img width={180} alt={product.image} src={product.image}  /></td>
                 <td>{product.author}</td>
                 <td>{product.price}</td>
@@ -52,11 +52,10 @@ class ProductTable extends React.Component {
                 />
             );
         });
-
         return (
-            <table className="mail-box">
+            <table  className="mail-box">
                 <thead>
-                <tr className="main-title">
+                <tr className="main-title" >
                     <th>书名</th>
                     <th>封面</th>
                     <th>作者</th>
@@ -111,6 +110,7 @@ class SearchBar extends React.Component {
                     </p>
                 </div>
             </form>
+
 
         );
     }
