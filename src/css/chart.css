@@ -32,6 +32,15 @@ img{
     border-radius: 10px;
     margin-top: 52px;
 }
+.displaysmall{
+    width:100px;
+    text-align: center;
+}
+.displaybig{
+    width:400px;
+    height:42px;
+    text-align: center;
+}
 .fl{
     float: left;
 }

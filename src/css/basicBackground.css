@@ -173,7 +173,7 @@ p {
 .SideBar a:hover {
     position: relative;
     cursor: pointer;
-    transform: translate(0,-3px);
+    transform: translate(0,-10px);
 }
 
 .SideBar a div {
@@ -181,7 +181,7 @@ p {
     align-content: center;
     color: #474747;
     line-height: 40px;
-    padding-left: 80px;
+    padding-left: 60px;
 }
 
 .block-min-01 {

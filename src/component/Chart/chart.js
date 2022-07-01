@@ -1,28 +1,30 @@
 import React from "react";
 import '../../css/book_detail.css'
 import '../../css/chart.css'
-import {getRequest, postRequest, postRequest_v2} from "../../utils/ajax";
+import {getRequest} from "../../utils/ajax";
 import {apiURL,frontURL} from "../../config/BaseConfig";
 import axios from "axios";
-import {Button, InputNumber, Popconfirm} from "antd";
+import {Button, Checkbox, Popconfirm} from "antd";
 import {PriceTrim} from "../../Service/bookService";
 import {message} from "antd";
 import {history} from "../../utils/history";
 
-function formatPrice(price){
-    if(typeof price !=="number"){
-        price = Number("aaa") || 0
-    }
-    return "¥"+ price.toFixed(2)
-}
+// function formatPrice(price){
+//     if(typeof price !=="number"){
+//         price = Number("aaa") || 0
+//     }
+//     return "¥"+ price.toFixed(2)
+// }
 
 class Movie extends React.Component{
     constructor(){
         super()
         this.state={
             books:[],
+            totalPrice:0,
         }
     }
+    /*获取数据*/
     componentDidMount()
     {
         //每次进入购物车就向后端读取购物车内的内容并渲染
@@ -30,14 +32,15 @@ class Movie extends React.Component{
         {
             if(this.state.books == null)
             {
-                console.log("get nothing from the cartorder");
+                console.log("Render cart by getting data from cartorder DB failed");
             }
             else
             {
                 data = PriceTrim(data);
                 this.setState({books:data});
-                console.log("Render cart by getting data from cartorder DB successfully")
+                console.log("Render cart by getting data from cartorder DB successfully");
             }
+
         }
         let url = apiURL+'/getOrders';
         getRequest(url, {
@@ -45,11 +48,17 @@ class Movie extends React.Component{
         },callback
         );//发送请求
     }
+    /*点击继续购物*/
     Continue =()=>//点击继续购物的时候跳转到主页面
     {
         history.push("/first");
         history.go(0);
     };
+
+    handleSubmitOrder=() =>
+    {
+
+    }
 
     renderBooks(){
 
@@ -58,10 +67,11 @@ class Movie extends React.Component{
                 <table id= "shopping_cart_info">
                     <thead>
                     <tr>
-                        <th width="100px" >序号</th>
-                        <th >书籍名称</th>
-                        <th width="400px" height="42px">价格</th>
-                        <th width="400px" height="42px">购买数量</th>
+                        <td  className="displaysmall">选择</td>
+                        <th className="displaysmall" >序号</th>
+                        <th className="displaybig">书籍名称</th>
+                        <th className="displaybig">价格</th>
+                        <th className="displaybig">购买数量</th>
                         <th width="400px" height="42px">操作</th>
 
                     </tr>
@@ -71,6 +81,25 @@ class Movie extends React.Component{
                         this.state.books.map((item,index)=>{
                             return (
                                 <tr>
+                                    <td ><Checkbox  onChange={()=>
+                                    {
+                                        const newBooks =[...this.state.books];
+                                        if(newBooks[index].submitStatus === 0) {
+                                            this.changeBookStatus(index, 1);
+                                            newBooks[index].submitStatus = 1;
+                                        }
+                                        else
+                                        {
+                                            this.changeBookStatus(index,0);
+                                            newBooks[index].submitStatus = 0;
+                                        }
+                                      //  newBooks[index].status = newBooks[index].status !== true;
+                                        console.log(JSON.stringify(newBooks));
+                                        this.setState({books:newBooks});
+                                        let total = this.getTotalprice();
+                                        this.setState({totalPrice:total});
+
+                                    }}/></td>
                                     <td>{item.idCartOrder}</td>
                                     <td>{item.bookName}</td>
                                     <td>￥{item.price}</td>
@@ -82,17 +111,18 @@ class Movie extends React.Component{
                                     </td>
                                     <td>
                                         <Popconfirm
-                                            title="Are you sure to delete this task?"
+                                            title="你确定要移除这本书吗?"
                                           onConfirm={() =>
                                           {
                                               this.removeItem(index);
-                                              message.success("删除成功")
+                                              message.success("移除成功")
                                           }}
                                             okText="Yes"
                                             cancelText="No"
                                         >
                                             <Button danger>移除</Button>
                                         </Popconfirm>
+                                        <Button type="primary">详情</Button>
 
                                 </td>
                                 </tr>)
@@ -104,7 +134,7 @@ class Movie extends React.Component{
                     <Button type="button"   className="continue" onClick={ this.Continue}>继续购物</Button>
                     <Button type="submit"  className="submit">提交订单</Button>
                 </div>
-                <p>总价格:{this.getTotalprice()}</p>
+                <p>已选书籍总价格:{this.state.totalPrice.toFixed(2)}元</p>
             </div>)
     }
 
@@ -124,41 +154,50 @@ class Movie extends React.Component{
             buyNum:newBooks[index].buyNum,
         })
         this.setState({
+            books:newBooks,totalPrice:this.getTotalprice()
+        })
+    }
+    changeBookStatus(index,type){
+        const newBooks =[...this.state.books]
+        newBooks[index].submitStatus = type;
+       // console.log("get "+newBooks[index].bookid+" "+newBooks[index].buyNum)
+        axios.post(apiURL+"/changeStatus",{
+            cartOrderID:newBooks[index].idCartOrder,
+            submit_status:newBooks[index].submitStatus,
+        })
+        this.setState({
             books:newBooks
         })
     }
     removeItem(index){
         let newBooks =[...this.state.books];
         console.log("delete "+newBooks[index].idCartOrder+" "+newBooks[index].bookid+newBooks[index].bookName);
-        //console.log("before delte"+JSON.stringify(newBooks[0]));
         axios.post(apiURL+"/removeCartItem",{
             cartOrderID:newBooks[index].idCartOrder,
 
         })
             .then(response =>{
                 if(response != null) {
-
-/*我啥也没写就是玩儿aa*/
                     newBooks = response;
                     this.setState({
-                        //book: newBook
                          books:this.state.books.filter((item,indey)=>index !== indey)
                     })
-                    console.log("after delte"+this.state.books);
+                    this.setState({totalPrice:this.getTotalprice()})
                 }
                 else
                 {
                     console.log("get after delete failed");
                 }
             })
-
     }
 
     getTotalprice(){
         let totalPrice = this.state.books.reduce((pre,item)=>{
-            return pre+item.price * item.buyNum
+            if(item.submitStatus === 1)
+            return pre+item.price * item.buyNum;
+            else return pre;
         },0)
-        return formatPrice(totalPrice)
+       return totalPrice;
     }
 }
 export default Movie;
