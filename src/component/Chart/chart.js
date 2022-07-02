@@ -7,6 +7,7 @@ import axios from "axios";
 import {Button, Checkbox, Form, message, Popconfirm} from "antd";
 import {PriceTrim} from "../../Service/bookService";
 import {history} from "../../utils/history";
+import CartOrderModal from "./CartOrderModal";
 
 class Movie extends React.Component{
     constructor(){
@@ -59,28 +60,31 @@ class Movie extends React.Component{
                 orderIDGroup.push(item.idCartOrder);
             }
         })
-
-        let url = apiURL+"/makeOrder";
-        let obj =
-            {
-                username:localStorage.getItem("username"),
-                receiverName:"徐国洪",
-                postcode:"40400",
-                phoneNumber:"18290207267",
-                totalPrice: this.getTotalprice(),
-                CartorderIDGroup:orderIDGroup,
-                address:"东川路800号"
-            }
-
-
-        getRequest(url,obj,()=>
+        if(orderIDGroup.length ===0)
         {
-            console.log("make an order");
-            this.setState({
-                submitStatus:100
+            message.warn("您未选择任何一项")
+        }
+        else {
+            CartOrderModal.confirm()
+            let url = apiURL + "/makeOrder";
+            let obj =
+                {
+                    username: localStorage.getItem("username"),
+                    receiverName: "徐国洪",
+                    postcode: "40400",
+                    phoneNumber: "18290207267",
+                    totalPrice: this.getTotalprice(),
+                    CartorderIDGroup: orderIDGroup,
+                    address: "东川路800号"
+                }
+            getRequest(url, obj, () => {
+                console.log("make an order");
+                this.setState({
+                    submitStatus: 100
+                });
             });
-        });
-        window.location.reload();
+            window.location.reload();
+        }
     }
 
     renderBooks(){

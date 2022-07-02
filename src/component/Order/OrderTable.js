@@ -63,8 +63,7 @@ class OrderTable extends React.Component{
         {
             title: '时间',
             dataIndex: 'createTime',
-            key: 'create_time',
-
+            key: 'createTime',
         },
         {
             title: '操作',
