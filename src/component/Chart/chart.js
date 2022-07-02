@@ -7,7 +7,6 @@ import axios from "axios";
 import {Button, Checkbox, Form, message, Popconfirm} from "antd";
 import {PriceTrim} from "../../Service/bookService";
 import {history} from "../../utils/history";
-import CartOrderModal from "./CartOrderModal";
 
 class Movie extends React.Component{
     constructor(){
@@ -65,7 +64,6 @@ class Movie extends React.Component{
             message.warn("您未选择任何一项")
         }
         else {
-            CartOrderModal.confirm()
             let url = apiURL + "/makeOrder";
             let obj =
                 {
@@ -79,9 +77,6 @@ class Movie extends React.Component{
                 }
             getRequest(url, obj, () => {
                 console.log("make an order");
-                this.setState({
-                    submitStatus: 100
-                });
             });
             window.location.reload();
         }
