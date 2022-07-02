@@ -2,19 +2,11 @@ import React from "react";
 import '../../css/book_detail.css'
 import '../../css/chart.css'
 import {getRequest} from "../../utils/ajax";
-import {apiURL,frontURL} from "../../config/BaseConfig";
+import {apiURL} from "../../config/BaseConfig";
 import axios from "axios";
-import {Button, Checkbox, Popconfirm} from "antd";
+import {Button, Checkbox, Form, message, Popconfirm} from "antd";
 import {PriceTrim} from "../../Service/bookService";
-import {message} from "antd";
 import {history} from "../../utils/history";
-
-// function formatPrice(price){
-//     if(typeof price !=="number"){
-//         price = Number("aaa") || 0
-//     }
-//     return "¥"+ price.toFixed(2)
-// }
 
 class Movie extends React.Component{
     constructor(){
@@ -22,8 +14,10 @@ class Movie extends React.Component{
         this.state={
             books:[],
             totalPrice:0,
+            submitStatus:0,
         }
     }
+
     /*获取数据*/
     componentDidMount()
     {
@@ -57,14 +51,43 @@ class Movie extends React.Component{
 
     handleSubmitOrder=() =>
     {
+        let orderIDGroup = [];
+        let bookIDGroup = [];
+        this.state.books.forEach((item)=>
+        {
+            if(item.submitStatus === 1) {
+                orderIDGroup.push(item.idCartOrder);
+            }
+        })
 
+        let url = apiURL+"/makeOrder";
+        let obj =
+            {
+                username:localStorage.getItem("username"),
+                receiverName:"徐国洪",
+                postcode:"40400",
+                phoneNumber:"18290207267",
+                totalPrice: this.getTotalprice(),
+                CartorderIDGroup:orderIDGroup,
+                address:"东川路800号"
+            }
+
+
+        getRequest(url,obj,()=>
+        {
+            console.log("make an order");
+            this.setState({
+                submitStatus:100
+            });
+        });
+        window.location.reload();
     }
 
     renderBooks(){
 
         return(
             <div>
-                <table id= "shopping_cart_info">
+                <Form id= "shopping_cart_info">
                     <thead>
                     <tr>
                         <td  className="displaysmall">选择</td>
@@ -81,10 +104,10 @@ class Movie extends React.Component{
                         this.state.books.map((item,index)=>{
                             return (
                                 <tr>
-                                    <td ><Checkbox  onChange={()=>
+                                    <td ><Checkbox  onChange={(e)=>
                                     {
                                         const newBooks =[...this.state.books];
-                                        if(newBooks[index].submitStatus === 0) {
+                                        if(e.target.checked === true) {
                                             this.changeBookStatus(index, 1);
                                             newBooks[index].submitStatus = 1;
                                         }
@@ -93,7 +116,6 @@ class Movie extends React.Component{
                                             this.changeBookStatus(index,0);
                                             newBooks[index].submitStatus = 0;
                                         }
-                                      //  newBooks[index].status = newBooks[index].status !== true;
                                         console.log(JSON.stringify(newBooks));
                                         this.setState({books:newBooks});
                                         let total = this.getTotalprice();
@@ -120,7 +142,7 @@ class Movie extends React.Component{
                                             okText="Yes"
                                             cancelText="No"
                                         >
-                                            <Button danger>移除</Button>
+                                            <Button danger >移除</Button>
                                         </Popconfirm>
                                         <Button type="primary">详情</Button>
 
@@ -129,10 +151,10 @@ class Movie extends React.Component{
                         })
                     }
                     </tbody>
-                </table>
+                </Form>
                 <div className="continueorsubmit fr">
                     <Button type="button"   className="continue" onClick={ this.Continue}>继续购物</Button>
-                    <Button type="submit"  className="submit">提交订单</Button>
+                    <Button type="submit"  className="submit" onClick={this.handleSubmitOrder}>提交订单</Button>
                 </div>
                 <p>已选书籍总价格:{this.state.totalPrice.toFixed(2)}元</p>
             </div>)
@@ -192,12 +214,11 @@ class Movie extends React.Component{
     }
 
     getTotalprice(){
-        let totalPrice = this.state.books.reduce((pre,item)=>{
-            if(item.submitStatus === 1)
-            return pre+item.price * item.buyNum;
-            else return pre;
-        },0)
-       return totalPrice;
+        return this.state.books.reduce((pre, item) => {
+           if (item.submitStatus === 1)
+               return pre + item.price * item.buyNum;
+           else return pre;
+       }, 0);
     }
 }
 export default Movie;

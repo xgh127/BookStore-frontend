@@ -2,16 +2,7 @@ import React, {useState} from "react";
 import '../css/book_detail.css'
 import axios from "axios";
 import {apiURL, frontURL} from "../config/BaseConfig";
-import {
-    Button,
-    Card,
-    Col,
-    Descriptions,
-    Image,
-    InputNumber, Modal, notification,
-    PageHeader,
-    Row
-} from "antd";
+import {Button, Card, Col, Descriptions, Image, InputNumber, Modal, notification, PageHeader, Row} from "antd";
 import {history} from "../utils/history";
 const openNotification = (placement) => {
     notification.info({
@@ -24,9 +15,7 @@ const openNotification = (placement) => {
 class Book_detail extends React.Component{
 
     constructor(props) {
-        const bookprice = props.product.price;
         super(props);
-
         this.state =
         {
             buyNum:1,
@@ -79,6 +68,10 @@ class Book_detail extends React.Component{
     {
         history.go(-1);
     }
+    toNext=()=>
+    {
+        window.location.href=frontURL+"/detail?id=" + (this.props.product.id+1)%39 +"";
+    }
     /*修改购买数量*/
     buyNumChange(e){
         this.setState({bookPrice:this.props.product.price});
@@ -108,10 +101,12 @@ class Book_detail extends React.Component{
                             <Descriptions.Item label="作者" span={5}>{product.author}</Descriptions.Item>
                             <Descriptions.Item label="单价" span={5} ><b>{product.price}元</b></Descriptions.Item>
                             <Descriptions.Item label= "简介">{product.description}</Descriptions.Item>
+
                             </Descriptions>
 
                     </div>
                         <PageHeader><Button size="large" block  onClick={this.backToHome}>返回</Button></PageHeader>
+
             </div>
 
                     <Card title="购买信息" size={"small"}>
@@ -120,15 +115,18 @@ class Book_detail extends React.Component{
                             <Col>
                                     <p>购买数量：</p>
                                 </Col>
-                                <Col span={5}>
+                                <Col span={3}>
                                     <InputNumber id="buyNum" min={1} onChange={e => this.buyNumChange(e)} defaultValue={1}/>
                                 </Col>
-                            <Col span={8}><p>总价：{this.state.allPrice.toFixed(2)}元</p></Col>
+                            <Col span={5}><p>总价：{this.state.allPrice.toFixed(2)}元</p></Col>
 
                         <Col span={3}>
                     <Button onClick={ this.showAddConfirm}>加入购物车</Button>
-
-                            <Button id="btn"  >购买</Button></Col>
+                        </Col>
+                            <Col span={3}>
+                            <Button id="btn"  >直接购买</Button></Col>
+                            <Col span={3}>
+                                <Button onClick={this.toNext} >下一页</Button></Col>
                         </Row>
 
                     </Card>

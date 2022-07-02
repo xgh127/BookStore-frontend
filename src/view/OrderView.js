@@ -7,6 +7,10 @@ import title from "../picture/logo.png";
 import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
 import HeaderBar from "../component/Decoration/HeaderBar";
+import {Tabs} from "antd";
+import {UnorderedListOutlined} from "@ant-design/icons";
+import OrderTable from "../component/Order/OrderTable";
+import MyOrder from "../component/Order/MyOrder";
 function Head_img(){
     return(
         <img className="title"
@@ -23,6 +27,7 @@ function HeadBar(props){
     );
 }
 
+const { TabPane } = Tabs;
 
 class OrderView extends React.Component{
 
@@ -32,7 +37,7 @@ class OrderView extends React.Component{
             <div className="min-box">
                 <HeaderBar Head={"我的订单"}/>
                 <SideBar/>
-                <SubContainer elem = {"目前也是啥也没有"}/>
+                <SubContainer elem = {<MyOrder/>}/>
             </div>
         )
     }

@@ -6,6 +6,7 @@ import SubContainer from "../component/Container/subContainer";
 import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
 import HeaderBar from "../component/Decoration/HeaderBar";
+import {BookPriceTrim, getBookByID} from "../Service/bookService";
 
 class BookDetail extends React.Component{
 
@@ -19,12 +20,18 @@ class BookDetail extends React.Component{
 
     componentDidMount() {
         let href = window.location.href;
+        /*
+        *获取bookid
+        */
         let bookId = "";
         for(let i = href.length-1; href[i] >='0' && href[i] <='9'; i--)
         {
             bookId += href[i];
             console.log( href[i]);
         }
+        /*
+        * postrequest的回调函数
+        * */
         let callback=(bookData) =>
         {
             if(bookData == null)
@@ -34,17 +41,13 @@ class BookDetail extends React.Component{
             else
             {
                 /*这里也需要对价格进行处理*/
-                let actualPrice = parseInt(bookData.price)/100;
-                bookData.price = actualPrice.toFixed(2);
                 this.setState({
-                    bookData: bookData
+                    bookData: BookPriceTrim(bookData)
                 })
             }
         }
         bookId = bookId.split("").reverse().join("");
-        console.log("bookID = "+bookId);
-        let url = apiURL+"/findOne?id=" + bookId.toString()+"";
-        postRequest(url,callback);
+        getBookByID(bookId,callback);
     }
     bookDetail =() =>
     {
