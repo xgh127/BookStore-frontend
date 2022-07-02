@@ -105,7 +105,7 @@ class Book_detail extends React.Component{
                             </Descriptions>
 
                     </div>
-                        <PageHeader><Button size="large" block  onClick={this.backToHome}>返回</Button></PageHeader>
+                        <PageHeader><Button size="large" block   onClick={this.backToHome}>返回上一页</Button></PageHeader>
 
             </div>
 

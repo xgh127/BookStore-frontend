@@ -2,7 +2,7 @@ import React from "react";
 import '../../css/book_detail.css'
 import '../../css/chart.css'
 import {getRequest} from "../../utils/ajax";
-import {apiURL} from "../../config/BaseConfig";
+import {apiURL, frontURL} from "../../config/BaseConfig";
 import axios from "axios";
 import {Button, Checkbox, Form, message, Popconfirm} from "antd";
 import {PriceTrim} from "../../Service/bookService";
@@ -123,7 +123,7 @@ class Movie extends React.Component{
 
                                     }}/></td>
                                     <td>{item.idCartOrder}</td>
-                                    <td>{item.bookName}</td>
+                                    <td><a  onClick={()=>{window.location.href=frontURL+"/detail?id="+item.bookid}}>{item.bookName}</a></td>
                                     <td>￥{item.price}</td>
                                     <td>
                                         <Button shape="circle" onClick={()=>this.changeBookCount(index,-1)}
@@ -138,13 +138,14 @@ class Movie extends React.Component{
                                           {
                                               this.removeItem(index);
                                               message.success("移除成功")
+                                              window.location.reload();
                                           }}
                                             okText="Yes"
                                             cancelText="No"
                                         >
                                             <Button danger >移除</Button>
                                         </Popconfirm>
-                                        <Button type="primary">详情</Button>
+                                        <Button type="link" onClick={()=>{window.location.href=frontURL+"/detail?id="+item.bookid}}>详情</Button>
 
                                 </td>
                                 </tr>)

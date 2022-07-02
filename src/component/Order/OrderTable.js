@@ -3,7 +3,7 @@ import {Button, DatePicker, Image, Modal, Space, Table, Tag,message} from "antd"
 import {getUserOrder, OrderPriceTrim} from "../../Service/OrderService";
 import {PriceTrim} from "../../Service/bookService";
 import {getRequest, postRequest} from "../../utils/ajax";
-import {apiURL} from "../../config/BaseConfig";
+import {apiURL, frontURL} from "../../config/BaseConfig";
 
 class OrderTable extends React.Component{
     constructor(props) {
@@ -70,7 +70,7 @@ class OrderTable extends React.Component{
             title: '操作',
             dataIndex:'',
             render:(row, record) => {
-                return <Button onClick={() => this.removeOrder(row, record.key)}>删除</Button>}
+                return <Button danger onClick={() => this.removeOrder(row, record.key)}>删除</Button>}
         }
 
     ];
@@ -98,93 +98,55 @@ class OrderTable extends React.Component{
 
 
 
-    // expandedRowRender = (record) => {
-    //
-    //     console.log(record);
-    //     const columns = [
-    //         {
-    //             title: '图片',
-    //             dataIndex: 'bookurl',
-    //             key: 'bookurl',
-    //             render: (text) => <Image src={text} width={60}/>
-    //         },
-    //         {
-    //             title: '状态',
-    //             dataIndex: 'status',
-    //             key: 'status',
-    //             render: (_, { tags }) => {
-    //                 if(parseInt(_) === -1)
-    //                     return (
-    //                         <Tag color={"red"}>已取消</Tag>
-    //                     );
-    //                 else if(parseInt(_) === 0)
-    //                     return (
-    //                         <Tag color={"orange"} >购物车</Tag>
-    //                     );
-    //                 else if(parseInt(_) === 1)
-    //                     return (
-    //                         <Tag color={"orange"} >未支付</Tag>
-    //                     );
-    //
-    //                 else if(parseInt(_) === 2)
-    //                     return (
-    //                         <Tag color={"green"} >已支付</Tag>
-    //                     );
-    //                 else if(parseInt(_) === 3)
-    //                     return (
-    //                         <Tag color={"blue"} >已完成</Tag>
-    //                     );
-    //             },
-    //         },
-    //         {
-    //             title: '标题',
-    //             dataIndex: 'booktitle',
-    //             key: 'booktitle',
-    //             width: 300,
-    //         },
-    //         {
-    //             title: '购买数量',
-    //             dataIndex: 'buynum',
-    //             key: 'buynum',
-    //         },
-    //         {
-    //             title: '单价',
-    //             render: (text,record) =>
-    //             {
-    //                 if(record.buynum!==0)
-    //                     return (
-    //                         <p className="bookDetailPrice">
-    //                             ￥{(parseInt(record.payprice)/parseInt(record.buynum)/100).toFixed(2)}
-    //                         </p>
-    //                     );
-    //                 else{
-    //                     return (
-    //                         <p className="bookDetailPrice">
-    //                             ￥0.00
-    //                         </p>
-    //                     );
-    //                 }
-    //
-    //             }
-    //
-    //         },
-    //         {
-    //             title: '支付金额',
-    //             dataIndex: 'payprice',
-    //             key: 'payprice',
-    //             render: (text,record) => <p className="bookDetailPrice">￥{(parseInt(text)/100).toFixed(2)}</p>,
-    //         },
-    //
-    //     ];
-    //
-    //     return <Table columns={columns} dataSource={record.chileItem} pagination={false} />;
-    // };
+    expandedRowRender = (record) => {
+
+        console.log(record);
+        const columns = [
+            {
+                title: '书名',
+                dataIndex: 'bookName',
+                key: 'bookName',
+                render: (text,record) => {
+                   return( <a onClick={() => {
+                        window.location.href = frontURL + "/detail?id=" + record.bookid
+                    }}>{text}</a>)
+                }
+            },
+            {
+                title: '单价',
+                dataIndex: 'price',
+                key: 'price',
+                render:(text,record)=> {
+                 return(  <p>{(parseInt(record.price) / 100).toFixed(2)}元</p>)
+                }
+            },
+            {
+                title: '购买数量',
+                dataIndex: 'buyNum',
+                key: 'buynum',
+            },
+            {
+                title: '状态',
+                dataIndex: 'submitStatus',
+                key: 'submitStatus',
+                render:() =><Tag color= {"orange"}>已提交</Tag>
+
+            }
+
+        ];
+
+        return <Table columns={columns} dataSource={record.cartOrderList} pagination={false} />;
+    };
 
     render() {
 
         return(
             <Table
                 columns={this.columns}
+                expandable={{
+                    expandedRowRender:(record) => this.expandedRowRender(record),
+                    rowKey: "orderID"
+                }}
                  rowKey={"orderId"}
                 dataSource={this.state.orderData}
             />
