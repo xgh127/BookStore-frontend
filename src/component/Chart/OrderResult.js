@@ -1,12 +1,13 @@
 import { Button, Result } from 'antd';
 import React from 'react';
 import {frontURL} from "../../config/BaseConfig";
+import {history} from "../../utils/history";
 
 class ResultOfOrder extends React.Component {
 
 gotoChart=()=>
 {
-    window.location.href=frontURL+"/chart"
+   history.go(-1);
 }
     render()
     {

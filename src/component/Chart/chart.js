@@ -10,6 +10,7 @@ import {history} from "../../utils/history";
 import {handleMakeOrder} from "../../Service/OrderService";
 import Input from "antd/es/input/Input";
 import {formItemLayout} from "../../assert/Format";
+import SubmitForm from "./OrderSumbitForm";
 
 class Movie extends React.Component{
     constructor(props){
@@ -104,54 +105,7 @@ closeModal =() =>
         return(
             <div>
                 <Modal title="请输入订单信息" visible={this.state.visible} onOk={this.handleMakeOrder} onCancel={this.closeModal} okText="支付" cancelText="取消">
-
-                    <Form  {...formItemLayout} >
-
-                        <Form.Item label="收件人姓名" rules={[
-                            {
-                                required: true,
-                                message: '请输入收件人姓名!',
-                            },]}>
-                            <Input type="text" id="receiverName" placeholder="收件人姓名"
-                                   value = {this.state.receiverName}
-                                   onInput={(event) =>{this.InfoSet(event,'receiverName')}}
-                            />
-                        </Form.Item>
-                        <Form.Item label="收件地址" rules={[
-                            {
-                                required: true,
-                                message: 'Please input your address!',
-                            },]}
-                        >
-                            <Input id="address"
-                                placeholder="收件地址"
-                                onInput={(event) =>{
-                                    this.InfoSet(event,'address')
-                                }}
-                            />
-                        </Form.Item>
-                        <Form.Item label="邮编" rules={[
-                            {
-                                required: true,
-                                message: 'Please input your username!',
-                            },]}>
-                            <Input type="text" id="postcode" placeholder="邮编"/>
-
-                        </Form.Item>
-                        <Form.Item label="电话号码" rules={[
-                            {
-                                required: true,
-                                message: 'Please input your username!',
-                            },]}>
-                            <Input type="text" id="phoneNumber" placeholder="电话号码"
-                                   value = {this.state.phoneNumber}
-                                   onInput={(event) =>{
-                                       this.InfoSet(event,'phoneNumber')
-                                   }}
-                            />
-                        </Form.Item>
-                    </Form>
-
+                    <SubmitForm/>
                 </Modal>
 
                 <Form id= "shopping_cart_info">

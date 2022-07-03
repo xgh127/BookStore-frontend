@@ -43,3 +43,15 @@ export const handleMakeOrder=(orderIDGroup,receiverName,postcode,phoneNumber,tot
         getRequest(url, obj, callback);
 
 }
+export const handleOneBookOrder=(orderInfo) =>
+{
+    let url = apiURL + "/makeOneBookOrder";
+    let  callback=(data)=>
+    {
+        console.log(data);
+        history.push("/MakeOrderSuccessView?"+data.msg)
+        history.go(0);
+    }
+    getRequest(url, orderInfo, callback);
+
+}

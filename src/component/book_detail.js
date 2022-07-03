@@ -2,8 +2,11 @@ import React, {useState} from "react";
 import '../css/book_detail.css'
 import axios from "axios";
 import {apiURL, frontURL} from "../config/BaseConfig";
-import {Button, Card, Col, Descriptions, Image, InputNumber, Modal, notification, PageHeader, Row} from "antd";
+import {Button, Card, Col, Descriptions, Image, InputNumber, message, Modal, notification, PageHeader, Row} from "antd";
 import {history} from "../utils/history";
+import SubmitForm from "./Chart/OrderSumbitForm";
+import {getRequest} from "../utils/ajax";
+import {handleMakeOrder} from "../Service/OrderService";
 const openNotification = (placement) => {
     notification.info({
         message: "添加成功",
@@ -21,9 +24,11 @@ class Book_detail extends React.Component{
             buyNum:1,
             allPrice:0,
             bookPrice:0,
+            visible:false,
         }
     }
     /*消息确认框*/
+     cartID  = 0;
     showAddConfirm = ()=>
     {
         Modal.confirm(
@@ -34,7 +39,7 @@ class Book_detail extends React.Component{
                 okText: '确定',
                 okType: 'primary',
                 onOk: () => {
-                    this.addToCart()//确认按钮的回调方法，确认后可执行加入购物车
+                    this.addToCart(1)//确认按钮的回调方法，确认后可执行加入购物车
                 },
                 onCancel() {
                     console.log('Cancel');
@@ -42,7 +47,19 @@ class Book_detail extends React.Component{
             }
         )
     }
-    addToCart=()=>
+    showModal=()=>
+    {
+            this.setState({
+                visible:true
+            })
+    }
+    closeModal =() =>
+    {
+        this.setState({
+            visible:false
+        })
+    }
+    addToCart=(type)=>
     {//发送数据到后端
        let book = this.props.product;
        console.log("username"+localStorage.getItem("username"))
@@ -57,13 +74,36 @@ class Book_detail extends React.Component{
            image:book.image,
            username:localStorage.getItem("username")
        }
-           console.log("bookid = " + bookInfo.id);
-           axios.post(apiURL + "/addCart", bookInfo)
-               .then(response => {
-                   openNotification('top');//弹出消息提示框，参数是提示出现的位置
+       let url = apiURL + "/addCart";
+       let callback=(data)=>
+       {
+           this.cartID = data.msg;
+           console.log("set cartID to" + data.msg+"from"+this.cartID);
+           if(type === 1)
+           openNotification('top');//弹出消息提示框，参数是提示出现的位置
+           else
+           {
+               let receiverName = document.getElementById("receiverName").value;
+               let  postcode = document.getElementById("postcode").value;
+               let address = document.getElementById("address").value;
+               let phoneNumber = document.getElementById("phoneNumber").value;
+               let orderIDGroup = [];
+               orderIDGroup.push(this.cartID);
+               console.log("here we go"+this.cartID)
+               getRequest(apiURL+"/getCartOrderByID",{id:this.cartID},(cartOrder)=>
+               {
+                   let totalprice =( (parseInt(cartOrder.price)/100)*cartOrder.buyNum).toFixed(2);
+                   handleMakeOrder(orderIDGroup, receiverName, postcode, phoneNumber ,totalprice ,address)
                })
-       }
 
+           }
+       }
+       getRequest(url,bookInfo,callback)
+       }
+       submitOneBook=()=>
+       {
+           this.addToCart(0);
+       }
     backToHome=()=>
     {
         history.go(-1);
@@ -86,7 +126,9 @@ class Book_detail extends React.Component{
         const product = this.props.product;
         return(
             <div className="books-box">
-
+                <Modal title="请输入订单信息" visible={this.state.visible} onOk={this.submitOneBook} onCancel={this.closeModal} okText="支付" cancelText="取消">
+                    <SubmitForm/>
+                </Modal>
                 <div className="ghxz-02">
 <div className="BookDetailTop">
                         <div className="BookDetailImg">
@@ -124,7 +166,7 @@ class Book_detail extends React.Component{
                     <Button onClick={ this.showAddConfirm}>加入购物车</Button>
                         </Col>
                             <Col span={3}>
-                            <Button id="btn"  >直接购买</Button></Col>
+                            <Button onClick={this.showModal} >直接购买</Button></Col>
                             <Col span={3}>
                                 <Button onClick={this.toNext} >下一页</Button></Col>
                         </Row>
