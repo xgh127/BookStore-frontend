@@ -1,5 +1,6 @@
-import {apiURL} from "../config/BaseConfig";
+import {apiURL, frontURL} from "../config/BaseConfig";
 import {getRequest} from "../utils/ajax";
+import {history} from "../utils/history";
 
 export const getAllOrder =(callback) =>{
 
@@ -18,4 +19,27 @@ export const OrderPriceTrim=(data) =>
         data[i].totalPrice = actualPrice.toFixed(2);
     }
     return data;
+}
+export const handleMakeOrder=(orderIDGroup,receiverName,postcode,phoneNumber,totalPrice,address) =>
+{
+        let url = apiURL + "/makeOrder";
+        let obj =
+            {
+                username: localStorage.getItem("username"),
+                receiverName: receiverName,
+                postcode: postcode,
+                phoneNumber: phoneNumber,
+                totalPrice: totalPrice,
+                CartorderIDGroup: orderIDGroup,
+                address: address
+            }
+            let  callback=(data)=>
+            {
+                console.log(data);
+                history.push("/MakeOrderSuccessView?"+data.msg)
+                history.go(0);
+            }
+
+        getRequest(url, obj, callback);
+
 }

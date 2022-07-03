@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import '../css/basicBackground.css'
-import {Affix, Button, Card, List, Pagination, Table} from "antd";
-import {apiURL, frontURL} from "../config/BaseConfig";
+import {Button, Card, List, Pagination, Table} from "antd";
+import {frontURL} from "../config/BaseConfig";
 
 
 class ProductRow extends React.Component {

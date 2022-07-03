@@ -4,20 +4,35 @@ import '../../css/chart.css'
 import {getRequest} from "../../utils/ajax";
 import {apiURL, frontURL} from "../../config/BaseConfig";
 import axios from "axios";
-import {Button, Checkbox, Form, message, Popconfirm} from "antd";
+import {Button, Checkbox, Form, message, Modal, Popconfirm, Steps} from "antd";
 import {PriceTrim} from "../../Service/bookService";
 import {history} from "../../utils/history";
+import {handleMakeOrder} from "../../Service/OrderService";
+import Input from "antd/es/input/Input";
+import {formItemLayout} from "../../assert/Format";
 
 class Movie extends React.Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
             books:[],
             totalPrice:0,
             submitStatus:0,
+            visible:false,
+            receiverName:null,
+            postcode:[] ,
+            address : [],
+            phoneNumber:[],
+            orderIDGroup:[],
+
         }
     }
-
+    InfoSet = (e,key) =>
+    {
+        let userInfo = {};
+        userInfo[key] = e.target.value;
+        this.setState(userInfo);
+    }
     /*获取数据*/
     componentDidMount()
     {
@@ -34,7 +49,6 @@ class Movie extends React.Component{
                 this.setState({books:data});
                 console.log("Render cart by getting data from cartorder DB successfully");
             }
-
         }
         let url = apiURL+'/getOrders';
         getRequest(url, {
@@ -48,44 +62,98 @@ class Movie extends React.Component{
         history.push("/first");
         history.go(0);
     };
-
-    handleSubmitOrder=() =>
+/*控制表单展示*/
+    showModal=()=>
     {
-        let orderIDGroup = [];
-        let bookIDGroup = [];
-        this.state.books.forEach((item)=>
-        {
-            if(item.submitStatus === 1) {
-                orderIDGroup.push(item.idCartOrder);
-            }
-        })
-        if(orderIDGroup.length ===0)
-        {
-            message.warn("您未选择任何一项")
+    let orderIDGroup = [];
+    this.state.books.forEach((item)=>
+    {
+        if(item.submitStatus === 1) {
+            orderIDGroup.push(item.idCartOrder);
         }
-        else {
-            let url = apiURL + "/makeOrder";
-            let obj =
-                {
-                    username: localStorage.getItem("username"),
-                    receiverName: "徐国洪",
-                    postcode: "40400",
-                    phoneNumber: "18290207267",
-                    totalPrice: this.getTotalprice(),
-                    CartorderIDGroup: orderIDGroup,
-                    address: "东川路800号"
-                }
-            getRequest(url, obj, () => {
-                console.log("make an order");
-            });
-            window.location.reload();
-        }
+    })
+   this.setState({
+       orderIDGroup:orderIDGroup
+   })
+        console.log(orderIDGroup)
+    if(orderIDGroup.length ===0)
+    {
+        message.warn("您未选择任何一项")
     }
-
+    else
+    {
+    this.setState({
+        visible:true
+    })}
+    }
+closeModal =() =>
+{
+    this.setState({
+        visible:false
+    })
+}
+    handleMakeOrder=() =>
+    {
+       let receiverName = document.getElementById("receiverName").value;
+       let  postcode = document.getElementById("postcode").value;
+       let address = document.getElementById("address").value;
+       let phoneNumber = document.getElementById("phoneNumber").value;
+       handleMakeOrder(this.state.orderIDGroup, receiverName, postcode, phoneNumber, this.getTotalprice(), address)
+    }
     renderBooks(){
-
         return(
             <div>
+                <Modal title="请输入订单信息" visible={this.state.visible} onOk={this.handleMakeOrder} onCancel={this.closeModal} okText="支付" cancelText="取消">
+
+                    <Form  {...formItemLayout} >
+
+                        <Form.Item label="收件人姓名" rules={[
+                            {
+                                required: true,
+                                message: '请输入收件人姓名!',
+                            },]}>
+                            <Input type="text" id="receiverName" placeholder="收件人姓名"
+                                   value = {this.state.receiverName}
+                                   onInput={(event) =>{this.InfoSet(event,'receiverName')}}
+                            />
+                        </Form.Item>
+                        <Form.Item label="收件地址" rules={[
+                            {
+                                required: true,
+                                message: 'Please input your address!',
+                            },]}
+                        >
+                            <Input id="address"
+                                placeholder="收件地址"
+                                onInput={(event) =>{
+                                    this.InfoSet(event,'address')
+                                }}
+                            />
+                        </Form.Item>
+                        <Form.Item label="邮编" rules={[
+                            {
+                                required: true,
+                                message: 'Please input your username!',
+                            },]}>
+                            <Input type="text" id="postcode" placeholder="邮编"/>
+
+                        </Form.Item>
+                        <Form.Item label="电话号码" rules={[
+                            {
+                                required: true,
+                                message: 'Please input your username!',
+                            },]}>
+                            <Input type="text" id="phoneNumber" placeholder="电话号码"
+                                   value = {this.state.phoneNumber}
+                                   onInput={(event) =>{
+                                       this.InfoSet(event,'phoneNumber')
+                                   }}
+                            />
+                        </Form.Item>
+                    </Form>
+
+                </Modal>
+
                 <Form id= "shopping_cart_info">
                     <thead>
                     <tr>
@@ -139,8 +207,8 @@ class Movie extends React.Component{
                                               message.success("移除成功")
                                               window.location.reload();
                                           }}
-                                            okText="Yes"
-                                            cancelText="No"
+                                            okText="确定"
+                                            cancelText="取消"
                                         >
                                             <Button danger >移除</Button>
                                         </Popconfirm>
@@ -154,7 +222,7 @@ class Movie extends React.Component{
                 </Form>
                 <div className="continueorsubmit fr">
                     <Button type="button"   className="continue" onClick={ this.Continue}>继续购物</Button>
-                    <Button type="submit"  className="submit" onClick={this.handleSubmitOrder}>提交订单</Button>
+                    <Button type="submit"  className="submit" onClick={this.showModal}>生成订单</Button>
                 </div>
                 <p>已选书籍总价格:{this.state.totalPrice.toFixed(2)}元</p>
             </div>)

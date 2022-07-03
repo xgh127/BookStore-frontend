@@ -16,6 +16,7 @@ import {theOrder} from "./view/OrderView";
 import {theRegisterPage} from "./view/RegisterView";
 import {history} from "./utils/history";
 import PrivateRoute from "./PrivateRoute";
+import {MakeOrderSuccessView} from "./view/Result/MakeOrderSuccess";
 
 /*直接import的登录页面*/
 function AllOfPage(){
@@ -27,6 +28,7 @@ function AllOfPage(){
                 <Route exact path="/first" component={TheFirst}/>
                 <Route exact path='/detail' component={theBookDetail}/>
                 <Route exact path="/chart" component={theChartPage}/>
+                <Route exact path="/MakeOrderSuccessView" component={MakeOrderSuccessView}/>
                 <Route exact path="/order" component={theOrder}/>
                 <Route exact path="/personCenter" component={thePersonCenter}/>
         </div>

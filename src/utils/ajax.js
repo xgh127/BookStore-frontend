@@ -51,7 +51,7 @@ let getRequest = (url, json, callback) => {
 
     fetch(url,opts)
         .then((response) => {
-            return response.json()
+            return response.json();
         })
         .then((data) => {
             callback(data);
