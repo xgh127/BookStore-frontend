@@ -1,6 +1,7 @@
 import {apiURL, frontURL} from "../config/BaseConfig";
 import {getRequest} from "../utils/ajax";
 import {history} from "../utils/history";
+import {message} from "antd";
 
 export const getAllOrder =(callback) =>{
 
@@ -22,6 +23,11 @@ export const OrderPriceTrim=(data) =>
 }
 export const handleMakeOrder=(orderIDGroup,receiverName,postcode,phoneNumber,totalPrice,address) =>
 {
+    if(receiverName === "" || address === ""|| phoneNumber === "")
+    {
+        message.error("，请检查您的输入，您有必填项目未填！")
+    }
+    else {
         let url = apiURL + "/makeOrder";
         let obj =
             {
@@ -33,25 +39,13 @@ export const handleMakeOrder=(orderIDGroup,receiverName,postcode,phoneNumber,tot
                 CartorderIDGroup: orderIDGroup,
                 address: address
             }
-            let  callback=(data)=>
-            {
-                console.log(data);
-                history.push("/MakeOrderSuccessView?"+data.msg)
-                history.go(0);
-            }
+        let callback = (data) => {
+            console.log(data);
+            history.push("/MakeOrderSuccessView?" + data.msg)
+            history.go(0);
+        }
 
         getRequest(url, obj, callback);
-
-}
-export const handleOneBookOrder=(orderInfo) =>
-{
-    let url = apiURL + "/makeOneBookOrder";
-    let  callback=(data)=>
-    {
-        console.log(data);
-        history.push("/MakeOrderSuccessView?"+data.msg)
-        history.go(0);
     }
-    getRequest(url, orderInfo, callback);
 
 }

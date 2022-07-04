@@ -7,6 +7,8 @@ import {history} from "../utils/history";
 import SubmitForm from "./Chart/OrderSumbitForm";
 import {getRequest} from "../utils/ajax";
 import {handleMakeOrder} from "../Service/OrderService";
+import {checkBookExistByID, checkBookExistInCartByID, deleteCartOrderByID} from "../Service/ChartService";
+import {UserConst} from "../Constant/UserConst";
 const openNotification = (placement) => {
     notification.info({
         message: "添加成功",
@@ -25,8 +27,14 @@ class Book_detail extends React.Component{
             allPrice:0,
             bookPrice:0,
             visible:false,
+            // flag:false
         }
     }
+    componentDidMount() {
+
+
+    }
+
     /*消息确认框*/
      cartID  = 0;
     showAddConfirm = ()=>
@@ -59,47 +67,53 @@ class Book_detail extends React.Component{
             visible:false
         })
     }
-    addToCart=(type)=>
-    {//发送数据到后端
-       let book = this.props.product;
-       console.log("username"+localStorage.getItem("username"))
-       let bookInfo ={
-           id:book.id,
-           buyNum: this.state.buyNum,
-           title:book.name,
-           author:book.author,
-           price:book.price,
-           type:book.type,
-           description:book.description,
-           image:book.image,
-           username:localStorage.getItem("username")
-       }
-       let url = apiURL + "/addCart";
-       let callback=(data)=>
-       {
-           this.cartID = data.msg;
-           console.log("set cartID to" + data.msg+"from"+this.cartID);
-           if(type === 1)
-           openNotification('top');//弹出消息提示框，参数是提示出现的位置
-           else
-           {
-               let receiverName = document.getElementById("receiverName").value;
-               let  postcode = document.getElementById("postcode").value;
-               let address = document.getElementById("address").value;
-               let phoneNumber = document.getElementById("phoneNumber").value;
-               let orderIDGroup = [];
-               orderIDGroup.push(this.cartID);
-               console.log("here we go"+this.cartID)
-               getRequest(apiURL+"/getCartOrderByID",{id:this.cartID},(cartOrder)=>
-               {
-                   let totalprice =( (parseInt(cartOrder.price)/100)*cartOrder.buyNum).toFixed(2);
-                   handleMakeOrder(orderIDGroup, receiverName, postcode, phoneNumber ,totalprice ,address)
-               })
 
-           }
-       }
-       getRequest(url,bookInfo,callback)
-       }
+    addToCart=(type)=> {//发送数据到后端
+        let book = this.props.product;
+        console.log("book="+book);
+        checkBookExistInCartByID(book.id,(data)=> {//如果后端存在书籍
+            if (parseInt(data.msg) !== -1) {
+                console.log("data = " + JSON.stringify(data));
+                message.info("该书籍已经在购物车中了！你可以前往购物车提交订单或修改数据！");
+            }
+            else {
+                let bookInfo = {
+                    id: book.id,
+                    buyNum: this.state.buyNum,
+                    title: book.name,
+                    author: book.author,
+                    price: book.price,
+                    type: book.type,
+                    description: book.description,
+                    image: book.image,
+                    username: localStorage.getItem("username")
+                }
+                let url = apiURL + "/addCart";//为了代码更好地复用，先加到购物车里面
+                let callback = (data) => {
+                    this.cartID = data.msg;//加入购物车成功后会返回对应的订单号
+                    console.log("set cartID to" + data.msg + "from" + this.cartID);
+                    if (type === 1)//如果type ===1，说明点击的是加入购物车，就需要提示加入购物车成功
+                        openNotification('top');//弹出消息提示框，参数是提示出现的位置
+                    let receiverName = document.getElementById("receiverName").value;
+                    let postcode = document.getElementById("postcode").value;
+                    let address = document.getElementById("address").value;
+                    let phoneNumber = document.getElementById("phoneNumber").value;
+                    if (receiverName === "" || address === "" || phoneNumber === "") {
+                        deleteCartOrderByID(this.cartID);
+                        message.error("，请检查您的输入，您有必填项目未填！")
+                    }
+                    let orderIDGroup = [];//为了代码复用所以即使就一个数据也用的数组存
+                    orderIDGroup.push(this.cartID);
+                    console.log("here we go" + this.cartID)
+                    getRequest(apiURL + "/getCartOrderByID", {id: this.cartID}, (cartOrder) => {
+                        let totalprice = ((parseInt(cartOrder.price) / 100) * cartOrder.buyNum).toFixed(2);
+                           handleMakeOrder(orderIDGroup, receiverName, postcode, phoneNumber, totalprice, address)
+                    })
+                };
+                getRequest(url, bookInfo, callback)
+            }
+            });
+    }
        submitOneBook=()=>
        {
            this.addToCart(0);

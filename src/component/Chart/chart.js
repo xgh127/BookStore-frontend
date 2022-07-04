@@ -8,8 +8,6 @@ import {Button, Checkbox, Form, message, Modal, Popconfirm, Steps} from "antd";
 import {PriceTrim} from "../../Service/bookService";
 import {history} from "../../utils/history";
 import {handleMakeOrder} from "../../Service/OrderService";
-import Input from "antd/es/input/Input";
-import {formItemLayout} from "../../assert/Format";
 import SubmitForm from "./OrderSumbitForm";
 
 class Movie extends React.Component{
