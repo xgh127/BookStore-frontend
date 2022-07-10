@@ -14,7 +14,7 @@ class SideBar extends React.Component{
             <div className="SideBar">
 
                 {/*Affix组件能固定侧边栏，滚动也不变*/}
-                <Affix >
+                <Affix offsetTop={200}>
                 <a className="block-min-01">
                     <div> <Link to="/first">首页</Link></div>
                 </a>

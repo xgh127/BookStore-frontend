@@ -1,37 +1,33 @@
 import React from "react";
-import {Button, Input, Select, Space, Table, Tabs, Tag} from "antd";
-import {getAllUserList, setUserLoginPermit} from "../../Service/UserService";
-import {UserOutlined} from "@ant-design/icons";
-import { SearchOutlined } from '@ant-design/icons';
+import {Button, Image, Input, Popconfirm, Space, Table, Tabs} from "antd";
+import {SearchOutlined, UnorderedListOutlined} from "@ant-design/icons";
+import {getAllBookList} from "../../Service/bookService";
+import Highlighter from "react-highlight-words";
 
-import Highlighter from 'react-highlight-words';
 
-const { Option } = Select;
 const { TabPane } = Tabs;
 
-// 处理变更是否允许登录的功能
-const handleChange_ForBidLogin = (value,username) => {
-    setUserLoginPermit(username,value,(data)=>{console.log(data)});
-};
 
-class UserManage extends React.Component{
-    searchInput = null;
+class BookManage extends React.Component{
+
 
     constructor() {
         super();
         this.state = {
-            userData: [],
+            bookData: [],
             searchText: "",
             searchedColumn: "",
         }
-        getAllUserList((data)=>{
+
+        getAllBookList((data)=>{
             this.setState({
-                userData:data.concat([])
+                bookData:data.concat([])
             });
             console.log(data);
         });
     }
 
+    searchInput = null;
     setSearchText(val){
         this.setState({ searchText:val});
     }
@@ -123,86 +119,103 @@ class UserManage extends React.Component{
 
     columns = [
         {
-            title: '用户名',
-            dataIndex: 'username',
-            key: 'username',
-            render: (text) => <a>{text}</a>,
-            ...this.getColumnSearchProps('username'),
+            title: '图片',
+            dataIndex: 'image',
+            key: 'image',
+            render: (text) => <Image src={text} width={60}/>
         },
         {
-            title: '权限',
-            dataIndex: 'identity',
-            key: 'privilege',
-            render: (_, { tags }) => {
-                if(parseInt(_) === 0)
-                    return (
-                        <Tag color={"geekblue"}>超级管理员</Tag>
-                    );
-                else if(parseInt(_) === 1)
-                    return (
-                        <Tag color={"green"} >普通用户</Tag>
-                    );
-            },
-        },
-        {
-            title: '姓名',
+            title: '书籍名称',
             dataIndex: 'name',
             key: 'name',
             ...this.getColumnSearchProps('name'),
         },
         {
-            title: '电话号码',
-            dataIndex: 'tel',
-            key: 'telephone',
-            ...this.getColumnSearchProps('tel'),
+            title: '作者',
+            dataIndex: 'author',
+            key: 'author',
+            ...this.getColumnSearchProps('author'),
         },
         {
-            title: '电子邮件',
-            dataIndex: 'mail',
-            key: 'email',
-            render: (text) => <a href={"mailto:"+text}>{text}</a>,
-          ...this.getColumnSearchProps('mail'),
+            title: '分类',
+            dataIndex: 'type',
+            key: 'type',
+            ...this.getColumnSearchProps('type'),
+        },
+        {
+            title: '价格',
+            dataIndex: 'price',
+            key: 'price',
+            render: (text,record) => <p className="bookDetailPrice">￥{(parseInt(text)/100).toFixed(2)}</p>,
+        },
+        {
+            title: '库存',
+            dataIndex: 'inventory',
+            key: 'inventory',
+            width: 75,
+        },
+        // {
+        //     title: '销量',
+        //     dataIndex: 'sellnumber',
+        //     key: 'sellnumber',
+        //     width: 75,
+        //     sorter: {
+        //         compare: (a, b) => a.sellnumber - b.sellnumber,
+        //         multiple: 1,
+        //     },
+        // },
+        //
+        {
+            title: '操作',
+            width: 250,
+            render: (text,record) =>
+                <>
+                    <Button style={{margin:"3px"}} href={"/AdminBookDetail?id="+record.id}>查看</Button>
+                    <Button style={{margin:"3px"}} type="primary" href={"/eBook/admin/editbook?targetbookid="+record.id}>编辑</Button>
+                    <Popconfirm
+                        title="确认要删除书籍?操作不可撤销，且删除前请确认该书下没有订单！" /*onConfirm={()=>{this.deleteBook(record.id)}}*/
+                        // onCancel={cancel}
+                        okText="删除" cancelText="取消"
+                    >
+                        <Button style={{margin:"3px"}} type="primary" danger>删除</Button>
+                    </Popconfirm>
+                </>,
         },
 
-        {
-            title: '登录许可',
-            dataIndex: 'forbidenStatus',
-            key: 'forbidlogin',
-            render: (num,record) => (
-                <>
-                    <Select
-                        defaultValue={num === 0 ? "允许":"禁止"}
-                        style={{
-                            width: 80,
-                        }}
-                        onChange={(value)=>handleChange_ForBidLogin(value,record.id)}
-                    >
-                        <Option value="0">允许</Option>
-                        <Option value="1">禁止</Option>
-                    </Select>
-                </>
-            ),
-         },
     ];
 
+    // deleteBook = (bookID) =>{
+    //     let obj = {
+    //         bookID: bookID,
+    //     };
+    //     deleteOneBook(obj,(data)=>{
+    //         if(data.status >= 0){
+    //             alert("您已成功删除此书!");
+    //             window.location.reload();
+    //         }
+    //     });
+    //
+    // }
+
+
+    onChange = (pagination, filters, sorter, extra) => {
+        console.log('params', pagination, filters, sorter, extra);
+    };
+
     render() {
-         console.log(this.state.userData);
         return (
-            <div className="eBookPageContainer">
-                <div >
-
+            <div>
                     <Tabs defaultActiveKey="1">
-                        <TabPane tab={<><UserOutlined />全局用户管理</>} key="1">
-                            <Table columns={this.columns} dataSource={this.state.userData} />
+                        <TabPane tab={<><UnorderedListOutlined />书籍管理</>} key="1">
+                            <Table columns={this.columns} dataSource={this.state.bookData} onChange={this.onChange}/>
                         </TabPane>
-
                     </Tabs>
 
-
-                </div>
             </div>
         );
     }
 }
 
-export default UserManage;
+export default BookManage;
+
+

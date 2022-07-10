@@ -48,10 +48,8 @@ class LoginView extends React.Component{
         }
         else {
             userLogin({
-                     user_id :- 1,
                     username:user,
                     password:pwd,
-                    user_type:-1
             })
         }
     }

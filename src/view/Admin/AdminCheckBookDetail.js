@@ -1,14 +1,12 @@
 import React from "react";
-import '../css/basicBackground.css'
-import SideBar from "../component/Decoration/sideBar";
-import BookDetail from "../component/BookDetail/BookDetail";
-import SubContainer from "../component/Container/subContainer";
-import {postRequest} from "../utils/ajax";
-import {apiURL} from "../config/BaseConfig";
-import HeaderBar from "../component/Decoration/HeaderBar";
-import {BookPriceTrim, getBookByID} from "../Service/bookService";
+import '../../css/basicBackground.css'
+import AdminSideBar from "../../component/Decoration/AdminSideBar";
+import SubContainer from "../../component/Container/subContainer";
+import HeaderBar from "../../component/Decoration/HeaderBar";
+import {BookPriceTrim, getBookByID} from "../../Service/bookService";
+import AdminBookDetail from "../../component/BookDetail/AdminBookDetail";
 
-class BookDetailView extends React.Component{
+class DisplayBookDetailView extends React.Component{
 
     constructor(props) {
         super(props);
@@ -59,7 +57,7 @@ class BookDetailView extends React.Component{
             console.log("book information is"+this.state.bookData.name);
             return (
 
-                <BookDetail product={this.state.bookData}/>
+                <AdminBookDetail product={this.state.bookData}/>
             )
         }
     }
@@ -68,7 +66,7 @@ class BookDetailView extends React.Component{
 
             <div className="min-box">
                 <HeaderBar Head={"书籍详情"}/>
-                <SideBar/>
+                <AdminSideBar/>
                 <SubContainer elem = {this.bookDetail()}/>
             </div>
 
@@ -76,10 +74,10 @@ class BookDetailView extends React.Component{
     }
 }
 
-let theBookDetail = () =>
+let AdminDetail = () =>
 {
     return(
-        <BookDetailView/>
+        <DisplayBookDetailView/>
     )
 }
-export {theBookDetail};
+export {AdminDetail};

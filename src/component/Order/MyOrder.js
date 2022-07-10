@@ -15,7 +15,7 @@ class MyOrder extends React.Component{
                 <div >
                     <Tabs defaultActiveKey="1">
                         <TabPane tab={<><UnorderedListOutlined />查看所有订单项</>} key="1">
-                            <OrderTable idAdmin={0}/>
+                            <OrderTable/>
                         </TabPane>
                     </Tabs>
                 </div>

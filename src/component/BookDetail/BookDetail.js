@@ -1,14 +1,12 @@
-import React, {useState} from "react";
-import '../css/book_detail.css'
-import axios from "axios";
-import {apiURL, frontURL} from "../config/BaseConfig";
+import React from "react";
+import '../../css/book_detail.css'
+import {apiURL, frontURL} from "../../config/BaseConfig";
 import {Button, Card, Col, Descriptions, Image, InputNumber, message, Modal, notification, PageHeader, Row} from "antd";
-import {history} from "../utils/history";
-import SubmitForm from "./Chart/OrderSumbitForm";
-import {getRequest} from "../utils/ajax";
-import {handleMakeOrder} from "../Service/OrderService";
-import {checkBookExistByID, checkBookExistInCartByID, deleteCartOrderByID} from "../Service/ChartService";
-import {UserConst} from "../Constant/UserConst";
+import {history} from "../../utils/history";
+import SubmitForm from "../Chart/OrderSumbitForm";
+import {getRequest} from "../../utils/ajax";
+import {handleMakeOrder} from "../../Service/OrderService";
+import {checkBookExistInCartByID, deleteCartOrderByID} from "../../Service/ChartService";
 const openNotification = (placement) => {
     notification.info({
         message: "添加成功",
@@ -17,7 +15,7 @@ const openNotification = (placement) => {
         placement,
     });
 };
-class Book_detail extends React.Component{
+class BookDetail extends React.Component{
 
     constructor(props) {
         super(props);
@@ -27,14 +25,8 @@ class Book_detail extends React.Component{
             allPrice:0,
             bookPrice:0,
             visible:false,
-            // flag:false
         }
     }
-    componentDidMount() {
-
-
-    }
-
     /*消息确认框*/
      cartID  = 0;
     showAddConfirm = ()=>
@@ -94,12 +86,14 @@ class Book_detail extends React.Component{
                     console.log("set cartID to" + data.msg + "from" + this.cartID);
                     if (type === 1)//如果type ===1，说明点击的是加入购物车，就需要提示加入购物车成功
                         openNotification('top');//弹出消息提示框，参数是提示出现的位置
+
                     let receiverName = document.getElementById("receiverName").value;
                     let postcode = document.getElementById("postcode").value;
                     let address = document.getElementById("address").value;
                     let phoneNumber = document.getElementById("phoneNumber").value;
+
                     if (receiverName === "" || address === "" || phoneNumber === "") {
-                        deleteCartOrderByID(this.cartID);
+                        deleteCartOrderByID(this.cartID);//需要重新获取信息，所以删除
                         message.error("，请检查您的输入，您有必填项目未填！")
                     }
                     let orderIDGroup = [];//为了代码复用所以即使就一个数据也用的数组存
@@ -192,4 +186,4 @@ class Book_detail extends React.Component{
         )
     }
 }
-export default Book_detail;
+export default BookDetail;

@@ -4,6 +4,7 @@ import Input from "antd/es/input/Input";
 import React from "react";
 
 class SubmitForm extends React.Component {
+    formRef = React.createRef();
     render() {
         return(
         <Form  {...formItemLayout}>
@@ -21,7 +22,8 @@ class SubmitForm extends React.Component {
                     required:true,
                     message:"请输入收件人姓名"
                 },
-                ]}>
+                ]
+            }>
                 <Input type="text" id="receiverName" placeholder="收件人姓名"/>
             </Form.Item>
             <Form.Item name="address" label="收件地址" rules={[
@@ -67,9 +69,9 @@ class SubmitForm extends React.Component {
                     }
                 })]} >
                 <Input  id="phoneNumber" placeholder="电话号码" />
-            </Form.Item>
+            </Form.Item >
 
-        </Form>)
+        </Form > )
     }
 }
 export default SubmitForm;

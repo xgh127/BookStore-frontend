@@ -134,7 +134,7 @@ p {
 
 /* 就医流程等 */
 .min-box {
-    width: 1200px;
+    width: 1400px;
     height: auto;
     margin: auto;
     clear: both;
@@ -152,9 +152,11 @@ p {
     width: 220px;
     height: auto;
     float: left;
-    position: relative;
-    top: 0px;
+    position: absolute;
+    top: 200px;
     margin-top: 64px;
+    left:5rem;
+    margin-right: 10px;
 }
 
 .SideBar a {
@@ -185,22 +187,19 @@ p {
 }
 
 .block-min-01 {
-    /*background-image: url(../images/jylc-img-01.png);*/
     background-color: #04c8d9;
 }
 
 .block-min-02 {
-    /* background-image: url(../images/jylc-img-02.png);*/
     background-color: #ffa64b;
 }
 
 .block-min-03 {
-    /*background-image: url(../images/jylc-img-03.png);*/
     background-color: #ffcd37;
 }
 
 .block-min-04 {
-    /*background-image: url(../images/jylc-img-04.png);*/
+
     background-color: #fc805b;
 }
 
@@ -208,7 +207,7 @@ p {
 /* 右侧列表 */
 .books-box {
     float: right;
-    width: 940px;
+    width: 1140px;
     height: auto;
     background-color: #fff;
     border-radius: 10px;

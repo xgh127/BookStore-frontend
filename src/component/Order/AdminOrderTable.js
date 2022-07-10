@@ -1,12 +1,13 @@
 import React from "react";
-import {Button, DatePicker, Image, Modal, Space, Table, Tag,message} from "antd";
+import {Button, DatePicker, Image, Modal, Space, Table, Tag, message, Input} from "antd";
 import {getAllOrder, getUserOrder, OrderPriceTrim} from "../../Service/OrderService";
 import {getRequest} from "../../utils/ajax";
 import {apiURL, frontURL} from "../../config/BaseConfig";
 import {SearchOutlined} from "@ant-design/icons";
 import DateFormat from "util";
+import Highlighter from "react-highlight-words";
 const { RangePicker } = DatePicker;
-class OrderTable extends React.Component{
+class AdminOrderTable extends React.Component{
     constructor(props) {
         super(props);
 
@@ -16,7 +17,8 @@ class OrderTable extends React.Component{
             searchedColumn: "",
             searchTime: [],
         }
-            getUserOrder((data) => {
+
+            getAllOrder((data) => {
                 data = OrderPriceTrim(data);
                 console.log(data);
                 this.setState({
@@ -106,18 +108,88 @@ class OrderTable extends React.Component{
         },
     });
 
+    getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+            <div
+                style={{
+                    padding: 8,
+                }}
+            >
+                <Input
+                    ref={this.searchInput}
+                    placeholder={`Search ${dataIndex}`} value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{marginBottom: 8, display: 'block',}}
+                />
+                <Space>
+                    <Button
+                        type="primary" onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />} size="small" style={{width: 90,}}
+                    >
+                        Search
+                    </Button>
+                    <Button
+                        onClick={() => clearFilters && this.handleReset(clearFilters)} size="small"
+                        style={{width: 90,}}
+                    >
+                        Reset
+                    </Button>
+                    <Button
+                        type="link" size="small"
+                        onClick={() => {
+                            confirm({closeDropdown: false,});
+                            this.setSearchText(selectedKeys[0]);
+                            this.setSearchedColumn(dataIndex);
+                        }}
+                    >
+                        Filter
+                    </Button>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{
+                    color: filtered ? '#1890ff' : undefined,
+                }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible) => {
+            if (visible) {
+                setTimeout(() => this.searchInput.current?.select(), 10);
+            }
+        },
+        render: (text) =>
+            this.state.searchedColumn === dataIndex ? (
+                <Highlighter
+                    highlightStyle={{
+                        backgroundColor: '#ffc069',
+                        padding: 0,
+                    }}
+                    searchWords={[this.state.searchText]}
+                    autoEscape
+                    textToHighlight={text ? text.toString() : ''}
+                />
+            ) : (
+                text
+            ),
+    });
 
-
-     columns = [
+    columns = [
         {
             title: '订单编号',
             dataIndex: 'orderId',
             key: 'orderID',
+            ...this.getColumnSearchProps("orderId"),
         },
         {
             title: '所属用户',
             dataIndex: 'belongUser',
             key: 'belonguser',
+            ...this.getColumnSearchProps("belongUser"),
         },
 
         {
@@ -139,6 +211,7 @@ class OrderTable extends React.Component{
             title: '收件人',
             dataIndex: 'receiverName',
             key: 'receivername',
+            ...this.getColumnSearchProps("receiverName"),
         },
         {
             title: '总价(元）',
@@ -149,7 +222,7 @@ class OrderTable extends React.Component{
             title: '时间',
             dataIndex: 'createTime',
             key: 'createTime',  //return DateFormat.format(text);
-             render: (text) => {return DateFormat.format(text).toLocaleString();},
+            render: (text) => {return DateFormat.format(text).toLocaleString();},
             ...this.getColumnSearchTimeProps('createTime')
         },
         {
@@ -162,34 +235,34 @@ class OrderTable extends React.Component{
     ];
 
     removeOrder=(row, key)=>
-{
-    Modal.confirm({
-        title: '删除内容',
-        content: `你确定要删除该订单吗？`,
-        onOk: () => {
-            let url = apiURL+"/deleteOrder";
-           getRequest(url,{orderID:row.orderId},(data)=>
-           {
-               if(data === 1)
-               window.location.reload();
-           })
-            message.success('删除成功!')
-        }
-    })
-}
+    {
+        Modal.confirm({
+            title: '删除内容',
+            content: `你确定要删除该订单吗？`,
+            onOk: () => {
+                let url = apiURL+"/deleteOrder";
+                getRequest(url,{orderID:row.orderId},(data)=>
+                {
+                    if(data === 1)
+                        window.location.reload();
+                })
+                message.success('删除成功!')
+            }
+        })
+    }
 
 
 
     expandedRowRender = (record) => {
 
-       // console.log(record);
+        // console.log(record);
         const columns = [
             {
                 title: '书名',
                 dataIndex: 'bookName',
                 key: 'bookName',
                 render: (text,record) => {
-                   return( <a onClick={() => {
+                    return( <a onClick={() => {
                         window.location.href = frontURL + "/detail?id=" + record.bookid
                     }}>{text}</a>)
                 }
@@ -199,7 +272,7 @@ class OrderTable extends React.Component{
                 dataIndex: 'price',
                 key: 'price',
                 render:(text,record)=> {
-                 return(  <p>{(parseInt(record.price) / 100).toFixed(2)}元</p>)
+                    return(  <p>{(parseInt(record.price) / 100).toFixed(2)}元</p>)
                 }
             },
             {
@@ -229,11 +302,11 @@ class OrderTable extends React.Component{
                     expandedRowRender:(record) => this.expandedRowRender(record),
                     rowKey: "orderID"
                 }}
-                 rowKey={"orderId"}
+                rowKey={"orderId"}
                 dataSource={this.state.orderData}
             />
         );
     }
 }
 
-export default OrderTable;
+export default AdminOrderTable;

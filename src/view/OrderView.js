@@ -1,7 +1,7 @@
 import React from "react";
 import '../css/basicBackground.css'
 import SideBar from "../component/Decoration/sideBar";
-import Book_detail from "../component/book_detail";
+import BookDetail from "../component/BookDetail/BookDetail";
 import SubContainer from "../component/Container/subContainer";
 import title from "../picture/logo.png";
 import {postRequest} from "../utils/ajax";
