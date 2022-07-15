@@ -263,7 +263,7 @@ class AdminOrderTable extends React.Component{
                 key: 'bookName',
                 render: (text,record) => {
                     return( <a onClick={() => {
-                        window.location.href = frontURL + "/detail?id=" + record.bookid
+                        window.location.href = frontURL + "/AdminBookDetail?id=" + record.bookid
                     }}>{text}</a>)
                 }
             },

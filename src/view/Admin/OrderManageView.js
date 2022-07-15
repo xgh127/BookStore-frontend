@@ -5,23 +5,23 @@ import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
 import AdminSideBar from "../../component/Decoration/AdminSideBar";
 import UserManage from "../../component/ManageTable/UserMange";
+import AdminOrder from "../../component/Order/AdminOrder";
 
-class UserMangeView extends React.Component{
+class OrderMangeView extends React.Component{
     render() {
         return(
             <div className="min-box">
-                <HeaderBar Head={"用户管理"}/>
+                <HeaderBar Head={"订单管理"}/>
                 <AdminSideBar/>
-                <SubContainer elem = {  <UserManage/>}/>
-
+                <SubContainer elem = {  <AdminOrder/>}/>
             </div>
         )
     }
 }
-let UserMangePage = () =>
+let OrderMangePage = () =>
 {
     return(
-        <UserMangeView/>
+        <OrderMangeView/>
     )
 }
-export {UserMangePage};
+export {OrderMangePage};

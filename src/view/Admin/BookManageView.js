@@ -3,7 +3,7 @@ import '../../css/basicBackground.css'
 import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
 import AdminSideBar from "../../component/Decoration/AdminSideBar";
-import BookManage from "./BookManage";
+import BookManage from "../../component/ManageTable/BookManage";
 
 class BookMangeView extends React.Component{
     render() {

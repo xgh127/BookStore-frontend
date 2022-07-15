@@ -3,6 +3,7 @@ import {Button, Image, Input, Popconfirm, Space, Table, Tabs} from "antd";
 import {SearchOutlined, UnorderedListOutlined} from "@ant-design/icons";
 import {getAllBookList} from "../../Service/bookService";
 import Highlighter from "react-highlight-words";
+import NewBook from "../../view/Admin/NewBook";
 
 
 const { TabPane } = Tabs;
@@ -154,24 +155,25 @@ class BookManage extends React.Component{
             key: 'inventory',
             width: 75,
         },
-        // {
-        //     title: '销量',
-        //     dataIndex: 'sellnumber',
-        //     key: 'sellnumber',
-        //     width: 75,
-        //     sorter: {
-        //         compare: (a, b) => a.sellnumber - b.sellnumber,
-        //         multiple: 1,
-        //     },
-        // },
-        //
+        {
+            title: '销量',
+            dataIndex: 'sellNum',
+            key: 'sellNumber',
+            width: 75,
+            sorter: {
+                compare: (a, b) => a.sellNum - b.sellNum,
+                multiple: 1,
+            },
+        },
+
         {
             title: '操作',
             width: 250,
             render: (text,record) =>
                 <>
                     <Button style={{margin:"3px"}} href={"/AdminBookDetail?id="+record.id}>查看</Button>
-                    <Button style={{margin:"3px"}} type="primary" href={"/eBook/admin/editbook?targetbookid="+record.id}>编辑</Button>
+                    <Button style={{margin:"3px"}} type="primary" href={"/AdminEditBook?id="+record.id}>编辑</Button>
+                        {/*// " eBook/admin/editbook?targetbookid="+record.id*/}
                     <Popconfirm
                         title="确认要删除书籍?操作不可撤销，且删除前请确认该书下没有订单！" /*onConfirm={()=>{this.deleteBook(record.id)}}*/
                         // onCancel={cancel}
@@ -197,7 +199,6 @@ class BookManage extends React.Component{
     //
     // }
 
-
     onChange = (pagination, filters, sorter, extra) => {
         console.log('params', pagination, filters, sorter, extra);
     };
@@ -209,6 +210,9 @@ class BookManage extends React.Component{
                         <TabPane tab={<><UnorderedListOutlined />书籍管理</>} key="1">
                             <Table columns={this.columns} dataSource={this.state.bookData} onChange={this.onChange}/>
                         </TabPane>
+                        <TabPane tab={<><UnorderedListOutlined />新书发布</>} key="2">
+                            <NewBook/>
+                            </TabPane>
                     </Tabs>
 
             </div>

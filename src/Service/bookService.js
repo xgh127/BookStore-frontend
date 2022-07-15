@@ -35,4 +35,21 @@ export const getAllBookList =(callback)=>
     let url = apiURL + "/getBooks";
     getRequest(url,{},callback);
 }
+export const parseBookId=(href) =>{
+    /*
+    *获取bookid
+    */
+    let bookId = "";
+    for(let i = href.length-1; href[i] >='0' && href[i] <='9'; i--)
+    {
+        bookId += href[i];
+        console.log( href[i]);
+    }
+    return bookId;
+}
+
+export const editOneBook = (bookInfo, callback) => {
+    let url = apiURL + "/editOneBook";
+    getRequest(url,bookInfo,callback);
+}
 

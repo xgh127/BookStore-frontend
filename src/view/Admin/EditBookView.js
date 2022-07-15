@@ -4,24 +4,25 @@ import SideBar from "../../component/Decoration/sideBar";
 import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
 import AdminSideBar from "../../component/Decoration/AdminSideBar";
-import UserManage from "./UserMange";
-import AdminOrder from "../../component/Order/AdminOrder";
+import UserManage from "../../component/ManageTable/UserMange";
+import EditBook from "./EditBook";
 
-class OrderMangeView extends React.Component{
+class EditBookView extends React.Component{
     render() {
         return(
             <div className="min-box">
-                <HeaderBar Head={"订单管理"}/>
+                <HeaderBar Head={"编辑书籍信息"}/>
                 <AdminSideBar/>
-                <SubContainer elem = {  <AdminOrder/>}/>
+                <SubContainer elem = {  <EditBook/>}/>
+
             </div>
         )
     }
 }
-let OrderMangePage = () =>
+let EditBookPage = () =>
 {
     return(
-        <OrderMangeView/>
+        <EditBookView/>
     )
 }
-export {OrderMangePage};
+export {EditBookPage};

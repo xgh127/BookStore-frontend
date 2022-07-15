@@ -17,10 +17,12 @@ import {theRegisterPage} from "./view/RegisterView";
 import {history} from "./utils/history";
 import {MakeOrderSuccessView} from "./view/Result/MakeOrderSuccess";
 import {UserMangePage} from "./view/Admin/UserMangeView";
-import {OrderMangePage} from "./view/Admin/OrderMange";
+import {OrderMangePage} from "./view/Admin/OrderManageView";
 import {BookMangePage} from "./view/Admin/BookManageView";
 import {theAdminPersonCenter} from "./view/Admin/AdminPersonCenter";
 import {AdminDetail} from "./view/Admin/AdminCheckBookDetail";
+import {EditBookPage} from "./view/Admin/EditBookView";
+import {EditBookSuccessView} from "./view/Result/editBookSuccess";
 
 /*直接import的登录页面*/
 function AllOfPage(){
@@ -41,6 +43,8 @@ function AllOfPage(){
                 <Route exact path = "/BookMange" component={BookMangePage}/>
                 <Route exact path = "/AdminBookDetail" component={AdminDetail}/>
                 <Route exact path = "/AdminPersonalCenter" component={theAdminPersonCenter}/>
+                <Route exact path = "/AdminEditBook" component={EditBookPage}/>
+                <Route exact path = "/Admin/editBookSuccess" component={EditBookSuccessView}/>
         </div>
         </Router>
     )
