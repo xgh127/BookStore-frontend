@@ -23,6 +23,8 @@ import {theAdminPersonCenter} from "./view/Admin/AdminPersonCenter";
 import {AdminDetail} from "./view/Admin/AdminCheckBookDetail";
 import {EditBookPage} from "./view/Admin/EditBookView";
 import {EditBookSuccessView} from "./view/Result/editBookSuccess";
+import {ErrorPageView} from "./view/Result/ErrorPage";
+import {PublishBookSuccessView} from "./view/Result/PublishBookSuccess";
 
 /*直接import的登录页面*/
 function AllOfPage(){
@@ -45,6 +47,8 @@ function AllOfPage(){
                 <Route exact path = "/AdminPersonalCenter" component={theAdminPersonCenter}/>
                 <Route exact path = "/AdminEditBook" component={EditBookPage}/>
                 <Route exact path = "/Admin/editBookSuccess" component={EditBookSuccessView}/>
+                <Route exact path = "/Admin/PublishBookSuccess" component={PublishBookSuccessView}/>
+                <Route exact path = "/Error" component={ErrorPageView}/>
         </div>
         </Router>
     )

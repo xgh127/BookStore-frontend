@@ -52,4 +52,9 @@ export const editOneBook = (bookInfo, callback) => {
     let url = apiURL + "/editOneBook";
     getRequest(url,bookInfo,callback);
 }
+export const AddOneBook = (bookInfo, callback) => {
+    let url = apiURL + "/AddOneBook";
+    getRequest(url,bookInfo,callback);
+}
+
 

@@ -25,7 +25,7 @@ class EditBook extends React.Component{
             imageUrl: "",
         }
         this.targetbookid = parseBookId(window.location.href);
-        if(this.targetbookid!=0){
+        if(this.targetbookid!==0){
             let that = this;
             getBookByID(this.targetbookid,(resp) => {
                     let data = BookPriceTrim(resp);
@@ -73,7 +73,7 @@ class EditBook extends React.Component{
                     window.location.href = "/Admin/editBookSuccess?" + data.data.id;
                 }
                 else
-                    window.location.href = "/errorPage";
+                    window.location.href = "/Error";
              }
          );
 

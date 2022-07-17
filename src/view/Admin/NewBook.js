@@ -1,8 +1,9 @@
 import React from "react";
-import {Tabs, Form, Input, InputNumber, Button} from "antd";
+import {Tabs, Form, Input, InputNumber, Button, Select} from "antd";
 import {ShopOutlined} from "@ant-design/icons";
 //import FileUploader from "../../../components/Book/BookImgUploader";
 import TextArea from "antd/es/input/TextArea";
+import {AddOneBook} from "../../Service/bookService";
 
 
 const { TabPane } = Tabs;
@@ -15,12 +16,12 @@ class newBook extends React.Component{
         let sendData = values;
 
         console.log(sendData);
-        // addBook(sendData,(data) => {
-        //     if(data.status >= 0)
-        //         window.location.href = "/eBook/publishSuccess?targetbookid=" + data.data.bookID;
-        //     else
-        //         window.location.href = "/eBook/errorPage";
-        // });
+        AddOneBook(sendData,(data) => {
+            if(data.status >= 0)
+                window.location.href = "/Admin/PublishBookSuccess";
+            else
+                window.location.href = "/Error";
+        });
     };
 
     render() {
@@ -59,15 +60,7 @@ class newBook extends React.Component{
                                     />
                                 </Form.Item>
 
-                                <Form.Item label="书本标题" name="displaytitle"
-                                           rules={[{
-                                               required: true,
-                                               message: '需要输入书籍的标题信息!',
-                                           },]}
-                                >
-                                    <Input placeholder="用于关键词搜索，宣传展示的标题，尽可能丰富"/>
-                                </Form.Item>
-                                <Form.Item label="书本名称" name="bookname"
+                                <Form.Item label="书本名称" name="bookName"
                                            rules={[{
                                                required: true,
                                                message: '需要输入书籍的名称信息!',
@@ -83,16 +76,6 @@ class newBook extends React.Component{
                                 >
                                     <Input placeholder="样例:978-7-000-00000-0"/>
                                 </Form.Item>
-
-                                <Form.Item label="发货地点" name="departure"
-                                           rules={[{
-                                               required: true,
-                                               message: '需要输入书籍的发货信息!',
-                                           },]}
-                                >
-                                    <Input placeholder="填写发货地点，尽可能简洁，如:上海"/>
-                                </Form.Item>
-
                                 <Form.Item label="书籍作者" name="author"
                                            rules={[{
                                                required: true,
@@ -101,14 +84,12 @@ class newBook extends React.Component{
                                 >
                                     <Input placeholder="填写书本作者"/>
                                 </Form.Item>
-
-                                <Form.Item label="书籍出版社" name="publisher"
-                                           rules={[{
-                                               required: true,
-                                               message: '需要输入书籍的出版社信息!',
-                                           },]}
-                                >
-                                    <Input placeholder="填写出版社名称，如:人民教育出版社"/>
+                                <Form.Item label="书籍分类" name="type"
+                                            rules={[{
+                                                required:true,
+                                                message:"请输入书籍的分类",
+                                            },]}>
+                                    <Input placeholder = "填写本书的分类，比如编程，儿童文学"/>
                                 </Form.Item>
 
                                 <Form.Item label="详情描述" name="description"
