@@ -25,6 +25,8 @@ import {EditBookPage} from "./view/Admin/EditBookView";
 import {EditBookSuccessView} from "./view/Result/editBookSuccess";
 import {ErrorPageView} from "./view/Result/ErrorPage";
 import {PublishBookSuccessView} from "./view/Result/PublishBookSuccess";
+import {RegisterSuccessView} from "./view/Result/RegisterSuccess";
+import {LogoutSuccessView} from "./view/Result/LogoutSuccess";
 
 /*直接import的登录页面*/
 function AllOfPage(){
@@ -39,6 +41,8 @@ function AllOfPage(){
                 <Route exact path="/MakeOrderSuccessView" component={MakeOrderSuccessView}/>
                 <Route exact path="/order" component={theOrder}/>
                 <Route exact path="/personCenter" component={thePersonCenter}/>
+                <Route exact path="/registerSuccess" component={RegisterSuccessView}/>
+                <Route exact path="/logoutSuccess" component={LogoutSuccessView}/>
                 {/*管理员页面*/}
                 <Route exact path = "/UserMange" component={UserMangePage}/>
                 <Route exact path = "/OrderMange" component={OrderMangePage}/>

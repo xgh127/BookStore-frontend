@@ -1,6 +1,5 @@
 import { Button, Result } from 'antd';
 import React from 'react';
-import {history} from "../utils/history";
 
 class FeedBack extends React.Component {
     constructor(props) {

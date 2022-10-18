@@ -1,8 +1,6 @@
 import React from "react";
 import '../css/logincss.css'
 import logHead from "../picture/login_head.jpeg"
-import axios from "axios"
-import {apiURL, frontURL} from "../config/BaseConfig";
 import HeaderBar from "../component/Decoration/HeaderBar";
 import {Link} from "react-router-dom";
 import {Button, Form, Input} from "antd";

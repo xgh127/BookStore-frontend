@@ -9,7 +9,8 @@ import {
 } from 'antd';
 import {formItemLayout,tailFormItemLayout} from "../assert/Format"
 import { useState } from 'react';
-import {frontURL} from "../config/BaseConfig";
+import {apiURL, frontURL} from "../config/BaseConfig";
+import {getRequest} from "../utils/ajax";
 const { Option } = Select;
 
 
@@ -18,6 +19,17 @@ const RegisterForm = () => {
 
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
+
+        getRequest(apiURL+"/register",values,(resp)=>{
+            if (resp.status >= 0)
+            {
+                window.location.href=frontURL+"/registerSuccess";
+            }
+            else
+            {
+                window.location.href=frontURL+"/Error";
+            }
+        })
     };
 
     const prefixSelector = (
@@ -61,6 +73,19 @@ const RegisterForm = () => {
                     {
                         required: true,
                         message: 'Please input your nickname!',
+                        whitespace: true,
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+            <Form.Item
+                name="username"
+                label="用户名"
+                rules={[
+                    {
+                        required: true,
+                        message: '请输入用户名!',
                         whitespace: true,
                     },
                 ]}
@@ -162,9 +187,9 @@ const RegisterForm = () => {
                 ]}
             >
                 <Select placeholder="select your gender">
-                    <Option value="male">男</Option>
-                    <Option value="female">女</Option>
-                    <Option value="other">其它</Option>
+                    <Option value="1">男</Option>
+                    <Option value="0">女</Option>
+                    <Option value="-1">其它</Option>
                 </Select>
             </Form.Item>
             <Form.Item

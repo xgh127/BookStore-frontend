@@ -9,8 +9,9 @@ export const getAllOrder =(callback) =>{
     getRequest(url,{},callback);
 };
 export const getUserOrder = (callback) =>{
-    let url = apiURL + "/getUserOrder";
-    getRequest(url,{username:localStorage.getItem("username")},callback);
+    let username = localStorage.getItem("username");
+    let url = apiURL + "/getUserOrder/"+username;
+    getRequest(url,{},callback);
 }
 export const OrderPriceTrim=(data) =>
 {
@@ -41,8 +42,12 @@ export const handleMakeOrder=(orderIDGroup,receiverName,postcode,phoneNumber,tot
             }
         let callback = (data) => {
             console.log(data);
-            history.push("/MakeOrderSuccessView?" + data.msg)
-            history.go(0);
+            if (data.status >= 0) {
+                window.location.href = "/MakeOrderSuccessView?" + data.data.uuid;
+            }else
+            {
+                message.error(data.msg);
+            }
         }
 
         getRequest(url, obj, callback);
