@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Image, Input, Popconfirm, Space, Table, Tabs} from "antd";
 import {SearchOutlined, UnorderedListOutlined} from "@ant-design/icons";
-import {getAllBookList} from "../../Service/bookService";
+import {deleteOneBook, getAllBookList} from "../../Service/bookService";
 import Highlighter from "react-highlight-words";
 import NewBook from "../../view/Admin/NewBook";
 
@@ -175,7 +175,7 @@ class BookManage extends React.Component{
                     <Button style={{margin:"3px"}} type="primary" href={"/AdminEditBook?id="+record.id}>编辑</Button>
                         {/*// " eBook/admin/editbook?targetbookid="+record.id*/}
                     <Popconfirm
-                        title="确认要删除书籍?操作不可撤销，且删除前请确认该书下没有订单！" /*onConfirm={()=>{this.deleteBook(record.id)}}*/
+                        title="确认要删除书籍?操作不可撤销，且删除前请确认该书下没有订单！" onConfirm={()=>{this.deleteBook(record.id)}}
                         // onCancel={cancel}
                         okText="删除" cancelText="取消"
                     >
@@ -186,18 +186,18 @@ class BookManage extends React.Component{
 
     ];
 
-    // deleteBook = (bookID) =>{
-    //     let obj = {
-    //         bookID: bookID,
-    //     };
-    //     deleteOneBook(obj,(data)=>{
-    //         if(data.status >= 0){
-    //             alert("您已成功删除此书!");
-    //             window.location.reload();
-    //         }
-    //     });
-    //
-    // }
+    deleteBook = (bookID) =>{
+        let obj = {
+            bookID: bookID,
+        };
+        deleteOneBook(obj,(data)=>{
+            if(data.status >= 0){
+                alert("您已成功删除此书!");
+                window.location.reload();
+            }
+        });
+
+    }
 
     onChange = (pagination, filters, sorter, extra) => {
         console.log('params', pagination, filters, sorter, extra);
@@ -218,6 +218,8 @@ class BookManage extends React.Component{
             </div>
         );
     }
+
+
 }
 
 export default BookManage;

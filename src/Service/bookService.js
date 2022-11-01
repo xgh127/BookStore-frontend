@@ -2,6 +2,7 @@
 /*将后台传回的价格转化为含有两位小数的数字*/
 import {apiURL} from "../config/BaseConfig";
 import {getRequest, postRequest} from "../utils/ajax";
+import {callbackify} from "util";
 
 /*
 * 处理多本书的价格
@@ -56,5 +57,8 @@ export const AddOneBook = (bookInfo, callback) => {
     let url = apiURL + "/AddOneBook";
     getRequest(url,bookInfo,callback);
 }
-
+export const deleteOneBook = (bookId,callback) =>{
+    let url = apiURL +"/deleteOneBook";
+    getRequest(url,bookId,callback);
+}
 

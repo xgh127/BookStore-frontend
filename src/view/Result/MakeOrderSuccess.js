@@ -8,6 +8,7 @@ import {history} from "../../utils/history";
 import FeedBack from "../../component/FeedBack";
 import {Modal, notification} from "antd";
 import {closeWebSocket, createWebSocket} from "../../utils/WebSocket";
+import {UserConst} from "../../Constant/UserConst";
 const reminderInfoCheck = (type, content) => {
     notification[type]({
         duration:null,
@@ -31,7 +32,7 @@ class MakeOrderSuccess extends React.Component{
         if (this.orderUUID !== "")
         {
 
-            this.socketURL = "ws://localhost:8080/websocket/transfer/" + this.orderUUID;
+            this.socketURL = "ws://localhost:8080/websocket/transfer/" + localStorage.getItem(UserConst.USERNAME);
             createWebSocket(this.socketURL,
                 (info) => {
                // alert(info);
