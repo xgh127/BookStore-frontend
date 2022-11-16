@@ -68,7 +68,7 @@ class BookDetailView extends React.Component{
 
             <div className="min-box">
                 <HeaderBar Head={"书籍详情"}/>
-                <SideBar/>
+                {/*<SideBar/>*/}
                 <SubContainer elem = {this.bookDetail()}/>
             </div>
 

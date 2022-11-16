@@ -7,6 +7,7 @@ import SubmitForm from "../Chart/OrderSumbitForm";
 import {getRequest} from "../../utils/ajax";
 import {handleMakeOrder} from "../../Service/OrderService";
 import {checkBookExistInCartByID, deleteCartOrderByID} from "../../Service/ChartService";
+import BackButton from "../UtilButton/BackButton";
 const openNotification = (placement) => {
     notification.info({
         message: "添加成功",
@@ -155,8 +156,8 @@ class BookDetail extends React.Component{
                             </Descriptions>
 
                     </div>
-                        <PageHeader><Button size="large" block   onClick={this.backToHome}>返回上一页</Button></PageHeader>
 
+<BackButton/>
             </div>
 
                     <Card title="购买信息" size={"small"}>

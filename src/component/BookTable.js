@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import '../css/basicBackground.css'
-import {Button, Card, List, Pagination, Table} from "antd";
+import {Button} from "antd";
 import {frontURL} from "../config/BaseConfig";
+import GlobalSearchBar from "./GlobalSearchBar";
 
 
 class ProductRow extends React.Component {
@@ -141,13 +142,16 @@ class FilterableProductTable2 extends React.Component {
 
     render() {
         return (
+
             <div>
+                <GlobalSearchBar id="MainPageSearchPanel" fromPage="home"/>
                 <SearchBar
                     filterText={this.state.filterText}
                     inStockOnly={this.state.inStockOnly}
                     onFilterTextChange={this.handleFilterTextChange}
                     onInStockChange={this.handleInStockChange}
                 />
+
                 <ProductTable
                     products={this.props.products}
                     filterText={this.state.filterText}

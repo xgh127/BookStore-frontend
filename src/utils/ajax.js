@@ -60,4 +60,19 @@ let getRequest = (url, json, callback) => {
             console.log(error);
         });
 };
-export {postRequest,postRequest_v2,getRequest};
+/*用GET方法获取信息*/
+const doGet=(url,callback) =>{
+    fetch(url,{
+        method: 'GET',
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            callback(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+}
+export {postRequest,postRequest_v2,getRequest,doGet};
