@@ -1,6 +1,6 @@
 import './App.css';
 import './css/basicBackground.css'
-import './component/BookTable';
+import './component/Table/BookTable';
 import './component/BookDetail/BookDetail';
 import React from "react";
 import ReactDOM from 'react-dom';
@@ -27,8 +27,10 @@ import {ErrorPageView} from "./view/Result/ErrorPage";
 import {PublishBookSuccessView} from "./view/Result/PublishBookSuccess";
 import {RegisterSuccessView} from "./view/Result/RegisterSuccess";
 import {LogoutSuccessView} from "./view/Result/LogoutSuccess";
-import SearchResultPage from "./component/SearchResult";
-import {theSearchResult} from "./view/SearchResultView";
+import SearchResultPage from "./component/SearchComponent/GlobalSearchResult";
+import {theSearchResult} from "./view/SearchResult/GlobalSearchResultView";
+import {ServiceView} from "./view/mircoServiceView";
+import {theAuthorSearchResult} from "./view/SearchResult/AuthorSearchView";
 
 /*直接import的登录页面*/
 function AllOfPage(){
@@ -46,6 +48,8 @@ function AllOfPage(){
                 <Route exact path="/registerSuccess" component={RegisterSuccessView}/>
                 <Route exact path="/logoutSuccess" component={LogoutSuccessView}/>
                 <Route exact path="/searchResult" component={theSearchResult}/>
+                <Route exact path="/mircoService" component={ServiceView}/>
+                <Route exact path="/AuthorSearchResult" component={theAuthorSearchResult}/>
                 {/*管理员页面*/}
                 <Route exact path = "/UserMange" component={UserMangePage}/>
                 <Route exact path = "/OrderMange" component={OrderMangePage}/>

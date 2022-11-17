@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import '../css/basicBackground.css'
+import '../../css/basicBackground.css'
 import {Button} from "antd";
-import {frontURL} from "../config/BaseConfig";
-import GlobalSearchBar from "./GlobalSearchBar";
+import {frontURL} from "../../config/BaseConfig";
+import GlobalSearchBar from "../SearchComponent/GlobalSearchBar";
 
 
 class ProductRow extends React.Component {

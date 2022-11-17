@@ -43,7 +43,8 @@ export const handleMakeOrder=(orderIDGroup,receiverName,postcode,phoneNumber,tot
         let callback = (data) => {
             console.log(data);
             if (data.status >= 0) {
-                window.location.href = "/MakeOrderSuccessView?" + data.data.uuid;
+                // window.location.href = "/MakeOrderSuccessView?" + data.data.uuid;
+                window.location.href="/MakeOrderSuccessView";
             }else
             {
                 message.error(data.msg);

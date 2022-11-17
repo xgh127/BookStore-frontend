@@ -3,9 +3,9 @@ import '../../css/basicBackground.css'
 import SideBar from "../../component/Decoration/sideBar";
 import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
-import OrderResult from "../../component/FeedBack";
+import OrderResult from "../../component/UtilComponet/FeedBack";
 import {history} from "../../utils/history";
-import FeedBack from "../../component/FeedBack";
+import FeedBack from "../../component/UtilComponet/FeedBack";
 import {Modal, notification} from "antd";
 import {closeWebSocket, createWebSocket} from "../../utils/WebSocket";
 import {UserConst} from "../../Constant/UserConst";
@@ -22,27 +22,27 @@ const reminderInfoCheck = (type, content) => {
     });
 };
 class MakeOrderSuccess extends React.Component{
-    orderUUID = "";
-    socketURL = "";
-    constructor() {
-        super();
-        let url = window.location.href;
-        let start = url.indexOf("?");
-        this.orderUUID= url.substring(start+1);
-        if (this.orderUUID !== "")
-        {
-
-            this.socketURL = "ws://localhost:8080/websocket/transfer/" + localStorage.getItem(UserConst.USERNAME);
-            createWebSocket(this.socketURL,
-                (info) => {
-               // alert(info);
-                   reminderInfoCheck("success",info.data);
-                }
-            );
-        }
-    } componentWillUnmount(){
-        closeWebSocket();
-    }
+    // orderUUID = "";
+    // socketURL = "";
+    // constructor() {
+    //     super();
+    //     let url = window.location.href;
+    //     let start = url.indexOf("?");
+    //     this.orderUUID= url.substring(start+1);
+    //     if (this.orderUUID !== "")
+    //     {
+    //
+    //         this.socketURL = "ws://localhost:8080/websocket/transfer/" + localStorage.getItem(UserConst.USERNAME);
+    //         createWebSocket(this.socketURL,
+    //             (info) => {
+    //            // alert(info);
+    //                reminderInfoCheck("success",info.data);
+    //             }
+    //         );
+    //     }
+    // } componentWillUnmount(){
+    //     closeWebSocket();
+    // }
 
     render() {
 
@@ -52,11 +52,12 @@ class MakeOrderSuccess extends React.Component{
                 <HeaderBar Head={"反馈"}/>
                 <SideBar/>
                 <SubContainer elem = { <OrderResult
-                    ID = {this.orderUUID}
+                    // ID = {this.orderUUID}
                     status = {"success"}
-                    title={"您已下单成功！正在生成订单......"}
-                    pre={"订单UUID:"}
-                    help={"系统将会将是否成功的消息以弹窗的形式告诉您，并附上订单号！"}
+                    // title={"您已下单成功！正在生成订单......"}
+                    title = {"下单成功！"}
+                    // pre={"订单UUID:"}
+                    // help={"系统将会将是否成功的消息以弹窗的形式告诉您，并附上订单号！"}
                     function={()=>{history.go(-1)}}
                 />}/>
             </div>

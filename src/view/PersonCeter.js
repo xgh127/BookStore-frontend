@@ -9,6 +9,7 @@ import { PoweroffOutlined} from '@ant-design/icons';
 import {UserConst} from "../Constant/UserConst";
 import {userLogout} from "../Service/UserService";
 import {LogoutSuccessView} from "./Result/LogoutSuccess";
+import AuthorSearchBar from "../component/SearchComponent/AuthorSearchBar";
 
 class PersonCenterView extends React.Component{
     doLogout =()=>
@@ -33,10 +34,8 @@ class PersonCenterView extends React.Component{
                                 <Descriptions.Item label= "简介"  >{localStorage.getItem(UserConst.DESCRIPTION)}</Descriptions.Item>
 
                             </Descriptions>
+                            <Button icon={<PoweroffOutlined/>} danger onClick={this.doLogout}>退出登陆</Button><br/>
 
-
-
-                    <Button icon={<PoweroffOutlined/>} danger onClick={this.doLogout}>退出登陆</Button>
                     </div>
                 }>
 

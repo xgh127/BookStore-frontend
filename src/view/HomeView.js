@@ -1,6 +1,6 @@
 import React from "react";
 import '../css/basicBackground.css'
-import {FilterableProductTable2} from "../component/BookTable";
+import {FilterableProductTable2} from "../component/Table/BookTable";
 import SubContainer from "../component/Container/subContainer";
 import Container from "../component/Container/Container";
 import SideBar from "../component/Decoration/sideBar";

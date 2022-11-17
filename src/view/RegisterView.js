@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterForm from "../component/RegisterForm";
+import RegisterForm from "../component/Table/RegisterForm";
 import HeaderBar from "../component/Decoration/HeaderBar";
 import Container from "../component/Container/Container";
 import SubContainer from "../component/Container/subContainer";

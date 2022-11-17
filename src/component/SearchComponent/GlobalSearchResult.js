@@ -6,9 +6,9 @@ import {BarsOutlined} from "@ant-design/icons";
 
 import GlobalSearchBar from "./GlobalSearchBar";
 import SearchBookRow from "./SearchBookRow";
-import {urlDecoder} from "../utils/urlDecoder";
-import {getAllBookList, getBookByKeyWord} from "../Service/bookService";
-import BackButton from "./UtilButton/BackButton";
+import {urlDecoder} from "../../utils/urlDecoder";
+import {getAllBookList, getBookByKeyWord} from "../../Service/bookService";
+import BackButton from "../UtilComponet/BackButton";
 
 
 const { TabPane } = Tabs;

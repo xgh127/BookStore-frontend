@@ -7,10 +7,10 @@ import {
     Input,
     Select,
 } from 'antd';
-import {formItemLayout,tailFormItemLayout} from "../assert/Format"
+import {formItemLayout,tailFormItemLayout} from "../../assert/Format"
 import { useState } from 'react';
-import {apiURL, frontURL} from "../config/BaseConfig";
-import {getRequest} from "../utils/ajax";
+import {apiURL, frontURL} from "../../config/BaseConfig";
+import {getRequest} from "../../utils/ajax";
 const { Option } = Select;
 
 

@@ -25,9 +25,12 @@ class SideBar extends React.Component{
                 <a className="block-min-03">
                     <div><Link to="/order">我的订单</Link></div>
                 </a>
-                <a className="block-min-04" >
-                    <div><Link to ="/personCenter">个人中心</Link></div>
-                </a>
+                    <a className="block-min-05">
+                        <div><Link to="/mircoService">其他功能</Link></div>
+                    </a>
+                    <a className="block-min-04" >
+                        <div><Link to ="/personCenter">个人中心</Link></div>
+                    </a>
                 </Affix>
             </div>
         )

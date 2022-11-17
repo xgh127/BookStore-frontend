@@ -3,7 +3,7 @@ import '../../css/basicBackground.css'
 import SideBar from "../../component/Decoration/sideBar";
 import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
-import OrderResult from "../../component/FeedBack";
+import OrderResult from "../../component/UtilComponet/FeedBack";
 import {history} from "../../utils/history";
 
 class LogoutSuccess extends React.Component{

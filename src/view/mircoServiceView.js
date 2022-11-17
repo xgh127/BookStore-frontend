@@ -8,25 +8,22 @@ import {Button, Card, Descriptions, Popconfirm} from "antd";
 import { PoweroffOutlined} from '@ant-design/icons';
 import {UserConst} from "../Constant/UserConst";
 import {userLogout} from "../Service/UserService";
-import SearchResultPage from "../component/SearchResult";
-import BackButton from "../component/UtilButton/BackButton";
+import {LogoutSuccessView} from "./Result/LogoutSuccess";
+import AuthorSearchBar from "../component/SearchComponent/AuthorSearchBar";
 
-class SearchResultView extends React.Component{
-    doLogout =()=>
-    {
-        userLogout();
-        window.location.href="/logoutSuccess";
-        localStorage.removeItem("onlineTime");
-    }
+class MircoServiceView extends React.Component{
+
     render() {
         return(
             <div className="min-box">
-                <HeaderBar Head={"全局搜索"}/>
+                <HeaderBar Head={"其他功能"}/>
                 <SideBar/>
                 <SubContainer elem = {
-                    <div>
 
-                    <SearchResultPage/>
+                    <div >
+                        <p>通过书名查询作者</p>
+                       <AuthorSearchBar/>
+
                     </div>
                 }>
 
@@ -36,13 +33,10 @@ class SearchResultView extends React.Component{
         )
     }
 }
-let theSearchResult = () =>
+let ServiceView = () =>
 {
     return(
-        <div>
-
-        <SearchResultView/>
-    </div>
+        <MircoServiceView/>
     )
 }
-export {theSearchResult};
+export {ServiceView};
