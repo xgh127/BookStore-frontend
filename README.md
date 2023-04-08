@@ -1,3 +1,5 @@
+# 写在前面
+这是sjtu-se web课程书城前端代码，目前还在上这门课，所以禁止copy
 # Getting Started with Create React App
 
 
