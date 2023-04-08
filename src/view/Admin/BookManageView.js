@@ -4,6 +4,7 @@ import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
 import AdminSideBar from "../../component/Decoration/AdminSideBar";
 import BookManage from "../../component/ManageTable/BookManage";
+import {Footer} from "antd/es/layout/layout";
 
 class BookMangeView extends React.Component{
     render() {
@@ -16,10 +17,5 @@ class BookMangeView extends React.Component{
         )
     }
 }
-let BookMangePage = () =>
-{
-    return(
-        <BookMangeView/>
-    )
-}
-export {BookMangePage};
+
+export {BookMangeView};

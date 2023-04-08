@@ -2,7 +2,7 @@
 /* CSS Document */
 img{
     float: left;
-    shape-outside: url(../picture/深入理解计算机系统.jpg);
+    /*shape-outside: url(src/assets/picture/深入理解计算机系统.jpg);*/
     margin:0 2rem;
     transform: translateX(-2rem);
 
@@ -26,7 +26,7 @@ img{
 }
 .books-box {
     float: right;
-    width: 1140px;
+    width: 1080px;
     height: auto;
     background-color: #fff;
     border-radius: 10px;

@@ -178,21 +178,23 @@ class OrderTable extends React.Component{
     })
 }
 
-
-
     expandedRowRender = (record) => {
-
-       // console.log(record);
         const columns = [
             {
                 title: '书名',
-                dataIndex: 'bookName',
-                key: 'bookName',
+                dataIndex: 'name',
+                key: 'name',
                 render: (text,record) => {
                    return( <a onClick={() => {
-                        window.location.href = frontURL + "/detail?id=" + record.bookid
+                        window.location.href = frontURL + "/detail?id=" + record.bookId
                     }}>{text}</a>)
                 }
+            },
+            {
+                title: '书籍封面',
+                dataIndex: 'image',
+                key: 'image',
+                render:(text,record)=><Image src={record.image} width={60}/>
             },
             {
                 title: '单价',
@@ -217,7 +219,7 @@ class OrderTable extends React.Component{
 
         ];
 
-        return <Table columns={columns} dataSource={record.cartOrderList} pagination={false} />;
+        return <Table columns={columns} dataSource={record.orderitemList} pagination={false} />;
     };
 
     render() {

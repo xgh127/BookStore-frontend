@@ -24,7 +24,7 @@ export const tailFormItemLayout = {
         },
         sm: {
             span: 16,
-            offset: 8,
+            offset: 6,
         },
     },
 };

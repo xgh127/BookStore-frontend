@@ -23,13 +23,5 @@ class AuthorSearchView extends React.Component{
         )
     }
 }
-let theAuthorSearchResult = () =>
-{
-    return(
-        <div>
 
-            <AuthorSearchView/>
-        </div>
-    )
-}
-export {theAuthorSearchResult};
+export {AuthorSearchView};

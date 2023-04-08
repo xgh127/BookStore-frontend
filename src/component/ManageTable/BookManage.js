@@ -55,6 +55,7 @@ class BookManage extends React.Component{
                     padding: 8,
                 }}
             >
+                {/*搜索输入框*/}
                 <Input
                     ref={this.searchInput}
                     placeholder={`Search ${dataIndex}`} value={selectedKeys[0]}
@@ -120,7 +121,12 @@ class BookManage extends React.Component{
 
     columns = [
         {
-            title: '图片',
+            title: 'ISBN',
+            dataIndex: 'isbn',
+            key: 'isbn',
+                },
+        {
+            title: '封面',
             dataIndex: 'image',
             key: 'image',
             render: (text) => <Image src={text} width={60}/>

@@ -23,13 +23,5 @@ class GlobalSearchResultView extends React.Component{
         )
     }
 }
-let theSearchResult = () =>
-{
-    return(
-        <div>
 
-        <GlobalSearchResultView/>
-    </div>
-    )
-}
-export {theSearchResult};
+export {GlobalSearchResultView};

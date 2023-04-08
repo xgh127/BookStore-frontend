@@ -25,6 +25,9 @@ class AdminSideBar extends React.Component{
                     <a className="block-min-03">
                         <div><Link to="/BookMange">书籍管理</Link></div>
                     </a>
+                    <a className="block-min-05">
+                        <div><Link to="/Statistic">数据统计</Link></div>
+                    </a>
                     <a className="block-min-04" >
                         <div><Link to ="/AdminPersonalCenter">个人中心</Link></div>
                     </a>

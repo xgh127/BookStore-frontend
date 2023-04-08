@@ -1,7 +1,19 @@
 import React from "react";
 import '../../css/book_detail.css'
 import {apiURL, frontURL} from "../../config/BaseConfig";
-import {Button, Card, Col, Descriptions, Image, InputNumber, message, Modal, notification, PageHeader, Row} from "antd";
+import {
+    Button,
+    Card,
+    Col,
+    Descriptions,
+    Divider,
+    Image,
+    InputNumber,
+    message,
+    Modal,
+    notification,
+    Row
+} from "antd";
 import {history} from "../../utils/history";
 import SubmitForm from "../Chart/OrderSumbitForm";
 import {getRequest} from "../../utils/ajax";
@@ -30,6 +42,9 @@ class BookDetail extends React.Component{
     }
     /*消息确认框*/
      cartID  = 0;
+    /**
+     * 添加书籍的确认框
+     */
     showAddConfirm = ()=>
     {
         Modal.confirm(
@@ -60,11 +75,17 @@ class BookDetail extends React.Component{
             visible:false
         })
     }
-
-    addToCart=(type)=> {//发送数据到后端
+    /**
+     * 将书籍添加到购物车里
+     * @param type 如果type ==1，说明点击的是加入购物车，如果type == 0，说明点击的直接购买
+     */
+    addToCart=(type)=> {        //发送数据到后端，type标志的是直接购买还是加入购物车后购买的
         let book = this.props.product;
         console.log("book="+book);
-        checkBookExistInCartByID(book.id,(data)=> {//如果后端存在书籍
+        /**
+         * 如果后端存在书籍的购物车记录了，那就提示用户直接去购物车进行操作
+         */
+        checkBookExistInCartByID(book.id,(data)=> {
             if (parseInt(data.msg) !== -1) {
                 console.log("data = " + JSON.stringify(data));
                 message.info("该书籍已经在购物车中了！你可以前往购物车提交订单或修改数据！");
@@ -85,21 +106,24 @@ class BookDetail extends React.Component{
                 let callback = (data) => {
                     this.cartID = data.msg;//加入购物车成功后会返回对应的订单号
                     console.log("set cartID to" + data.msg + "from" + this.cartID);
-                    if (type === 1)//如果type ===1，说明点击的是加入购物车，就需要提示加入购物车成功
+                    if (type === 1)     //如果type ===1，说明点击的是加入购物车，就需要提示加入购物车成功
+                    {
                         openNotification('top');//弹出消息提示框，参数是提示出现的位置
-
+                        return;
+                    }
+                    alert("cartID = " + this.cartID);
                     let receiverName = document.getElementById("receiverName").value;
                     let postcode = document.getElementById("postcode").value;
                     let address = document.getElementById("address").value;
                     let phoneNumber = document.getElementById("phoneNumber").value;
 
                     if (receiverName === "" || address === "" || phoneNumber === "") {
-                        deleteCartOrderByID(this.cartID);//需要重新获取信息，所以删除
+                        deleteCartOrderByID(this.cartID);       //需要重新获取信息，所以删除
                         message.error("，请检查您的输入，您有必填项目未填！")
                     }
-                    let orderIDGroup = [];//为了代码复用所以即使就一个数据也用的数组存
+                    let orderIDGroup = [];              //为了代码复用所以即使就一个数据也用的数组存
                     orderIDGroup.push(this.cartID);
-                    console.log("here we go" + this.cartID)
+                    alert("here we go" + this.cartID)
                     getRequest(apiURL + "/getCartOrderByID", {id: this.cartID}, (cartOrder) => {
                         let totalprice = ((parseInt(cartOrder.price) / 100) * cartOrder.buyNum).toFixed(2);
                            handleMakeOrder(orderIDGroup, receiverName, postcode, phoneNumber, totalprice, address)
@@ -113,10 +137,16 @@ class BookDetail extends React.Component{
        {
            this.addToCart(0);
        }
+    /**
+     * 回退一页
+     */
     backToHome=()=>
     {
         history.go(-1);
     }
+    /**
+     * 跳转到下一个书籍详情页面
+     */
     toNext=()=>
     {
         window.location.href=frontURL+"/detail?id=" + (this.props.product.id+1)%39 +"";
@@ -140,22 +170,23 @@ class BookDetail extends React.Component{
                 </Modal>
                 <div className="ghxz-02">
 <div className="BookDetailTop">
-                        <div className="BookDetailImg">
-                            <Image width="380px" src={product.image}
-                             alt={product.name}/>
-                        </div>
+
 
                     <div className="BookDescription">
-                            <Descriptions title={"书籍详情"} >
-                                <Descriptions.Item label="书名" span={6}>{product.name}</Descriptions.Item>
+                            <Descriptions title={"书籍详情"} layout={"vertical"}>
+                                <Descriptions.Item label="书名" >{product.name}</Descriptions.Item>
                             <Descriptions.Item label="分类" span={5}>{product.type}</Descriptions.Item>
                             <Descriptions.Item label="作者" span={5}>{product.author}</Descriptions.Item>
                             <Descriptions.Item label="单价" span={5} ><b>{product.price}元</b></Descriptions.Item>
-                            <Descriptions.Item label= "简介">{product.description}</Descriptions.Item>
-
+                                <Descriptions.Item label="简介" span={5}  >{product.description}</Descriptions.Item>
                             </Descriptions>
 
+
                     </div>
+    <div className="BookDetailImg">
+        <Image src={product.image}
+               alt={product.name} style={{float:"right"}}/>
+    </div>
 
 <BackButton/>
             </div>
@@ -172,10 +203,10 @@ class BookDetail extends React.Component{
                             <Col span={5}><p>总价：{this.state.allPrice.toFixed(2)}元</p></Col>
 
                         <Col span={3}>
-                    <Button onClick={ this.showAddConfirm}>加入购物车</Button>
+                    <Button  type="primary" ghost onClick={ this.showAddConfirm}>加入购物车</Button>
                         </Col>
                             <Col span={3}>
-                            <Button onClick={this.showModal} >直接购买</Button></Col>
+                            <Button type="danger"  onClick={this.showModal} >直接购买</Button></Col>
                             <Col span={3}>
                                 <Button onClick={this.toNext} >下一页</Button></Col>
                         </Row>

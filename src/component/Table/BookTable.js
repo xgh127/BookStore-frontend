@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import '../../css/basicBackground.css'
-import {Button} from "antd";
 import {frontURL} from "../../config/BaseConfig";
 import GlobalSearchBar from "../SearchComponent/GlobalSearchBar";
+import {BookCarousel} from "../BookCarousel";
 
 
 class ProductRow extends React.Component {
@@ -23,11 +23,13 @@ class ProductRow extends React.Component {
         return (
 
             <tr className="mail-min" >
-                <td><Button block type ="Link" onClick={this.jumpToDetail}>{product.name}</Button></td>
+                <td>{product.isbn}</td>
+                <td><a block type ="Link" onClick={this.jumpToDetail}>{product.name}</a></td>
                 <td><img width={180} alt={product.image} src={product.image}  /></td>
                 <td>{product.author}</td>
                 <td>{product.price}</td>
                 <td>{product.type}</td>
+                <td>{product.inventory}</td>
 
             </tr>
         );
@@ -57,11 +59,13 @@ class ProductTable extends React.Component {
             <table  className="mail-box">
                 <thead>
                 <tr className="main-title" >
+                    <th>ISBN</th>
                     <th>书名</th>
                     <th>封面</th>
                     <th>作者</th>
                     <th>定价(元）</th>
                     <th>分类</th>
+                    <th>剩余库存</th>
                 </tr>
                 </thead>
                 <tbody >
@@ -143,15 +147,17 @@ class FilterableProductTable2 extends React.Component {
     render() {
         return (
 
-            <div>
-                <GlobalSearchBar id="MainPageSearchPanel" fromPage="home"/>
+            <div >
+                {/*<GlobalSearchBar id="MainPageSearchPanel" fromPage="home"/>*/}
+
                 <SearchBar
                     filterText={this.state.filterText}
                     inStockOnly={this.state.inStockOnly}
                     onFilterTextChange={this.handleFilterTextChange}
                     onInStockChange={this.handleInStockChange}
                 />
-
+                {/*这是一个跑马灯*/}
+                <BookCarousel/>
                 <ProductTable
                     products={this.props.products}
                     filterText={this.state.filterText}

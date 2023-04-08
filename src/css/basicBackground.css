@@ -214,14 +214,14 @@ p {
 }
 
 /* 右侧列表 */
-.books-box {
-    float: right;
-    width: 1140px;
-    height: auto;
-    background-color: #fff;
-    border-radius: 10px;
-    margin-top: 52px;
-}
+/*.books-box {*/
+/*    float: right;*/
+/*    width: 1140px;*/
+/*    height: auto;*/
+/*    background-color: #fff;*/
+/*    border-radius: 10px;*/
+/*    margin-top: 52px;*/
+/*}*/
 
 
 .books_query-01 {
@@ -724,6 +724,11 @@ table {
 }
 .Home a{
     position: center;
+}
+
+.bookCarousel{
+    height: 20px;
+    width:40px ;
 }
 
 

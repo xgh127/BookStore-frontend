@@ -6,7 +6,7 @@ import HeaderBar from "../../component/Decoration/HeaderBar";
 import OrderResult from "../../component/UtilComponet/FeedBack";
 import {history} from "../../utils/history";
 
-class ErrorPage extends React.Component{
+class ErrorPageView extends React.Component{
 
     render() {
         return(
@@ -25,10 +25,5 @@ class ErrorPage extends React.Component{
         )
     }
 }
-let ErrorPageView = () =>
-{
-    return(
-        <ErrorPage/>
-    )
-}
+
 export {ErrorPageView};

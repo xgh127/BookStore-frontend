@@ -1,5 +1,5 @@
-import {apiURL, frontURL} from "../config/BaseConfig";
-import {getRequest, postRequest_v2} from "../utils/ajax";
+import {apiURL} from "../config/BaseConfig";
+import {getRequest} from "../utils/ajax";
 import {UserConst} from "../Constant/UserConst";
 import {LoginFailed, LoginForbid, LoginSuccessFully, LogoutSuccess} from "../Message/LoginMessage";
 import {history} from "../utils/history";
@@ -26,6 +26,7 @@ const userLogin = (loginInfo)=>
                         localStorage.setItem(UserConst.NICKNAME,userInfo.nickname);
                         localStorage.setItem(UserConst.TEL,userInfo.tel);
                         localStorage.setItem(UserConst.MAIL,userInfo.mail);
+                        console.log("用户简介"+userInfo.description);
                         localStorage.setItem(UserConst.DESCRIPTION,userInfo.description)
                         history.push("/first");
                         history.go();
@@ -37,11 +38,13 @@ const userLogin = (loginInfo)=>
                     history.go();
                 }
             } else {
-                LoginFailed();
+                LoginFailed(response.msg);
             }
         });
 }
-
+/**
+ * 从后端获取登陆时长
+ */
 const userLogout =()=>
 {
     let url = apiURL+"/logout";
@@ -64,6 +67,16 @@ const userLogout =()=>
     })
 }
 
+export const doLogout =()=> {
+
+    userLogout();
+    window.location.href = "/logoutSuccess";
+    localStorage.removeItem("onlineTime");
+}
+/**
+ * 获取所有的用户信息
+ * @param callback
+ */
 let getAllUserList = (callback) => {
 
     let getAllUserListURL = apiURL + "/getAllUser";

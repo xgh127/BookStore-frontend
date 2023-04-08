@@ -5,8 +5,9 @@ import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
 import OrderResult from "../../component/UtilComponet/FeedBack";
 import {history} from "../../utils/history";
+import FeedBack from "../../component/UtilComponet/FeedBack";
 
-class EditBookSuccess extends React.Component{
+class EditBookSuccessView extends React.Component{
 
     render() {
         let url = window.location.href;
@@ -16,7 +17,7 @@ class EditBookSuccess extends React.Component{
             <div className="min-box">
                 <HeaderBar Head={"反馈"}/>
                 <SideBar/>
-                <SubContainer elem = { <OrderResult  ID = {orderID}
+                <SubContainer elem = { <FeedBack  ID = {orderID}
                                                      status = {"success"}
                                                      title={"修改书籍信息成功"}
                                                      pre={"书籍ID:"}
@@ -26,10 +27,5 @@ class EditBookSuccess extends React.Component{
         )
     }
 }
-let EditBookSuccessView = () =>
-{
-    return(
-        <EditBookSuccess/>
-    )
-}
+
 export {EditBookSuccessView};

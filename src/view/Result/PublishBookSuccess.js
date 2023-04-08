@@ -3,10 +3,10 @@ import '../../css/basicBackground.css'
 import SideBar from "../../component/Decoration/sideBar";
 import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
-import OrderResult from "../../component/UtilComponet/FeedBack";
 import {history} from "../../utils/history";
+import FeedBack from "../../component/UtilComponet/FeedBack";
 
-class PublishBookSuccess extends React.Component{
+class PublishBookSuccessView extends React.Component{
 
     render() {
         let url = window.location.href;
@@ -16,7 +16,7 @@ class PublishBookSuccess extends React.Component{
             <div className="min-box">
                 <HeaderBar Head={"反馈"}/>
                 <SideBar/>
-                <SubContainer elem = { <OrderResult  ID = {orderID}
+                <SubContainer elem = { <FeedBack  ID = {orderID}
                                                      status = {"success"}
                                                      title={"发布书籍成功！"}
                                                      pre={"书籍ID:"}
@@ -26,10 +26,5 @@ class PublishBookSuccess extends React.Component{
         )
     }
 }
-let PublishBookSuccessView = () =>
-{
-    return(
-        <PublishBookSuccess/>
-    )
-}
+
 export {PublishBookSuccessView};

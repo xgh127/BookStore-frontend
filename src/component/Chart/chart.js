@@ -9,6 +9,7 @@ import {PriceTrim} from "../../Service/bookService";
 import {history} from "../../utils/history";
 import {handleMakeOrder} from "../../Service/OrderService";
 import SubmitForm from "./OrderSumbitForm";
+import {BookDetailButton} from "../UtilComponet/BookDetailButton";
 
 class Movie extends React.Component{
     constructor(props){
@@ -147,7 +148,7 @@ closeModal =() =>
                                     <td>
                                         <Button shape="circle" onClick={()=>this.changeBookCount(index,-1)}
                                                 disabled={item.buyNum ===1}>-</Button>
-                                        <span >x{item.buyNum}</span>
+                                        <span style={{padding:10}} >x{item.buyNum}</span>
                                         <Button shape="circle"  onClick={()=>this.changeBookCount(index,1)}>+</Button>
                                     </td>
                                     <td>
@@ -164,8 +165,7 @@ closeModal =() =>
                                         >
                                             <Button danger >移除</Button>
                                         </Popconfirm>
-                                        <Button type="link" onClick={()=>{window.location.href=frontURL+"/detail?id="+item.bookid}}>详情</Button>
-
+                                        <BookDetailButton bookId = {item.bookid} text={"详情"}/>
                                 </td>
                                 </tr>)
                         })

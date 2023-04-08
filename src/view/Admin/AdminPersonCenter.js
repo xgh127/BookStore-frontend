@@ -6,8 +6,9 @@ import {frontURL} from "../../config/BaseConfig";
 import {Button} from "antd";
 import { PoweroffOutlined} from '@ant-design/icons';
 import AdminSideBar from "../../component/Decoration/AdminSideBar";
+import {Footer} from "antd/es/layout/layout";
 
-class AdminPersonCeterView extends React.Component{
+class AdminPersonCenterView extends React.Component{
     doLogOut=()=>
     {
         window.location.href=frontURL+"/";
@@ -19,15 +20,9 @@ class AdminPersonCeterView extends React.Component{
                 <HeaderBar Head={"管理员中心"}/>
                 <AdminSideBar/>
                 <SubContainer elem = {  <Button icon={<PoweroffOutlined />} danger onClick={this.doLogOut}>退出登陆</Button>}/>
-
             </div>
         )
     }
 }
-let theAdminPersonCenter = () =>
-{
-    return(
-        <AdminPersonCeterView/>
-    )
-}
-export {theAdminPersonCenter};
+
+export {AdminPersonCenterView};

@@ -6,6 +6,7 @@ import HeaderBar from "../../component/Decoration/HeaderBar";
 import AdminSideBar from "../../component/Decoration/AdminSideBar";
 import UserManage from "../../component/ManageTable/UserMange";
 import EditBook from "./EditBook";
+import {Footer} from "antd/es/layout/layout";
 
 class EditBookView extends React.Component{
     render() {
@@ -14,15 +15,9 @@ class EditBookView extends React.Component{
                 <HeaderBar Head={"编辑书籍信息"}/>
                 <AdminSideBar/>
                 <SubContainer elem = {  <EditBook/>}/>
-
             </div>
         )
     }
 }
-let EditBookPage = () =>
-{
-    return(
-        <EditBookView/>
-    )
-}
-export {EditBookPage};
+
+export {EditBookView};

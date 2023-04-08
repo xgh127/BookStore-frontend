@@ -1,5 +1,5 @@
 import {Form} from "antd";
-import {formItemLayout} from "../../assert/Format";
+import {formItemLayout} from "../../utils/Format";
 import Input from "antd/es/input/Input";
 import React from "react";
 

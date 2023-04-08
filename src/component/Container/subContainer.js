@@ -1,5 +1,4 @@
 import React from "react";
-import {Affix} from "antd";
 
 class SubContainer extends  React.Component{
     constructor(props) {

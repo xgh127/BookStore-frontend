@@ -6,6 +6,7 @@ import HeaderBar from "../../component/Decoration/HeaderBar";
 import AdminSideBar from "../../component/Decoration/AdminSideBar";
 import UserManage from "../../component/ManageTable/UserMange";
 import AdminOrder from "../../component/Order/AdminOrder";
+import {Footer} from "antd/es/layout/layout";
 
 class OrderMangeView extends React.Component{
     render() {
@@ -18,10 +19,5 @@ class OrderMangeView extends React.Component{
         )
     }
 }
-let OrderMangePage = () =>
-{
-    return(
-        <OrderMangeView/>
-    )
-}
-export {OrderMangePage};
+
+export {OrderMangeView};

@@ -4,7 +4,7 @@ import {ShopOutlined} from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
 import {BookPriceTrim, editOneBook, getBookByID, parseBookId} from "../../Service/bookService";
 import {history} from "../../utils/history";
-import {PageHeader} from "antd";
+
 const { TabPane } = Tabs;
 class EditBook extends React.Component{
 

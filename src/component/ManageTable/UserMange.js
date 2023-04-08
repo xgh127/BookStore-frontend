@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Input, Select, Space, Table, Tabs, Tag} from "antd";
 import {getAllUserList, setUserLoginPermit} from "../../Service/UserService";
-import {UserOutlined} from "@ant-design/icons";
+import { UserOutlined} from "@ant-design/icons";
 import { SearchOutlined } from '@ant-design/icons';
 
 import Highlighter from 'react-highlight-words';
@@ -13,6 +13,8 @@ const { TabPane } = Tabs;
 const handleChange_ForBidLogin = (value,username) => {
     setUserLoginPermit(username,value,(data)=>{console.log(data)});
 };
+
+
 
 class UserManage extends React.Component{
     searchInput = null;
@@ -39,7 +41,6 @@ class UserManage extends React.Component{
     setSearchedColumn(val){
         this.setState({ searchedColumn:val});
     }
-
     handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         this.setSearchText(selectedKeys[0]);
@@ -169,18 +170,20 @@ class UserManage extends React.Component{
             dataIndex: 'forbidenStatus',
             key: 'forbidlogin',
             render: (num,record) => (
-                <>
+
+ <>
                     <Select
-                        defaultValue={num === 0 ? "允许":"禁止"}
+                        defaultValue={num === 0 ? "禁止":"允许"}
                         style={{
                             width: 80,
                         }}
-                        onChange={(value)=>handleChange_ForBidLogin(value,record.id)}
+                        onChange={(value )=>handleChange_ForBidLogin(value,record.id)}
                     >
-                        <Option value="0">允许</Option>
-                        <Option value="1">禁止</Option>
+                        <Option label={0} value="0">允许</Option>
+                        <Option label={1} value="1">禁止</Option>
                     </Select>
-                </>
+</>
+
             ),
          },
     ];

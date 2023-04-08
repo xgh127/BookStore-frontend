@@ -5,6 +5,7 @@ import SubContainer from "../component/Container/subContainer";
 import HeaderBar from "../component/Decoration/HeaderBar";
 import Container from "../component/Container/Container";
 import Movie from "../component/Chart/chart";
+import {Footer} from "antd/es/layout/layout";
 
 let chart=<Movie/> ;                           //购物车
 let pageChart =  <SubContainer elem={chart}/>;
@@ -22,7 +23,4 @@ class ChartView extends React.Component {
     }
 }
 
-let theChartPage = () =>{
-    return(<ChartView/>)
-}
-export {theChartPage};
+export {ChartView};

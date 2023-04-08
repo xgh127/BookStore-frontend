@@ -7,27 +7,31 @@ import {
     Input,
     Select,
 } from 'antd';
-import {formItemLayout,tailFormItemLayout} from "../../assert/Format"
+import {formItemLayout,tailFormItemLayout} from "../../utils/Format"
 import { useState } from 'react';
 import {apiURL, frontURL} from "../../config/BaseConfig";
 import {getRequest} from "../../utils/ajax";
+import {NotifyErrorMsg, NotifySuccessMsg} from "../../Message/LoginMessage";
 const { Option } = Select;
 
 
 const RegisterForm = () => {
     const [form] = Form.useForm();
-
+/**
+ * 注册完成后的跳转函数
+ * */
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
 
         getRequest(apiURL+"/register",values,(resp)=>{
             if (resp.status >= 0)
             {
+                NotifySuccessMsg(resp.msg);
                 window.location.href=frontURL+"/registerSuccess";
             }
             else
             {
-                window.location.href=frontURL+"/Error";
+                NotifyErrorMsg(resp.msg);
             }
         })
     };
@@ -44,6 +48,9 @@ const RegisterForm = () => {
             </Select>
         </Form.Item>
     );
+    /**
+     * 回到登陆页面
+     * */
     let toLogin =() =>
     {
         window.location.href=frontURL+"/";

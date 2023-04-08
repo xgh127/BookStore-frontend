@@ -3,10 +3,10 @@
 
 .BookDetailImg{
     display: inline-block;
-    width: 30%;
+    width: 28%;
     height: auto;
-    float: left;
-    margin-left:auto;
+    float: right;
+    margin-left:0;
 
 }
 .BookDescription{
@@ -15,7 +15,7 @@
     margin-left:50px;
     width: 70%;
     height: auto;
-    padding: 10px 20px;
+    /*padding: 10px 20px;*/
 
 }
 .BookDetailTop{
@@ -289,7 +289,7 @@ p {
 
 .ghxz-02 img {
     display: block;
-    margin: auto;
+    margin: 0;
     padding-bottom: 60px;
 }
 
@@ -714,7 +714,7 @@ table {
 }
 img{
     float: left;
-    shape-outside: url(../picture/深入理解计算机系统.jpg);
+    /*shape-outside: url(src/assets/picture/深入理解计算机系统.jpg);*/
     margin:0 2rem;
     transform: translateX(-2rem);
 

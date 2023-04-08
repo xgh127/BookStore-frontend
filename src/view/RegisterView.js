@@ -1,8 +1,6 @@
 import React from "react";
 import RegisterForm from "../component/Table/RegisterForm";
 import HeaderBar from "../component/Decoration/HeaderBar";
-import Container from "../component/Container/Container";
-import SubContainer from "../component/Container/subContainer";
 
 
 class RegisterView extends React.Component{
@@ -20,10 +18,4 @@ class RegisterView extends React.Component{
 
     }
 }
-let theRegisterPage =()=>
-{
-    return(
-       <RegisterView/>
-    )
-}
-export {theRegisterPage};
+export {RegisterView};

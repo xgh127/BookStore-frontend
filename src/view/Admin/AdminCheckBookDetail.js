@@ -5,6 +5,7 @@ import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
 import {BookPriceTrim, getBookByID} from "../../Service/bookService";
 import AdminBookDetail from "../../component/BookDetail/AdminBookDetail";
+import {Footer} from "antd/es/layout/layout";
 
 class DisplayBookDetailView extends React.Component{
 
@@ -74,10 +75,4 @@ class DisplayBookDetailView extends React.Component{
     }
 }
 
-let AdminDetail = () =>
-{
-    return(
-        <DisplayBookDetailView/>
-    )
-}
-export {AdminDetail};
+export {DisplayBookDetailView};

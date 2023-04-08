@@ -1,24 +1,30 @@
 import React from "react";
 import '../css/logincss.css'
-import logHead from "../picture/login_head.jpeg"
+import logHead from "../assets/picture/login_head.jpeg"
 import HeaderBar from "../component/Decoration/HeaderBar";
 import {Link} from "react-router-dom";
-import {Button, Form, Input} from "antd";
+import {Button, Col, Form, Input, Row} from "antd";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
-import {formItemLayout, tailFormItemLayout} from "../assert/Format";
-import {userLogin} from "../Service/UserService";
+import {formItemLayout, tailFormItemLayout} from "../utils/Format";
+import {doLogout, userLogin} from "../Service/UserService";
+import {LoginEmpty} from "../Message/LoginMessage";
+import {Footer} from "antd/es/layout/layout";
+import Container from "../component/Container/Container";
 
-function Head_img(){//
-    return(
-        <div className="min-box">
-            <img width="200px" src={logHead} alt="头像"/>
-        </div>
-    ) ;
-}
+/**
+* 随便弄的一个头像
+* */
+// function Head_img(){
+//     return(
+//         <div className="min-box">
+//             <img width="200px" src={logHead} alt="头像"/>
+//         </div>
+//     ) ;
+// }
 class LoginView extends React.Component{
     constructor(props) {
         super(props);
-        /*申请两个state*/
+        /**申请两个state*/
         this.state ={
             username:"",
             password:""
@@ -31,20 +37,25 @@ class LoginView extends React.Component{
         userInfo[key] = e.target.value;
         this.setState(userInfo);
     }
-    doRegister = e =>
-    {
-
+   handleKeyDown=(e)=> {
+        if (e.keyCode === 13) { // 判断是否按下回车键
+            this.doLogin(); // 调用相应的函数
+        }
     }
     doLogin = e =>
     {
         e.preventDefault();
+        // e.stopPropagation()
+        //获取用户名和密码
         let user = document.getElementById("username").value;
         let pwd =  document.getElementById("password").value;
+        //判断是否为空
         if(user == null || pwd == null || user === "" || pwd === "")
         {
-            alert("Mistake!")
+            LoginEmpty();
         }
         else {
+            //调用service
             userLogin({
                     username:user,
                     password:pwd,
@@ -56,11 +67,11 @@ class LoginView extends React.Component{
         return (
 <div className="min-box">
     <HeaderBar Head={"欢迎来到牙牙书城，请先登录吧！"}/>
-            <div className="login-Box">
-
-            <Head_img/>
+<div className="login-Box">
+                {/*登陆表单，来自ant design*/}
                     <Form  {...formItemLayout}>
-
+                    <Row>
+                        <Col span={24} >
                         <Form.Item name="username" rules={[
                                     {
                                         required: true,
@@ -74,7 +85,6 @@ class LoginView extends React.Component{
                                        this.InfoSet(event,'username')
                                    }} //如果输入的username改变了应该咋办
                             />
-
                                         </Form.Item>
                         <Form.Item name="password" rules={[
                                     {
@@ -91,26 +101,36 @@ class LoginView extends React.Component{
                                         }}
                                         />
                         </Form.Item>
-                        <Form {...tailFormItemLayout}>
-                        <Button  type="primary"
-                                 htmlType="submit"
-                                 onClick={this.doLogin}> 登录 </Button><br/>
-                        <span>没有账号？</span><br/>
-                        <Button ><Link to ="/register">前往注册</Link></Button>
-                        </Form>
+                        </Col>
+                    </Row>
+                        <Row>
+                            <Col span={12}  offset={2} >
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            onClick={this.doLogin}
+                           > 登录 </Button><br/>
+                            </div>
+                            </Col>
+
+                    <Col span={12}  offset={2}>
+                        <br/>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                     <Button ><Link to ="/register">注册</Link></Button>
+                        </div>
+
+                            </Col>
+                    </Row>
                     </Form>
-            </div>
+
     </div>
+
+
+</div>
 
         )
     }
 }
 
-/*直接在这儿输出登陆页面*/
-const loginPage=()=>{
-    return(
-        <LoginView/>
-    )
-
-}
-export {LoginView,loginPage};
+export {LoginView};

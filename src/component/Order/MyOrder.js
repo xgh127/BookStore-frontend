@@ -2,6 +2,7 @@ import React from "react";
 import {Tabs} from "antd";
 import {UnorderedListOutlined} from "@ant-design/icons";
 import OrderTable from "./OrderTable";
+import OrderItemTable from "./OrderItemTable";
 
 
 
@@ -17,6 +18,9 @@ class MyOrder extends React.Component{
                         <TabPane tab={<><UnorderedListOutlined />查看所有订单项</>} key="1">
                             <OrderTable/>
                         </TabPane>
+                        <TabPane  tab={<><UnorderedListOutlined />查看订单子项</>} key="2">
+                            <OrderItemTable/>
+                            </TabPane>
                     </Tabs>
                 </div>
         );

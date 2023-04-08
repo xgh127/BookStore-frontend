@@ -3,7 +3,7 @@ import '../css/basicBackground.css'
 import SideBar from "../component/Decoration/sideBar";
 import BookDetail from "../component/BookDetail/BookDetail";
 import SubContainer from "../component/Container/subContainer";
-import title from "../picture/logo.png";
+import title from "../assets/picture/logo.png";
 import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
 import HeaderBar from "../component/Decoration/HeaderBar";
@@ -11,6 +11,7 @@ import {Tabs} from "antd";
 import {UnorderedListOutlined} from "@ant-design/icons";
 import OrderTable from "../component/Order/OrderTable";
 import MyOrder from "../component/Order/MyOrder";
+import {Footer} from "antd/es/layout/layout";
 function Head_img(){
     return(
         <img className="title"
@@ -18,17 +19,6 @@ function Head_img(){
              alt="title"/>
     ) ;
 }
-function HeadBar(props){
-    return(
-        <div className="title-box">
-            <Head_img/>
-            <h1>{props.Head}</h1>
-        </div>
-    );
-}
-
-const { TabPane } = Tabs;
-
 class OrderView extends React.Component{
 
 
@@ -37,17 +27,12 @@ class OrderView extends React.Component{
             <div className="min-box">
                 <HeaderBar Head={"我的订单"}/>
                 <SideBar/>
-                <SubContainer elem = {<MyOrder/>}/>
+                <SubContainer elem = {
+                    <div>
+                        <MyOrder/>
+                    </div>}/>
             </div>
         )
     }
 }
-let theOrder = () =>
-{
-    return(
-        <div>
-            <OrderView/>
-        </div>
-    )
-}
-export {theOrder};
+export {OrderView};

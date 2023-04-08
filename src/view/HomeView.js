@@ -8,6 +8,9 @@ import {postRequest} from "../utils/ajax";
 import {apiURL} from "../config/BaseConfig";
 import HeaderBar from "../component/Decoration/HeaderBar";
 import {PriceTrim} from "../Service/bookService";
+import {Layout} from "antd";
+import {BookCarousel} from "../component/BookCarousel";
+import {Content, Footer} from "antd/es/layout/layout";
 
 class HomeView extends React.Component{
 
@@ -46,7 +49,9 @@ class HomeView extends React.Component{
         else
         {
             return(
+                <div>
                 <FilterableProductTable2 products={this.state.books}/>
+                </div>
             )
         }
 
@@ -56,19 +61,12 @@ class HomeView extends React.Component{
         return (
                 <div>
                     <HeaderBar Head={"欢迎你,"+localStorage.getItem("username")}/>
+                    <Container SideBar={<SideBar/>} Sub={  <SubContainer elem={
+                        this.table1()
 
-                    <Container SideBar={<SideBar/>} Sub={  <SubContainer elem={this.table1()}/>}/>
-
+                    }/>}/>
                 </div>
         )
     }
 }
-
-export const TheFirst=()=>
-{
-    return(
-        <div>
-          <HomeView/>
-        </div>
-    )
-}
+export {HomeView}

@@ -3,18 +3,18 @@ import '../../css/basicBackground.css'
 import SideBar from "../../component/Decoration/sideBar";
 import SubContainer from "../../component/Container/subContainer";
 import HeaderBar from "../../component/Decoration/HeaderBar";
-import OrderResult from "../../component/UtilComponet/FeedBack";
-import {history} from "../../utils/history";
+import FeedBack from "../../component/UtilComponet/FeedBack";
 
-class LogoutSuccess extends React.Component{
+class LogoutSuccessView extends React.Component{
     constructor(props) {
         super(props);
+
     }
     render() {
         return(
             <div className="min-box">
                 <HeaderBar Head={"反馈"}/>
-                <SubContainer elem = { <OrderResult  ID =""
+                <SubContainer elem = { <FeedBack  ID =""
                                                      status = {"success"}
                                                      title={"退出登陆成功,本次在线时长为："+localStorage.getItem("onlineTime")}
                                                      pre=""
@@ -24,10 +24,5 @@ class LogoutSuccess extends React.Component{
         )
     }
 }
-let LogoutSuccessView = () =>
-{
-    return(
-        <LogoutSuccess/>
-    )
-}
+
 export {LogoutSuccessView};

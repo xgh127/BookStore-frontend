@@ -3,27 +3,25 @@ import '../css/basicBackground.css'
 import SideBar from "../component/Decoration/sideBar";
 import SubContainer from "../component/Container/subContainer";
 import HeaderBar from "../component/Decoration/HeaderBar";
-import {frontURL} from "../config/BaseConfig";
-import {Button, Card, Descriptions, Popconfirm} from "antd";
-import { PoweroffOutlined} from '@ant-design/icons';
-import {UserConst} from "../Constant/UserConst";
-import {userLogout} from "../Service/UserService";
-import {LogoutSuccessView} from "./Result/LogoutSuccess";
 import AuthorSearchBar from "../component/SearchComponent/AuthorSearchBar";
+import UserStatistic from "./Admin/Statistic/UserStatistic";
+import {Divider} from "antd";
+import {Footer} from "antd/es/layout/layout";
 
 class MircoServiceView extends React.Component{
 
     render() {
         return(
             <div className="min-box">
-                <HeaderBar Head={"其他功能"}/>
+                <HeaderBar Head={"数据统计"}/>
                 <SideBar/>
                 <SubContainer elem = {
 
                     <div >
-                        <p>通过书名查询作者</p>
-                       <AuthorSearchBar/>
-
+                       {/* <h2 style={{color:"#ff78ac"}}>通过书名查询作者</h2>*/}
+                       {/*<AuthorSearchBar/>*/}
+                       {/* <Divider/>*/}
+                        <UserStatistic/>
                     </div>
                 }>
 
@@ -33,10 +31,5 @@ class MircoServiceView extends React.Component{
         )
     }
 }
-let ServiceView = () =>
-{
-    return(
-        <MircoServiceView/>
-    )
-}
-export {ServiceView};
+
+export {MircoServiceView};
