@@ -2,10 +2,10 @@ import './App.css';
 import './css/basicBackground.css'
 import './component/Table/BookTable';
 import './component/BookDetail/BookDetail';
-import React from "react";
+import React, {useState} from "react";
 import ReactDOM from 'react-dom';
 import './css/chart.css';
-import {BrowserRouter as Router,Route} from 'react-router-dom'
+import {BrowserRouter as Router, Redirect, Route} from 'react-router-dom'
 import './css/chart.css'
 import {HomeView} from "./view/HomeView";
 import {LoginView} from "./view/LoginView";
@@ -31,6 +31,8 @@ import {GlobalSearchResultView} from "./view/SearchResult/GlobalSearchResultView
 import {MircoServiceView} from "./view/mircoServiceView";
 import {AuthorSearchView} from "./view/SearchResult/AuthorSearchView";
 import {StatisticView} from "./view/Admin/Statistic/StatisticView";
+import PrivateRoute from "./PrivateRoute";
+import {clearAuthenticated} from "./Service/UserService";
 
 /*直接import的登录页面*/
 function AllOfPage(){
@@ -39,16 +41,16 @@ function AllOfPage(){
         <div>
                 <Route exact path="/" component={LoginView}/>
                 <Route exact path="/register" component={RegisterView}/>
-                <Route exact path="/first" component={HomeView}/>
-                <Route exact path='/detail' component={BookDetailView}/>
-                <Route exact path="/chart" component={ChartView}/>
-                <Route exact path="/MakeOrderSuccessView" component={MakeOrderSuccessView}/>
-                <Route exact path="/order" component={OrderView}/>
-                <Route exact path="/personCenter" component={PersonCenterView}/>
+                <PrivateRoute exact path="/first" component={HomeView}/>
+                <PrivateRoute exact path='/detail' component={BookDetailView}/>
+                <PrivateRoute exact path="/chart" component={ChartView}/>
+                <PrivateRoute exact path="/MakeOrderSuccessView" component={MakeOrderSuccessView}/>
+                <PrivateRoute exact path="/order" component={OrderView}/>
+                <PrivateRoute exact path="/personCenter" component={PersonCenterView}/>
                 <Route exact path="/registerSuccess" component={RegisterSuccessView}/>
-                <Route exact path="/logoutSuccess" component={LogoutSuccessView}/>
-                <Route exact path="/searchResult" component={GlobalSearchResultView}/>
-                <Route exact path="/mircoService" component={MircoServiceView}/>
+                <PrivateRoute exact path="/logoutSuccess" component={LogoutSuccessView}/>
+                <PrivateRoute exact path="/searchResult" component={GlobalSearchResultView}/>
+                <PrivateRoute exact path="/mircoService" component={MircoServiceView}/>
                 <Route exact path="/AuthorSearchResult" component={AuthorSearchView}/>
                 {/*管理员页面*/}
                 <Route exact path = "/UserMange" component={UserMangeView}/>
@@ -68,7 +70,6 @@ function AllOfPage(){
 function App() {
   return (
 <AllOfPage/>
-
   )
 }
 ReactDOM.render(<App/>,document.getElementById("root"));

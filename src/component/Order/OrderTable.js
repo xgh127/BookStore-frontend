@@ -43,7 +43,11 @@ class OrderTable extends React.Component{
         clearFilters();
         this.setSearchText('');
     };
-
+    /**
+     * 用时间来进行搜索
+     * @param dataIndex
+     * @returns {{filterDropdown: (function({setSelectedKeys: *, selectedKeys: *, confirm: *, clearFilters: *})), filterIcon: (function(*)), onFilter: (function(*, *)), onFilterDropdownVisibleChange: OrderTable.getColumnSearchTimeProps.onFilterDropdownVisibleChange}}
+     */
     getColumnSearchTimeProps = (dataIndex) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
             <div style={{padding: 8,}}>
@@ -107,7 +111,9 @@ class OrderTable extends React.Component{
     });
 
 
-
+    /**
+     * 表格设置表头，数据源，以及表格的样式
+     */
      columns = [
         {
             title: '订单编号',
@@ -160,7 +166,11 @@ class OrderTable extends React.Component{
         }
 
     ];
-
+    /**
+     * 删除订单
+     * @param row
+     * @param key
+     */
     removeOrder=(row, key)=>
 {
     Modal.confirm({
@@ -177,7 +187,11 @@ class OrderTable extends React.Component{
         }
     })
 }
-
+    /**
+     * 展开表格，展示订单中的书籍
+     * @param record
+     * @returns {JSX.Element}
+     */
     expandedRowRender = (record) => {
         const columns = [
             {

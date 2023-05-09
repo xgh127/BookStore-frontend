@@ -111,7 +111,6 @@ class BookDetail extends React.Component{
                         openNotification('top');//弹出消息提示框，参数是提示出现的位置
                         return;
                     }
-                    alert("cartID = " + this.cartID);
                     let receiverName = document.getElementById("receiverName").value;
                     let postcode = document.getElementById("postcode").value;
                     let address = document.getElementById("address").value;
@@ -123,7 +122,6 @@ class BookDetail extends React.Component{
                     }
                     let orderIDGroup = [];              //为了代码复用所以即使就一个数据也用的数组存
                     orderIDGroup.push(this.cartID);
-                    alert("here we go" + this.cartID)
                     getRequest(apiURL + "/getCartOrderByID", {id: this.cartID}, (cartOrder) => {
                         let totalprice = ((parseInt(cartOrder.price) / 100) * cartOrder.buyNum).toFixed(2);
                            handleMakeOrder(orderIDGroup, receiverName, postcode, phoneNumber, totalprice, address)

@@ -11,6 +11,7 @@ import {PriceTrim} from "../Service/bookService";
 import {Layout} from "antd";
 import {BookCarousel} from "../component/BookCarousel";
 import {Content, Footer} from "antd/es/layout/layout";
+import {UserConst} from "../Constant/UserConst";
 
 class HomeView extends React.Component{
 
@@ -60,7 +61,7 @@ class HomeView extends React.Component{
     {
         return (
                 <div>
-                    <HeaderBar Head={"欢迎你,"+localStorage.getItem("username")}/>
+                    <HeaderBar Head={"欢迎你,"+localStorage.getItem(UserConst.NICKNAME)}/>
                     <Container SideBar={<SideBar/>} Sub={  <SubContainer elem={
                         this.table1()
 

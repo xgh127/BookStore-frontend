@@ -1,52 +1,19 @@
 import React from 'react';
-import {Route} from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom';
+import {isAuthenticated } from './Service/UserService';
 
-export default class PrivateRoute extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            isAuthed: false,
-            hasAuthed: false,
-        };
-    }
+const PrivateRoute = ({ component: Component, ...rest }) => (
 
-    // checkAuth = (data) => {
-    //     console.log(data);
-    //     if (data.status >= 0) {
-    //         this.setState({isAuthed: true, hasAuthed: true});
-    //     } else {
-    //         message.error(data.msg);
-    //         localStorage.removeItem('user');
-    //         this.setState({isAuthed: false, hasAuthed: true});
-    //     }
-    // };
-    //
-    //
-    // componentDidMount() {
-    //     userService.checkSession(this.checkAuth);
-    // }
+    <Route
+        {...rest}
+        render={(props) =>
+            isAuthenticated() ? (
+                <Component {...props} />
+            ) : (
+                <Redirect to="/" />
+            )
+        }
+    />
+);
 
-
-    render() {
-
-        const {component: Component, path="/",exact=false,strict=false} = this.props;
-
-       // console.log(this.state.isAuthed);
-
-        // if (!this.state.hasAuthed) {
-        //     return null;
-        // }
-
-        return <Route path={path} exact={exact} strict={strict} render={props => (
-            // this.state.isAuthed ? (
-                <Component {...props}/>
-            // ) : (
-            //     <Redirect to={{
-            //         pathname: '/login',
-            //         state: {from: props.location}
-            //     }}/>
-            //)
-        )}/>
-    }
-}
-
+export default PrivateRoute;
