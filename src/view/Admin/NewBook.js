@@ -30,14 +30,14 @@ class newBook extends React.Component{
                                   onFinish={this.onFinish} ref={this.formRef}
                             >
 
-                                {/*<Form.Item label="封面上传" name="imgtitle" valuePropName="fileList"*/}
-                                {/*           rules={[{*/}
-                                {/*               required: true,*/}
-                                {/*               message: '需要上传书籍的封面!',*/}
-                                {/*           },]}*/}
-                                {/*>*/}
-                                {/*    <FileUploader parentNode={this}/>*/}
-                                {/*</Form.Item>*/}
+                                <Form.Item label="封面上传" name="imageUrl"
+                                           rules={[{
+                                               required: true,
+                                               message: '需要上传书籍的封面!',
+                                           },]}
+                                >
+                                   <Input placeholder="请上传书籍的封面图片链接"/>
+                                </Form.Item>
 
                                 <Form.Item label="书籍价格" name="price"
                                            rules={[{

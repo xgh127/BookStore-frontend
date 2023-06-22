@@ -24,7 +24,8 @@ class EditBook extends React.Component{
             bookDescription: "",
             imageUrl: "",
         }
-        this.targetbookid = parseBookId(window.location.href);
+
+        this.targetbookid = window.location.href.split("?id=")[1];
         if(this.targetbookid!==0){
             let that = this;
             getBookByID(this.targetbookid,(resp) => {
@@ -44,6 +45,7 @@ class EditBook extends React.Component{
 
                     that.formRef.current.setFieldsValue(
                         {
+                            url:        data.image,
                             price:       data.price,
                             inventory:  data.inventory,
                             bookName:   data.name,
@@ -67,7 +69,6 @@ class EditBook extends React.Component{
     onFinish = (values) => {
         let sendData = values;
         sendData["bookID"]=this.state.bookID;
-        console.log(sendData);
         editOneBook(sendData, (data) => {
                 if(data.status >= 0){
                     window.location.href = "/Admin/editBookSuccess?" + data.data.id;
@@ -94,10 +95,12 @@ class EditBook extends React.Component{
                                 <Form labelCol={{span: 3, offset: 1}} wrapperCol={{span: 10, offset: 1}}
                                       onFinish={this.onFinish} ref={this.formRef}
                                 >
-                                    <Form.Item label="封面更新" name="url" valuePropName="fileList">
-                                      {/*//  <FileUploader parentNode={this}/>*/}
-                                        <br/>
-                                        {/*<Image src={this.state.imageUrl} width={100}></Image>*/}
+                                    <Form.Item label="封面更新" name="url"
+                                               rules={[{
+                                                   required: true,
+                                                   message: '输入新的书籍封面链接!',
+                                               },]}>
+                                      <Input placeholder="输入新的书籍封面链接"/>
                                     </Form.Item>
                                     <Form.Item label="书本名称" name="bookName"
                                                rules={[{

@@ -3,7 +3,6 @@ import {Button, DatePicker, Divider, Image, Input, Space, Table, Tabs} from "ant
 import {BarChartOutlined, SearchOutlined, UnorderedListOutlined} from "@ant-design/icons";
 import {Column} from "@ant-design/charts";
 import {getBooksSellData} from "../../../Service/StatisticService";
-import {BookDetailButton} from "../../../component/UtilComponet/BookDetailButton";
 
 const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;

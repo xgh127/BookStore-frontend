@@ -3,7 +3,7 @@ import {Button, Input, Select, Space, Table, Tabs, Tag} from "antd";
 import {getAllUserList, setUserLoginPermit} from "../../Service/UserService";
 import { UserOutlined} from "@ant-design/icons";
 import { SearchOutlined } from '@ant-design/icons';
-
+import {StatusConst} from "../../Constant/UserConst";
 import Highlighter from 'react-highlight-words';
 
 const { Option } = Select;
@@ -132,14 +132,14 @@ class UserManage extends React.Component{
         },
         {
             title: '权限',
-            dataIndex: 'identity',
+            dataIndex: 'userAuth',
             key: 'privilege',
             render: (_, { tags }) => {
-                if(parseInt(_) === 0)
+                if(parseInt(_.userType) === 0)
                     return (
                         <Tag color={"geekblue"}>超级管理员</Tag>
                     );
-                else if(parseInt(_) === 1)
+                else if(parseInt(_.userType) === 1)
                     return (
                         <Tag color={"green"} >普通用户</Tag>
                     );
@@ -147,7 +147,7 @@ class UserManage extends React.Component{
         },
         {
             title: '姓名',
-            dataIndex: 'name',
+            dataIndex: 'nickname',
             key: 'name',
             ...this.getColumnSearchProps('name'),
         },
@@ -167,13 +167,15 @@ class UserManage extends React.Component{
 
         {
             title: '登录许可',
-            dataIndex: 'forbidenStatus',
+            dataIndex: 'forbiddenStatus',
             key: 'forbidlogin',
             render: (num,record) => (
+            console.log("record="+JSON.stringify(record)),
 
  <>
                     <Select
-                        defaultValue={num === 0 ? "禁止":"允许"}
+                       defaultValue={record.userAuth.forbiddenStatus=== 0 ? "允许" : "禁止" }
+
                         style={{
                             width: 80,
                         }}

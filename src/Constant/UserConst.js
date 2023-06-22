@@ -7,3 +7,7 @@ export const UserConst ={
     TEL:"tel",
     DESCRIPTION:"description",
 }
+export const StatusConst ={
+    ALLOWED:"允许",
+    FORBIDDEN:"禁止",
+}
