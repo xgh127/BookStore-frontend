@@ -1,73 +1,29 @@
-# 写在前面
-这是sjtu-se web课程书城前端代码，目前还在上这门课，所以禁止copy
-# Getting Started with Create React App
 
+# 线上书城前端项目
+### `概述`
+这是sjtu-se web课程书城前端代码，css设计参考是扒的一个牙科医院的前端页面，所以应该不会有雷同的前端页面。对于这门课的后来者，我的**建议**是善用老师的demo！自己写会比较累~~~
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### `项目运行`
 
-## Available Scripts
+终端： npm start 即可，也可以配置一下，用绿色的三角按钮运行
+[http://localhost:3000](http://localhost:3000)
 
-（feel free to write anything）In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `运行效果`
+- 登录界面
+![登录界面](public/login.png)
+- 首页
+![首页](public/first.png)
+- 书籍详情页
+![书籍详情页](public/detail.png)
+- 购物车
+![购物车](public/cart.png)
+- 数据统计
+![数据统计](public/data.png)
+- 订单
+![订单](public/order.png)
+- 个人中心
+![个人中心](public/personCenter.png)
+- 管理员界面 略~~，懒得截图咧，请自行探索或者进我主页联系我
+### `课程结果`
+所有功能全部完成，签到-4.作业-0.5，UserAuth开始没加-1
+课程难度比较大，建议及时尽早开始做！同时注意签到的问题！
